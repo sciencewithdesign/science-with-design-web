@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Thoughts &amp; stories — Science with Design</title>
+<meta name="description" content="Reflexiones sin orden fijo sobre ciencia, diseño y el proceso detrás de cada proyecto." />
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="page-thoughts">
+
+  <!-- ============ HEADER: logo + nav — idéntico al del resto del sitio ============ -->
+  <header class="site-header">
+    <div class="wrap site-header__inner">
+      <a href="index.html" class="logo" aria-label="Science with Design — inicio">
+        <img src="img/basic.elements/Logo.bot%20Home.svg" alt="Science with Design" width="54" height="54" />
+      </a>
+
+      <button type="button" class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Abrir menú de navegación">
+        <img src="img/basic.elements/nav.menu.button.svg" alt="" width="30" height="30" />
+      </button>
+
+      <nav class="nav" id="primary-nav" aria-label="Navegación principal">
+        <a href="works.html" class="nav__pill nav__pill--work">Work</a>
+        <a href="about.html" class="nav__pill nav__pill--about">About</a>
+        <a href="thoughts.html" class="nav__pill nav__pill--thoughts">Thoughts</a>
+        <a href="inspiration.html" class="nav__pill nav__pill--inspiration">Inspiration</a>
+        <a href="contact.html" class="nav__pill nav__pill--talk">Let&rsquo;s talk</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- ============ THOUGHTS: panel fijo (título+línea+párrafo) + feed de tarjetas que sube y sale por arriba ============ -->
+    <section class="thoughts wrap" aria-labelledby="thoughts-title">
+      <div class="thoughts__card">
+        <div class="thoughts__row">
+
+          <div class="thoughts__sticky">
+            <h1 id="thoughts-title" class="type-display-bigger thoughts__title">Thoughts<br /><span class="thoughts__title-amp">&amp;</span>stories</h1>
+            <hr class="thoughts__rule" aria-hidden="true" />
+            <p class="type-body-big thoughts__lead">Think of this as a sort of a blog. What is the thought process behind a decision? What is the importance of the relationship between science and society? <span class="type-body-big-highlight">How can design thinking improve science communication?</span> This section is not meant to have any order. It&rsquo;s just a site to share my reflections, whenever I want to stop and take some perspective on the greater things I belong to. Also, a place where I can explain in detail the work behind a project.</p>
+            <img class="thoughts__pendulo" src="img/illustrations/pendulo.svg" alt="" aria-hidden="true" loading="lazy" />
+          </div>
+
+          <div class="thoughts__divider-v" aria-hidden="true"></div>
+
+          <div class="thoughts__feed-wrap">
+            <div class="thoughts__feed" id="thoughts-feed" aria-label="Últimas entradas del blog">
+
+              <button type="button" class="thoughtcard thoughtcard--terracota thoughtcard--clickable" id="thoughtcard-humanism" aria-expanded="false" aria-controls="thoughts-article">
+                <h3 class="thoughtcard__title">The humanism in science</h3>
+                <hr class="thoughtcard__rule" aria-hidden="true" />
+                <div class="thoughtcard__media">
+                  <img src="img/images/cajal.drawing.jpg" alt="Dibujo científico de neuronas de Santiago Ramón y Cajal" loading="lazy" />
+                </div>
+              </button>
+
+              <article class="thoughtcard thoughtcard--azul">
+                <div class="thoughtcard__media">
+                  <img src="img/images/janfishcer.quiet.outer.space.jpg" alt="Ilustración contemplativa del espacio exterior" loading="lazy" />
+                </div>
+                <hr class="thoughtcard__rule" aria-hidden="true" />
+                <h3 class="thoughtcard__title">Why making scientific journals so difficult to even read &amp; see?</h3>
+              </article>
+
+              <div class="thoughts__illustration thoughts__illustration--tree">
+                <img src="img/illustrations/darwin.tree.svg" alt="Ilustración de un árbol evolutivo al estilo del árbol de Darwin" loading="lazy" />
+              </div>
+
+              <article class="thoughtcard thoughtcard--azul">
+                <div class="thoughtcard__media">
+                  <img src="img/images/cotta.partida.fantaciencia.jpg" alt="Ilustración de ciencia ficción de una vasija partida" loading="lazy" />
+                </div>
+                <hr class="thoughtcard__rule" aria-hidden="true" />
+                <h3 class="thoughtcard__title">Those who know are those who doubt</h3>
+              </article>
+
+              <article class="thoughtcard thoughtcard--ambar thoughtcard--split">
+                <div class="thoughtcard__split-text">
+                  <h3 class="thoughtcard__title">From the lab to the design board.</h3>
+                  <hr class="thoughtcard__rule" aria-hidden="true" />
+                </div>
+                <div class="thoughtcard__media">
+                  <img src="img/images/quimico.jpg" alt="Ilustración vintage de un químico en su laboratorio" loading="lazy" />
+                </div>
+              </article>
+
+              <div class="thoughts__illustration thoughts__illustration--orbits">
+                <img src="img/illustrations/orbits.svg" alt="Ilustración de órbitas concéntricas" loading="lazy" />
+              </div>
+
+              <article class="thoughtcard thoughtcard--terracota">
+                <h3 class="thoughtcard__title">On sitting with uncertainty</h3>
+                <hr class="thoughtcard__rule" aria-hidden="true" />
+                <div class="thoughtcard__media">
+                  <img src="img/images/espectro.jpg" alt="Gráfico de espectro de color" loading="lazy" />
+                </div>
+              </article>
+
+              <article class="thoughtcard thoughtcard--ambar">
+                <h3 class="thoughtcard__title">Science really needs an audience</h3>
+                <hr class="thoughtcard__rule" aria-hidden="true" />
+                <div class="thoughtcard__media">
+                  <img src="img/images/posteer-bird-plastic.jpg" alt="Cartel científico sobre plástico y fauna" loading="lazy" />
+                </div>
+              </article>
+
+              <article class="thoughtcard thoughtcard--azul">
+                <h3 class="thoughtcard__title">The mammoth steppe. A look into the design process</h3>
+                <hr class="thoughtcard__rule" aria-hidden="true" />
+                <div class="thoughtcard__media">
+                  <img src="img/images.my.projects/captura.mammoth.infographics.png" alt="Captura de la infografía del proyecto de la estepa del mamut" loading="lazy" />
+                </div>
+              </article>
+
+            </div>
+
+            <!-- ============ artículo desplegado: demo solo para "The humanism in science" ============ -->
+            <div class="thoughts__article" id="thoughts-article" hidden>
+              <button type="button" class="thoughts__article-close" id="thoughts-article-close" aria-label="Cerrar artículo">&times;</button>
+              <h2 class="type-h2 thoughts__article-title">The humanism in science</h2>
+              <div class="type-body-big thoughts__article-body">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur nec magna vitae sapien tincidunt fermentum. Suspendisse potenti. Vivamus sed erat non risus dictum congue.</p>
+                <p>Nulla facilisi. Praesent euismod, nibh non cursus vehicula, arcu risus tincidunt orci, at aliquet nibh sem eget velit. Duis at libero at nisl sagittis fringilla.</p>
+                <p>Etiam vitae leo eget purus efficitur convallis. Morbi at sem sit amet elit dapibus tristique. Quisque quis sapien nec risus fermentum egestas.</p>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PRE-FOOTER CTA: igual que inspiration, en ámbar/700 ============ -->
+    <section class="thoughts-cta wrap">
+      <div class="thoughts-cta__row">
+        <p class="type-prefooter-cta thoughts-cta__text">You have explored this far. Why not keep it going?</p>
+        <a href="contact.html" class="thoughts-cta__link">
+          <span class="type-prefooter-cta">Let&rsquo;s say hi</span>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap site-footer__wrap">
+      <div class="site-footer__bar">
+        <nav class="site-footer__social" aria-label="Redes sociales">
+          <a href="https://instagram.com" class="type-caption">Instagram</a>
+          <a href="https://linkedin.com" class="type-caption">Linkedin</a>
+          <a href="https://behance.net" class="type-caption">Behance</a>
+        </nav>
+        <p class="type-caption site-footer__legal">&copy; 2026 All rights reserved | ScienceWithDesign</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Botón de menú móvil — idéntico al del resto del sitio.
+    (function () {
+      const toggle = document.getElementById('nav-toggle');
+      const nav = document.getElementById('primary-nav');
+      if (!toggle || !nav) return;
+
+      function closeNav() {
+        nav.classList.remove('is-open');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+      function openNav() {
+        nav.classList.add('is-open');
+        toggle.setAttribute('aria-expanded', 'true');
+      }
+
+      toggle.addEventListener('click', () => {
+        const isOpen = nav.classList.contains('is-open');
+        if (isOpen) { closeNav(); } else { openNav(); }
+      });
+
+      nav.querySelectorAll('a').forEach((link) => {
+        link.addEventListener('click', closeNav);
+      });
+
+      document.addEventListener('click', (event) => {
+        if (!nav.classList.contains('is-open')) return;
+        if (nav.contains(event.target) || toggle.contains(event.target)) return;
+        closeNav();
+      });
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') closeNav();
+      });
+    })();
+
+    // Empuja el feed de tarjetas (y el panel de artículo, que comparte el
+    // mismo contenedor) para que arranquen alineadas por arriba con el
+    // párrafo ("Think of this as a sort of a blog…"), nunca por detrás del
+    // título ni de la línea. La altura del título+línea varía con el
+    // viewport (tipografía fluida), así que se mide en tiempo real en vez
+    // de aproximarla a mano con clamp(); se recalcula si cambia el tamaño
+    // del panel fijo (fuente cargada, resize, salto a móvil…).
+    (function () {
+      const stickyPane = document.querySelector('.thoughts__sticky');
+      const lead = document.querySelector('.thoughts__lead');
+      const feedWrap = document.querySelector('.thoughts__feed-wrap');
+      if (!stickyPane || !lead || !feedWrap) return;
+
+      function syncFeedOffset() {
+        // en móvil (ver responsive) el panel deja de ser sticky y pasa a
+        // flujo normal encima del feed: ya queda todo apilado sin más, no
+        // hace falta ningún hueco extra.
+        if (getComputedStyle(stickyPane).position !== 'sticky') {
+          feedWrap.style.paddingTop = '';
+          return;
+        }
+        const stickyTop = stickyPane.getBoundingClientRect().top;
+        const leadTop = lead.getBoundingClientRect().top;
+        feedWrap.style.paddingTop = Math.max(0, leadTop - stickyTop) + 'px';
+      }
+
+      if ('ResizeObserver' in window) {
+        new ResizeObserver(syncFeedOffset).observe(stickyPane);
+      } else {
+        window.addEventListener('resize', syncFeedOffset);
+      }
+      document.fonts.ready.then(syncFeedOffset);
+      syncFeedOffset();
+    })();
+
+    // Demo de despliegue de artículo: al hacer clic en "The humanism in
+    // science" se oculta el feed de tarjetas y aparece el panel del
+    // artículo en su mismo hueco (misma celda del grid). Se fija la altura
+    // del contenedor ANTES de ocultar el feed para que la fila del grid no
+    // se desplome (y con ella el resto del scroll fijo/sticky de la página).
+    // El cambio entre feed y artículo es un fundido secuencial (uno se
+    // desvanece con una ligera caída, luego aparece el otro) en vez de un
+    // corte instantáneo — ver transición en CSS (.thoughts__feed / .thoughts__article).
+    (function () {
+      const card = document.getElementById('thoughtcard-humanism');
+      const feed = document.getElementById('thoughts-feed');
+      const article = document.getElementById('thoughts-article');
+      const closeBtn = document.getElementById('thoughts-article-close');
+      const feedWrap = feed ? feed.closest('.thoughts__feed-wrap') : null;
+      if (!card || !feed || !article || !closeBtn || !feedWrap) return;
+
+      const FADE_MS = 240;
+      let animating = false;
+
+      function reducedMotion() {
+        return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      }
+
+      // Oculta hideEl con un fundido, ejecuta swap() en el instante del
+      // cambio (mientras ambos están fuera de vista) y luego muestra showEl
+      // con un fundido de entrada. done() se llama al terminar toda la
+      // animación (ahí es donde se gestiona el foco, aria-expanded, etc.).
+      function crossfade(hideEl, showEl, swap, done) {
+        if (animating) return;
+        animating = true;
+
+        if (reducedMotion()) {
+          hideEl.hidden = true;
+          showEl.hidden = false;
+          swap();
+          animating = false;
+          done();
+          return;
+        }
+
+        hideEl.classList.add('is-fading');
+        hideEl.style.opacity = '0';
+        hideEl.style.transform = 'translateY(8px)';
+
+        window.setTimeout(() => {
+          hideEl.hidden = true;
+          hideEl.classList.remove('is-fading');
+          hideEl.style.opacity = '';
+          hideEl.style.transform = '';
+
+          swap();
+
+          showEl.hidden = false;
+          showEl.classList.add('is-fading');
+          showEl.style.transition = 'none';
+          showEl.style.opacity = '0';
+          showEl.style.transform = 'translateY(8px)';
+          void showEl.offsetWidth; // fuerza reflow para reiniciar la transición
+          showEl.style.transition = '';
+          showEl.style.opacity = '1';
+          showEl.style.transform = 'translateY(0)';
+
+          window.setTimeout(() => {
+            showEl.classList.remove('is-fading');
+            showEl.style.opacity = '';
+            showEl.style.transform = '';
+            animating = false;
+            done();
+          }, FADE_MS);
+        }, FADE_MS);
+      }
+
+      function openArticle() {
+        if (animating) return;
+        feedWrap.style.minHeight = feedWrap.offsetHeight + 'px';
+        crossfade(feed, article, () => {}, () => {
+          card.setAttribute('aria-expanded', 'true');
+          closeBtn.focus();
+        });
+      }
+      function closeArticle() {
+        if (animating) return;
+        crossfade(article, feed, () => {}, () => {
+          feedWrap.style.minHeight = '';
+          card.setAttribute('aria-expanded', 'false');
+          card.focus();
+        });
+      }
+
+      card.addEventListener('click', openArticle);
+      closeBtn.addEventListener('click', closeArticle);
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && !article.hidden) closeArticle();
+      });
+    })();
+  </script>
+</body>
+</html>

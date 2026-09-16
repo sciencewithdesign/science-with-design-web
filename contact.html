@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Contact — Science with Design</title>
+<meta name="description" content="Cuéntanos qué necesitas: Science with Design se pone en contacto contigo." />
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="page-contact">
+
+  <!-- ============ HEADER: logo + nav — idéntico al de la home ============ -->
+  <header class="site-header">
+    <div class="wrap site-header__inner">
+      <a href="index.html" class="logo" aria-label="Science with Design — inicio">
+        <img src="img/basic.elements/Logo.bot%20Home.svg" alt="Science with Design" width="54" height="54" />
+      </a>
+
+      <button type="button" class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Abrir menú de navegación">
+        <img src="img/basic.elements/nav.menu.button.svg" alt="" width="30" height="30" />
+      </button>
+
+      <nav class="nav" id="primary-nav" aria-label="Navegación principal">
+        <a href="works.html" class="nav__pill nav__pill--work">Work</a>
+        <a href="about.html" class="nav__pill nav__pill--about">About</a>
+        <a href="thoughts.html" class="nav__pill nav__pill--thoughts">Thoughts</a>
+        <a href="inspiration.html" class="nav__pill nav__pill--inspiration">Inspiration</a>
+        <a href="contact.html" class="nav__pill nav__pill--talk">Let&rsquo;s talk</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ============ CONTACT ============ -->
+  <main>
+    <section class="contact wrap" aria-labelledby="contact-title">
+      <div class="contact__card">
+
+        <div class="contact__intro">
+          <h1 id="contact-title" class="type-display-bigger contact__title">The start<br />of a fun<br />collaboration</h1>
+          <p class="type-cta contact__subtitle">Tell me what you need<br />I&rsquo;ll be curious to learn about it</p>
+          <p class="type-body-big-highlight contact__lead">Do not mind being lengthy or specific.<br />I have been part of a lab</p>
+        </div>
+
+        <form class="contact__form" novalidate>
+          <div class="field">
+            <label class="type-body-small field__label" for="cf-name">Your name &amp; surname</label>
+            <input class="field__input" type="text" id="cf-name" name="name" placeholder="Your name &amp; surname" autocomplete="name" required />
+          </div>
+
+          <div class="field">
+            <label class="type-body-small field__label" for="cf-email">Your email</label>
+            <input class="field__input" type="email" id="cf-email" name="email" placeholder="you@email.com" autocomplete="email" required />
+          </div>
+
+          <div class="field">
+            <label class="type-body-small field__label" for="cf-topic">I am here for&hellip;</label>
+            <select class="field__input field__select" id="cf-topic" name="topic" required>
+              <option value="" disabled selected>Choose something&hellip;</option>
+              <option value="infographics">Infographics</option>
+              <option value="illustrations">Illustrations</option>
+              <option value="workshops">Workshops</option>
+              <option value="scrollytelling">Scrollytelling articles</option>
+              <option value="branding">Lab branding &amp; web design</option>
+              <option value="dataviz">Data visualization</option>
+              <option value="print">Printed materials</option>
+              <option value="thesis">Thesis covers</option>
+              <option value="presentations">Presentations</option>
+              <option value="graphical-abstract">Graphical abstract</option>
+              <option value="other">Other&hellip;</option>
+            </select>
+            <input class="field__input field__input--other" type="text" id="cf-topic-other" name="topic-other" placeholder="Tell me what it is" hidden />
+          </div>
+
+          <div class="field">
+            <label class="type-body-small field__label" for="cf-more">What else should I know?</label>
+            <textarea class="field__input field__textarea" id="cf-more" name="more" rows="4" placeholder="Tell me more"></textarea>
+          </div>
+
+          <button type="submit" class="button-cta contact__submit">Let&rsquo;s begin</button>
+        </form>
+
+        <p class="type-caption contact__hello">Or you can also just <span class="type-quote">say hello</span></p>
+
+        <a href="mailto:sciencewithdesign@outlook.com" class="type-body-big-highlight contact__email">sciencewithdesign@outlook.com</a>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap site-footer__wrap">
+      <div class="site-footer__bar">
+        <nav class="site-footer__social" aria-label="Redes sociales">
+          <a href="https://instagram.com" class="type-caption">Instagram</a>
+          <a href="https://linkedin.com" class="type-caption">Linkedin</a>
+          <a href="https://behance.net" class="type-caption">Behance</a>
+        </nav>
+        <p class="type-caption site-footer__legal">&copy; 2026 All rights reserved | ScienceWithDesign</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Botón de menú (solo visible en móvil estrecho): abre/cierra el nav
+    // como desplegable. Se cierra al elegir un enlace, al tocar fuera o
+    // con Escape. (idéntico al de la home)
+    (function () {
+      const toggle = document.getElementById('nav-toggle');
+      const nav = document.getElementById('primary-nav');
+      if (!toggle || !nav) return;
+
+      function closeNav() {
+        nav.classList.remove('is-open');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+      function openNav() {
+        nav.classList.add('is-open');
+        toggle.setAttribute('aria-expanded', 'true');
+      }
+
+      toggle.addEventListener('click', () => {
+        const isOpen = nav.classList.contains('is-open');
+        if (isOpen) { closeNav(); } else { openNav(); }
+      });
+
+      nav.querySelectorAll('a').forEach((link) => {
+        link.addEventListener('click', closeNav);
+      });
+
+      document.addEventListener('click', (event) => {
+        if (!nav.classList.contains('is-open')) return;
+        if (nav.contains(event.target) || toggle.contains(event.target)) return;
+        closeNav();
+      });
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') closeNav();
+      });
+    })();
+
+    // Desplegable "I am here for...": si eligen "Other", aparece un campo
+    // de texto libre para que lo describan.
+    (function () {
+      const select = document.getElementById('cf-topic');
+      const other = document.getElementById('cf-topic-other');
+      if (!select || !other) return;
+
+      select.addEventListener('change', () => {
+        const isOther = select.value === 'other';
+        other.hidden = !isOther;
+        other.required = isOther;
+        if (isOther) other.focus();
+      });
+    })();
+  </script>
+</body>
+</html>

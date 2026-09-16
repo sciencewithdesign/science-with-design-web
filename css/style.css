@@ -1,0 +1,2148 @@
+/* ============================================================
+   SCIENCE WITH DESIGN — style.css
+   Fuente: sistema de diseño extraído de Figma (ver design-system.md)
+   ============================================================ */
+
+/* ---------- 1. FUENTES LOCALES ---------- */
+@font-face { font-family:'Archivo'; src:url('../fonts/Archivo/static/Archivo-Regular.ttf') format('truetype'); font-weight:400; font-style:normal; font-display:swap; }
+@font-face { font-family:'Archivo'; src:url('../fonts/Archivo/static/Archivo-Medium.ttf') format('truetype'); font-weight:500; font-style:normal; font-display:swap; }
+@font-face { font-family:'Archivo'; src:url('../fonts/Archivo/static/Archivo-SemiBold.ttf') format('truetype'); font-weight:600; font-style:normal; font-display:swap; }
+@font-face { font-family:'Archivo'; src:url('../fonts/Archivo/static/Archivo-ExtraBold.ttf') format('truetype'); font-weight:800; font-style:normal; font-display:swap; }
+@font-face { font-family:'Archivo'; src:url('../fonts/Archivo/static/Archivo-Black.ttf') format('truetype'); font-weight:900; font-style:normal; font-display:swap; }
+
+@font-face { font-family:'Baskervville'; src:url('../fonts/Baskervville/static/Baskervville-Regular.ttf') format('truetype'); font-weight:400; font-style:normal; font-display:swap; }
+@font-face { font-family:'Baskervville'; src:url('../fonts/Baskervville/static/Baskervville-Bold.ttf') format('truetype'); font-weight:700; font-style:normal; font-display:swap; }
+
+@font-face { font-family:'Space Mono'; src:url('../fonts/Space_Mono/SpaceMono-Regular.ttf') format('truetype'); font-weight:400; font-style:normal; font-display:swap; }
+@font-face { font-family:'Space Mono'; src:url('../fonts/Space_Mono/SpaceMono-Bold.ttf') format('truetype'); font-weight:700; font-style:normal; font-display:swap; }
+
+/* ---------- 2. DESIGN TOKENS ---------- */
+:root {
+  /* color — familias con variaciones */
+  --terracota-900:#7E382B; --terracota-700:#B2513F; --terracota-500:#E66B54; --terracota-300:#EB734F; --terracota-orange:#F06329;
+  --azul-900:#233F58; --azul-700:#30597A; --azul-principal:#3D709C; --azul-300:#5491AD; --azul-100:#99D1DB;
+  --ambar-900:#F0914A; --ambar-700:#F7AB59; --ambar-principal:#FABA63; --ambar-300:#FCC96B; --ambar-100:#FFDEA1;
+  --negro-principal:#0F0A0A; --negro-700:#494444; --negro-500:#837E7E; --negro-300:#BDB8B8; --negro-100:#F5F0F0;
+
+  /* color — tokens semánticos */
+  --bg-primary:#F5F0F0;
+  --bg-secondary:#F5ECDE;
+  --bg-inverse:#0F0A0A;
+  --text-primary:#0F0A0A;
+  --text-secondary:#494444;
+  --text-muted:#837E7E;
+  --text-inverse:#F5F0F0;
+  --text-accent:var(--terracota-500); /* = terracota/500, por indicación de Edudu */
+
+  /* tipografía */
+  --font-sans:'Archivo', Helvetica Neue, Arial, sans-serif;
+  --font-serif:'Baskervville', Georgia, serif;
+  --font-mono:'Space Mono', 'Courier New', monospace;
+
+  /* layout */
+  --grid-max: 1920px;
+  --grid-pad: clamp(20px, 4vw, 52px);
+  /* páginas con una tarjeta grande flotando sobre un fondo de color a toda
+     página (contact, works, thoughts, inspiration): la tarjeta, el CTA y
+     el footer usan este padding, ligeramente menor que --grid-pad, para
+     que su borde quede un poco más allá del logo/nav del header (que sigue
+     usando --grid-pad) — así no quedan pegados al mismo borde. */
+  --card-pad: clamp(16px, 3.4vw, 40px);
+  --radius-card: 16px;
+}
+
+/* ---------- 3. RESET ---------- */
+*, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
+html { scroll-behavior:smooth; }
+img, svg { display:block; max-width:100%; }
+a { color:inherit; text-decoration:none; }
+ul, ol { list-style:none; }
+body {
+  background:var(--bg-primary);
+  color:var(--text-primary);
+  font-family:var(--font-sans);
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+  padding-bottom:calc(var(--footer-h) + var(--footer-gap)); /* deja sitio a la banda del footer, que es fija y flota separada del borde */
+  overflow-x:hidden; /* la bandeja del nav móvil entra deslizando desde fuera del viewport */
+}
+
+.wrap {
+  max-width:var(--grid-max);
+  margin-inline:auto;
+  padding-inline:var(--grid-pad);
+}
+
+/* páginas de "tarjeta grande flotando sobre fondo de color a toda página"
+   (contact, works, thoughts, inspiration): la tarjeta, su CTA y el footer
+   usan --card-pad (algo menor que --grid-pad) para que su borde quede
+   ligeramente más allá del logo/nav del header — que sigue con --grid-pad —
+   en vez de coincidir exactamente con él. Misma lógica en la home para la
+   tarjeta roja del hero, la banda de covers, la banda ámbar (scientific
+   rigor / handshake / clear visuals), la tira terracota de clientes y el
+   CTA final ámbar — el resto de la home (intro del workflow, tira de
+   logos, sección de formatos) no se toca. Dentro de .hero__card todo está
+   posicionado en relativo a la propia tarjeta (sin padding interno, split
+   en %), así que ensanchar la tarjeta no descoloca el lettering pegado a
+   su borde izquierdo ni la animación pegada al derecho. */
+.contact.wrap,
+.works.wrap,
+.works-cta.wrap,
+.thoughts.wrap,
+.thoughts-cta.wrap,
+.inspiration.wrap,
+.inspiration-cta.wrap,
+.page-contact .site-footer__wrap,
+.page-works .site-footer__wrap,
+.page-thoughts .site-footer__wrap,
+.page-inspiration .site-footer__wrap,
+.hero.wrap,
+.covers.wrap,
+.workflow__band.wrap,
+.workflow__strip.wrap,
+.final-cta.wrap {
+  padding-inline:var(--card-pad);
+}
+
+/* ---------- 4. ESCALA TIPOGRÁFICA ----------
+   letter-spacing documentado en Figma como % del tamaño de fuente,
+   por eso aquí se expresa en "em" (ej. -8% => -0.08em) en vez de px fijos. */
+.type-display-bigger { font-family:var(--font-sans); font-weight:900; font-size:clamp(48px, 7.7vw, 148px); line-height:0.75; letter-spacing:-0.08em; }
+.type-display         { font-family:var(--font-sans); font-weight:900; font-size:clamp(40px, 6.25vw, 120px); line-height:0.75; letter-spacing:-0.08em; }
+.type-h1               { font-family:var(--font-sans); font-weight:900; font-size:clamp(34px, 4.2vw, 80px); line-height:0.8; letter-spacing:-0.08em; }
+.type-h2               { font-family:var(--font-sans); font-weight:900; font-size:clamp(28px, 2.9vw, 56px); line-height:0.75; letter-spacing:-0.03em; }
+.type-h3               { font-family:var(--font-sans); font-weight:800; font-size:clamp(22px, 1.9vw, 36px); line-height:1.15; letter-spacing:-0.01em; }
+.type-h4               { font-family:var(--font-sans); font-weight:600; font-size:clamp(18px, 1.25vw, 24px); line-height:1.3; letter-spacing:0; }
+.type-body-big-display { font-family:var(--font-sans); font-weight:500; font-size:clamp(22px, 1.9vw, 36px); line-height:1.4; letter-spacing:0.07em; text-align:justify; }
+.type-body-big         { font-family:var(--font-sans); font-weight:400; font-size:clamp(17px, 1.25vw, 24px); line-height:1.3; letter-spacing:0.07em; }
+.type-body-big-highlight { font-family:var(--font-mono); font-weight:700; font-size:clamp(17px, 1.25vw, 24px); line-height:1.3; letter-spacing:0.07em; }
+.type-body-small       { font-family:var(--font-sans); font-weight:400; font-size:16px; line-height:1.7; letter-spacing:0.07em; }
+.type-label            { font-family:var(--font-sans); font-weight:400; font-size:13px; line-height:1.7; letter-spacing:0.03em; text-transform:uppercase; }
+.type-caption          { font-family:var(--font-mono); font-weight:400; font-size:20px; line-height:1.5; letter-spacing:0.05em; }
+.type-quote            { font-family:var(--font-serif); font-weight:700; font-size:32px; line-height:0.9; letter-spacing:0; }
+.type-button           { font-family:var(--font-serif); font-weight:700; font-size:20px; line-height:0.9; letter-spacing:0; }
+.type-cta              { font-family:var(--font-serif); font-weight:700; font-size:clamp(24px, 2.1vw, 40px); line-height:25.6px; letter-spacing:0; } /* line-height al 80% (32px * 0.8) */
+.type-prefooter-cta    { font-family:var(--font-serif); font-weight:700; font-size:clamp(48px, 5vw, 96px); line-height:0.9; letter-spacing:0; }
+
+/* ---------- 5. HEADER: logo + nav (flotante) ---------- */
+:root {
+  --header-h: 80px;      /* alto reservado al cargar, antes de hacer scroll */
+  --hero-split: 66%;     /* ancho de la columna del lettering — fija también la línea vertical */
+  --footer-h: 48px;      /* alto de la banda azul flotante del footer */
+  --footer-gap: 16px;    /* separación flotante respecto al borde inferior real */
+}
+
+.site-header {
+  position:fixed;
+  top:0; left:0; right:0;
+  z-index:100;
+  height:var(--header-h);
+  display:flex;
+  align-items:flex-start; /* logo y nav comparten el mismo borde superior */
+  padding-top:15px;       /* separación respecto al borde superior de la página */
+  background:transparent; /* SIN fondo propio: solo flotan el logo y las pills
+    (que ya llevan su propio fondo), el resto deja ver el contenido al hacer scroll */
+  pointer-events:none;    /* la franja vacía no debe bloquear clics sobre el contenido */
+}
+.site-header a,
+.site-header button { pointer-events:auto; } /* logo, pills y el botón de menú sí son clicables */
+.site-header__inner {
+  position:relative; /* ancla el desplegable del nav en móvil estrecho */
+  width:100%;
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:16px;
+  flex-wrap:wrap;
+}
+.logo { flex-shrink:0; }
+.logo img { width:40px; height:40px; display:block; }
+
+/* botón "hamburguesa": solo existe en móvil estrecho (ver responsive) —
+   en escritorio y tablet el nav de pills se muestra tal cual, sin botón. */
+.nav-toggle {
+  display:none;
+  align-items:center;
+  justify-content:center;
+  width:40px;
+  height:40px;
+  background:var(--negro-principal);
+  border:none;
+  border-radius:4px;
+  padding:0;
+  cursor:pointer;
+  transition:background .18s ease;
+}
+.nav-toggle:hover { background:var(--terracota-500); }
+.nav-toggle img { width:30px; height:30px; display:block; }
+
+/* nav "en racimo": réplica del reparto asimétrico del prototipo de Figma,
+   con Grid en escritorio y una fila simple envolvente en móvil.
+   Juntas entre sí pero legibles (ni demasiado grandes ni minúsculas). */
+.nav {
+  display:grid;
+  grid-template-columns:repeat(3, auto);
+  gap:3px;
+  justify-content:end;
+}
+.nav__pill {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  background:var(--negro-principal);
+  color:var(--text-inverse);
+  font-family:var(--font-serif);
+  font-weight:700;
+  font-size:17px; /* estilo "button" del sistema de diseño (20pt), reducido ~15% para escritorio */
+  line-height:1;
+  letter-spacing:0;
+  padding:7px 15px;
+  border-radius:4px;
+  white-space:nowrap;
+  transition:background .18s ease;
+}
+.nav__pill:hover { background:var(--terracota-500); }
+
+.nav__pill--work        { grid-column:2; grid-row:1; }
+.nav__pill--about       { grid-column:3; grid-row:1; }
+.nav__pill--inspiration { grid-column:1; grid-row:2; }
+.nav__pill--thoughts    { grid-column:2 / span 2; grid-row:2; }
+.nav__pill--talk        { grid-column:1 / -1; grid-row:3; justify-self:end; }
+
+/* ---------- 6. HERO-WRAP: envuelve la regla superior (no fija) + la línea
+   vertical (que sí recorre toda la altura, desde el borde superior real de
+   la página) + la sección hero ---------- */
+.hero-wrap {
+  position:relative;
+  padding-top:var(--header-h); /* deja sitio para el header fijo; la línea
+    vertical arranca justo aquí (borde superior visible de la página) */
+}
+
+.hero {
+  padding-block-start:clamp(16px, 3vw, 40px);
+  padding-block-end:clamp(32px, 5vw, 80px);
+}
+
+.hero__card {
+  position:relative;
+  overflow:hidden;
+  border-radius:var(--radius-card);
+  background:var(--terracota-500);
+}
+
+/* efecto de ruido/grano — sensación de impresión editorial sobre papel.
+   Solo capa "multiply" (únicamente puede oscurecer): mantiene el rojo
+   terracota más profundo e intenso, sin la capa "screen" que lo aclaraba. */
+.hero__noise {
+  position:absolute;
+  inset:0;
+  z-index:2;
+  pointer-events:none;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='150' height='150'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='1.15' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  background-size:150px 150px;
+  opacity:0.22;
+  mix-blend-mode:multiply;
+}
+
+/* línea vertical, peso 1 — vive dentro de .hero__card (mismo contenedor sin
+   padding que usa .hero__top para su grid), así que left:var(--hero-split)
+   coincide exactamente con el borde de columna del lettering, sin necesidad
+   de recalcular paddings/anchos entre contextos distintos. Recorre toda la
+   altura de la tarjeta. */
+.hero__divider-v {
+  position:absolute;
+  top:0;
+  bottom:0;
+  left:var(--hero-split);
+  width:1px;
+  background:var(--negro-principal);
+  z-index:3;
+  pointer-events:none;
+}
+
+/* fila superior: el lettering define la altura real de la fila y la línea
+   inferior se apoya exactamente en SU borde (no en una fila de grid
+   compartida con la animación, que podía tener otra altura y desalinear
+   la línea). La animación queda posicionada de forma absoluta, pegada al
+   borde derecho e inferior de esa misma línea — un elemento que se sale
+   de la gradilla, como en el prototipo original. */
+.hero__top {
+  position:relative;
+  z-index:1;
+  display:grid;
+  grid-template-columns:var(--hero-split) 1fr; /* la 2ª columna es el hueco a la derecha de la línea vertical */
+}
+.hero__lettering {
+  grid-column:1;
+  border-bottom:1px solid var(--negro-principal); /* pegada al píxel exacto del borde inferior del lettering */
+}
+.hero__lettering img { display:block; width:100%; height:auto; }
+
+/* La animación es absoluta y NO participa en el cálculo de la altura de la
+   fila (así la fila la sigue marcando solo el lettering), pero al asignarle
+   grid-column/grid-row su "contenedor de referencia" pasa a ser exactamente
+   esa celda: desde la línea vertical hasta el borde derecho de la tarjeta,
+   y desde arriba hasta la línea horizontal. inset:0 la ajusta a esa celda
+   al milímetro, así nunca sobrepasa ninguna de las dos líneas. */
+.hero__video {
+  position:absolute;
+  grid-column:2;
+  grid-row:1;
+  inset:0;
+  z-index:1;
+}
+.hero__video video {
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  object-position:right bottom; /* pegada al borde derecho e inferior dentro de su hueco */
+  border-radius:8px 0 0 0;
+}
+
+/* bloque inferior: título + párrafo + CTA, alineados a la derecha */
+.hero__bottom {
+  position:relative;
+  z-index:1;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-end;
+  text-align:right;
+  gap:clamp(18px, 2.6vw, 40px);
+  padding:clamp(16px, 2.4vw, 36px) clamp(20px, 3vw, 50px) clamp(24px, 3.4vw, 56px);
+}
+.hero__title { color:var(--text-primary); max-width:20ch; }
+.hero__lead { color:var(--text-primary); max-width:32ch; }
+
+.button-cta {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  background:var(--negro-principal);
+  color:var(--text-inverse);
+  font-family:var(--font-serif);
+  font-weight:700;
+  font-size:clamp(20px, 1.9vw, 36px);
+  line-height:1;
+  padding:12px 28px;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
+  transition:background .18s ease;
+}
+.button-cta:hover { background:var(--terracota-700); }
+
+/* ---------- 7. COVERS: aperitivo de portadas, galería acordeón ---------- */
+.covers {
+  padding-block:clamp(48px, 6vw, 96px) clamp(64px, 8vw, 120px);
+}
+
+.section-rule {
+  border:none;
+  border-top:2px solid var(--negro-principal);
+  margin:0 0 clamp(24px, 3.4vw, 40px);
+  height:0;
+}
+
+.covers__head {
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:24px;
+  flex-wrap:wrap;
+  margin-bottom:clamp(28px, 4vw, 48px);
+}
+.covers__intro { max-width:640px; }
+.covers__title { color:var(--text-primary); margin-bottom:14px; }
+.covers__lead { color:var(--text-secondary); max-width:38ch; }
+.covers__deco { width:clamp(90px, 9vw, 160px); height:auto; flex-shrink:0; }
+
+/* tarjeta azul redondeada que contiene la galería */
+.covers__deck-wrap {
+  border-radius:var(--radius-card);
+  background:var(--azul-principal);
+  padding:clamp(24px, 3vw, 40px) clamp(16px, 3vw, 32px);
+}
+
+/* fila "acordeón" — como en griph-art.com: todas las portadas reparten el
+   ancho disponible a partes iguales y lo llenan por completo (flex-grow),
+   recortadas (cover) para no dejar huecos. Al pasar el ratón (o dar
+   foco/tocar) por una, esa columna gana mucho más ancho y pasa a mostrar
+   la portada ENTERA sin recortar (contain), mientras las demás se
+   estrechan para dejarle sitio — la fila siempre ocupa el 100% del ancho. */
+.covers__deck {
+  display:flex;
+  align-items:stretch;
+  gap:4px;
+  height:clamp(260px, 32vw, 460px);
+}
+
+.covers__card {
+  flex:1 1 0%;
+  min-width:0;
+  position:relative;
+  transition:flex-grow 1.2s cubic-bezier(.22, .85, .3, 1.1);
+}
+.covers__card.is-active,
+.covers__card:hover,
+.covers__card:focus-within {
+  flex-grow:6;
+  z-index:2;
+}
+
+.covers__card-btn {
+  display:block;
+  width:100%;
+  height:100%;
+  padding:0;
+  border:none;
+  border-radius:8px;
+  overflow:hidden;
+  background:var(--azul-700); /* solo se nota si la portada activa deja algún margen por proporción */
+  cursor:pointer;
+  box-shadow:0 8px 18px rgba(15, 10, 10, .25);
+  filter:saturate(0.75) brightness(0.88); /* en reposo, algo apagadas frente al azul */
+  transition:filter 1.2s ease, box-shadow 1.2s ease;
+}
+.covers__card.is-active .covers__card-btn,
+.covers__card:hover .covers__card-btn,
+.covers__card:focus-within .covers__card-btn {
+  filter:none;
+  box-shadow:0 20px 40px rgba(15, 10, 10, .4);
+}
+.covers__card-btn img {
+  display:block;
+  width:100%;
+  height:100%;
+  /* en reposo, "cover" llena la columna estrecha sin dejar huecos */
+  object-fit:cover;
+  transition:object-fit 0s;
+}
+.covers__card.is-active .covers__card-btn img,
+.covers__card:hover .covers__card-btn img,
+.covers__card:focus-within .covers__card-btn img {
+  /* activa: "contain" para verla ENTERA, sin recortar */
+  object-fit:contain;
+}
+.covers__card-btn:focus-visible {
+  outline:3px solid var(--bg-primary);
+  outline-offset:-3px;
+}
+
+/* ---------- 8. FORMATS: menú de formatos/servicios ---------- */
+.formats {
+  padding-block:clamp(48px, 6vw, 96px) clamp(64px, 8vw, 120px);
+}
+
+.formats__head {
+  max-width:60ch;
+  margin-inline:auto;
+  margin-bottom:clamp(40px, 6vw, 80px);
+  text-align:center;
+}
+.formats__title { color:var(--text-primary); margin-bottom:clamp(16px, 2.4vw, 28px); }
+.formats__lead { color:var(--text-secondary); }
+
+.formats__grid {
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  column-gap:clamp(24px, 4vw, 64px);
+  row-gap:clamp(40px, 5vw, 72px);
+  list-style:none;
+}
+
+.formats__item { position:relative; text-align:center; }
+.formats__item:focus { outline:none; } /* el propio preview ya marca visualmente el estado activo */
+.formats__item-title { color:var(--text-primary); margin-bottom:clamp(10px, 1.4vw, 16px); }
+.formats__item-rule {
+  border:none;
+  border-top:2px solid var(--negro-principal);
+  margin:0 0 clamp(20px, 2.6vw, 32px);
+}
+.formats__item-img {
+  display:block;
+  width:100%;
+  max-width:320px;
+  height:auto;
+  margin-inline:auto;
+}
+
+/* ejemplo de trabajo en hover: ocupa todo el hueco del ítem (título + línea
+   + icono), tapándolos; entra pequeño y transparente y crece hasta ocupar
+   el espacio por completo y quedar opaco — y a la inversa al salir. */
+.formats__preview {
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  border-radius:8px;
+  background:var(--bg-primary);
+  opacity:0;
+  transform:scale(0.55);
+  transition:opacity .4s ease, transform .45s cubic-bezier(.22, .85, .3, 1.1);
+  pointer-events:none;
+  z-index:2;
+}
+.formats__item:hover .formats__preview,
+.formats__item:focus .formats__preview,
+.formats__item:focus-within .formats__preview {
+  opacity:1;
+  transform:scale(1);
+}
+.formats__preview img {
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+/* ---------- 9. WORKFLOW: "A collaborative workflow" ---------- */
+.workflow__intro {
+  padding-block:clamp(48px, 6vw, 96px) clamp(56px, 7vw, 104px);
+  text-align:center;
+}
+.workflow__title { color:var(--text-primary); margin-bottom:clamp(28px, 4vw, 48px); }
+.workflow__copy {
+  max-width:640px;
+  margin-inline:auto;
+  display:flex;
+  flex-direction:column;
+  gap:clamp(20px, 3vw, 36px);
+}
+.workflow__copy p { color:var(--text-primary); }
+.workflow__copy .type-body-big-highlight { color:var(--text-primary); }
+
+/* banda ámbar: los dos rótulos a los lados, el apretón de manos al centro */
+.workflow__band-inner {
+  background:var(--ambar-principal);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:clamp(16px, 3vw, 40px);
+  min-height:clamp(140px, 26.4vw, 380px);
+  padding-block:clamp(12px, 1.5vw, 20px);
+  padding-inline:clamp(20px, 2.6vw, 32px);
+}
+.workflow__label {
+  flex:0 0 auto;
+  color:var(--negro-principal);
+  text-transform:uppercase;
+}
+.workflow__label--left { text-align:left; }
+.workflow__label--right { text-align:right; }
+.workflow__handshake {
+  flex:0 1 auto;
+  min-width:0;
+  width:auto;
+  height:clamp(135px, 22.5vw, 345px);
+  max-width:44%;
+  object-fit:contain;
+  display:block;
+  margin-inline:auto;
+}
+
+/* franja terracota con la frase de "clientes" */
+.workflow__strip-inner {
+  background:var(--terracota-500);
+  min-height:63px; /* alto según Figma — min-height para no recortar si el texto envuelve en pantallas estrechas */
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding-block:8px;
+  padding-inline:clamp(20px, 2.6vw, 32px);
+}
+.workflow__strip-text {
+  text-align:center;
+  color:var(--text-inverse);
+}
+
+/* fila de logos con desplazamiento continuo, derecha → izquierda */
+.workflow__logos-clip {
+  overflow:hidden;
+  background:var(--bg-primary);
+  padding-block:clamp(28px, 4vw, 48px);
+}
+.workflow__logos-track {
+  display:flex;
+  align-items:center;
+  width:max-content;
+  gap:clamp(48px, 7vw, 96px);
+  animation:workflow-marquee 32s linear infinite;
+}
+.workflow__logos-track img {
+  display:block;
+  height:clamp(28px, 3.2vw, 44px);
+  width:auto;
+  flex:0 0 auto;
+}
+@keyframes workflow-marquee {
+  from { transform:translateX(0); }
+  to   { transform:translateX(-50%); } /* el track contiene el set duplicado: -50% cierra el bucle sin salto */
+}
+@media (prefers-reduced-motion: reduce) {
+  .workflow__logos-track { animation:none; }
+}
+
+/* ---------- 10. FINAL CTA: "Science deserves to be shared..." ---------- */
+.final-cta__inner {
+  background:var(--ambar-700);
+  border-radius:var(--radius-card) var(--radius-card) 0 0;
+  min-height:clamp(280px, 34vw, 480px);
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:clamp(24px, 4vw, 48px);
+  /* el padding superior iguala al lateral (antes era mayor, así que el
+     título quedaba más separado del borde de arriba que del izquierdo) */
+  padding-top:clamp(20px, 2.6vw, 32px);
+  padding-bottom:clamp(32px, 5vw, 64px);
+  padding-inline:clamp(20px, 2.6vw, 32px);
+}
+.final-cta__title { color:var(--negro-principal); max-width:14ch; }
+.final-cta__cta { align-self:flex-end; }
+
+/* ---------- 11. FOOTER: banda azul, flotante y fija ---------- */
+/* la franja exterior es transparente y recorre todo el viewport, pero SOLO
+   sirve para posicionar: igual que .hero-wrap > .hero (wrap) > .hero__card,
+   aquí .site-footer-wrap (wrap) fija el mismo ancho/margen que el hero, y la
+   barra azul (.site-footer__bar) es el hijo a 100% de ese ancho ya acotado —
+   así el footer queda exactamente tan ancho como la tarjeta del hero, no
+   pegado a los bordes reales del viewport. */
+.site-footer {
+  position:fixed;
+  left:0; right:0; bottom:var(--footer-gap);
+  z-index:90;
+  pointer-events:none; /* el margen transparente no debe bloquear clics */
+}
+.site-footer__wrap { pointer-events:none; }
+.site-footer__bar {
+  pointer-events:auto;
+  height:var(--footer-h);
+  background:var(--azul-principal);
+  border-radius:0 0 8px 8px; /* solo esquinas inferiores, radio 8 según Figma */
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:clamp(16px, 3vw, 32px);
+  flex-wrap:wrap;
+  padding-inline:clamp(20px, 2.6vw, 32px);
+}
+.site-footer__social {
+  display:flex;
+  gap:clamp(16px, 2vw, 28px);
+}
+.site-footer__social a,
+.site-footer__legal {
+  color:var(--text-inverse);
+  font-size:clamp(12px, 1.05vw, 14px);
+}
+.site-footer__social a:hover { color:var(--negro-principal); }
+.site-footer__legal { white-space:nowrap; }
+
+/* ---------- 11b. CONTACT PAGE ----------
+   Toda la página va sobre fondo negro (a diferencia del resto del sitio,
+   que va sobre --bg-primary): el contenido queda "flotando" dentro de una
+   tarjeta clara, igual que el hero de la home pero invertido — aquí la
+   tarjeta es clara y lo que la rodea es negro. El footer reutiliza la
+   misma estructura que en la home, solo cambia a terracota/500. */
+.page-contact { background:var(--negro-principal); }
+
+.contact {
+  /* sin relleno inferior: la tarjeta debe llegar hasta el final real de
+     <main>, para que el footer (que se solapa hacia arriba con un margen
+     negativo, ver .page-contact .site-footer) quede exactamente con su
+     borde inferior alineado al borde inferior de la tarjeta — sin banda
+     negra de por medio y sin dejarla "debajo". */
+  padding-block:calc(var(--header-h) + clamp(24px, 4vw, 56px)) 0;
+}
+
+.contact__card {
+  background:var(--bg-primary);
+  border-radius:var(--radius-card);
+  padding:clamp(40px, 7vw, 96px) clamp(20px, 5vw, 64px);
+}
+
+.contact__intro {
+  margin-bottom:clamp(40px, 5vw, 64px);
+  text-align:center;
+}
+/* el título NO lleva max-width: con letras tan grandes, una palabra larga como
+   "collaboration" puede ser más ancha que una columna de texto normal — si el
+   contenedor es más estrecho que la palabra, el navegador ya no puede
+   centrarla (la ancla al borde izquierdo y la desborda), que es justo el bug
+   que se veía. Dejando el título a todo el ancho de la tarjeta siempre hay
+   sitio de sobra y el centrado funciona en las tres líneas. */
+.contact__title { color:var(--text-primary); margin-bottom:clamp(24px, 3.4vw, 40px); }
+.contact__subtitle {
+  color:var(--text-primary);
+  max-width:46ch;
+  margin-inline:auto;
+  margin-bottom:clamp(20px, 2.8vw, 32px);
+}
+.contact__lead { color:var(--text-secondary); max-width:46ch; margin-inline:auto; }
+
+.contact__form {
+  max-width:520px;
+  margin-inline:auto;
+  display:flex;
+  flex-direction:column;
+  gap:clamp(20px, 2.6vw, 28px);
+}
+
+.field { display:flex; flex-direction:column; gap:8px; text-align:left; }
+.field__label { color:var(--text-secondary); }
+.field__input {
+  width:100%;
+  background:var(--bg-primary);
+  border:1px solid var(--negro-300);
+  border-radius:6px;
+  padding:13px 16px;
+  color:var(--text-primary);
+  font-family:var(--font-sans);
+  font-weight:400;
+  font-size:16px;
+  letter-spacing:0.03em;
+  transition:border-color .18s ease;
+}
+.field__input::placeholder {
+  font-family:var(--font-sans);
+  font-weight:400;
+  font-size:13px;
+  letter-spacing:0.03em;
+  text-transform:uppercase;
+  color:var(--text-muted);
+  opacity:1;
+}
+.field__input:focus { outline:none; border-color:var(--terracota-500); }
+
+.field__select {
+  appearance:none;
+  -webkit-appearance:none;
+  cursor:pointer;
+  padding-right:44px;
+  background-repeat:no-repeat;
+  background-position:right 16px center;
+  background-size:12px 8px;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23494444' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  /* estilo body_small para las opciones del desplegable */
+  font-family:var(--font-sans);
+  font-weight:400;
+  font-size:16px;
+  line-height:1.7;
+  letter-spacing:0.07em;
+}
+.field__select option {
+  font-family:var(--font-sans);
+  font-weight:400;
+  font-size:16px;
+  letter-spacing:0.07em;
+}
+.field__select:invalid { color:var(--text-muted); }
+
+.field__input--other { margin-top:10px; }
+
+.field__textarea { resize:vertical; min-height:120px; font-family:inherit; line-height:1.5; }
+
+.contact__submit { align-self:center; margin-top:clamp(8px, 1.4vw, 16px); }
+
+.contact__hello {
+  text-align:center;
+  color:var(--text-secondary);
+  margin-top:clamp(40px, 5vw, 64px);
+}
+.contact__hello .type-quote { color:var(--text-primary); }
+
+.contact__email {
+  display:block;
+  text-align:center;
+  color:var(--terracota-500);
+  text-transform:uppercase;
+  margin-top:clamp(12px, 1.6vw, 20px);
+  overflow-wrap:anywhere;
+  transition:color .18s ease;
+}
+.contact__email:hover { color:var(--terracota-700); }
+
+.page-contact .site-footer__bar { background:var(--terracota-500); }
+.page-contact .site-footer__social a:hover { color:var(--negro-principal); }
+
+/* en la home el footer va siempre fijo al viewport (flota sobre un montón de
+   contenido largo). En contact, en cambio, el "suelo" es la propia tarjeta:
+   el footer no debe poder flotar por debajo de ella al hacer scroll, así que
+   aquí usa sticky en vez de fixed — se pega al borde inferior del viewport
+   mientras se hace scroll, y en cuanto se llega al final real de la página
+   se "suelta" y pasa a flujo normal. El margen negativo (igual a su propia
+   altura) hace que, al soltarse, se solape con la tarjeta en vez de quedar
+   pegado justo debajo: así su borde inferior coincide exactamente con el
+   borde inferior de la tarjeta, sin banda negra de por medio. */
+.page-contact .site-footer {
+  position:sticky;
+  margin-top:calc(-1 * var(--footer-h));
+}
+
+/* ---------- 11c. INSPIRATION PAGE ----------
+   Misma lógica de "tarjeta flotando sobre fondo" que contact, pero aquí
+   el fondo es negro/500 (gris claro) y la tarjeta es oscura (negro/principal),
+   con texto invertido (text/inverse). Debajo va un CTA partido en dos
+   bloques de color (naranja + negro) y el footer, que se solapa con el
+   borde inferior de ese CTA exactamente igual que en contact. */
+.page-inspiration { background:var(--negro-500); }
+
+.inspiration {
+  padding-block:calc(var(--header-h) + clamp(24px, 4vw, 56px)) 0;
+}
+
+.inspiration__card {
+  background:var(--negro-principal);
+  border-radius:var(--radius-card);
+  /* el padding inferior es mayor que el resto a propósito: deja hueco de
+     sobra bajo el moodboard para que el CTA naranja (ver .inspiration-cta__row)
+     pueda solaparse hacia arriba con un margen negativo y la unión entre
+     ambas tarjetas quede sin ningún corte ni separación visible. */
+  padding:clamp(40px, 7vw, 96px) clamp(20px, 5vw, 64px) clamp(120px, 14vw, 220px);
+}
+
+.inspiration__intro { margin-bottom:clamp(24px, 3vw, 40px); text-align:center; }
+.inspiration__title { color:var(--text-inverse); }
+
+/* línea horizontal que atraviesa TODA la tarjeta: rompe el padding lateral
+   de la tarjeta con márgenes negativos — como está lejos de las esquinas
+   redondeadas de arriba/abajo, llegar a los bordes reales no las corta. */
+.inspiration__rule {
+  border:none;
+  border-top:1px solid var(--text-inverse);
+  margin-inline:calc(-1 * clamp(20px, 5vw, 64px));
+  margin-bottom:clamp(32px, 4vw, 56px);
+}
+
+.inspiration__lead {
+  color:var(--text-inverse);
+  max-width:50ch;
+  margin-inline:auto;
+  margin-bottom:clamp(48px, 7vw, 96px);
+  text-align:center;
+}
+
+/* moodboard: lienzo posicionado donde cada imagen flota en sus propias
+   coordenadas (--mx/--my en %). Aparece con fade+scale la primera vez que
+   entra en el viewport (clase .is-visible, ver script) y, una vez visible,
+   queda flotando sin parar según sus propias --fx0/--fy0/--fx1/--fy1
+   (@keyframes board-float), separando el "layer" de entrada del de flotado
+   para que ambas transformaciones no choquen entre sí. */
+.inspiration__board {
+  position:relative;
+  width:100%;
+  /* más alto que antes a propósito: separa más las filas del moodboard en
+     vertical (ver --my de cada .moodboard__item) para que el scroll total
+     de la página sea algo más largo. */
+  height:clamp(820px, 88vw, 1260px);
+}
+
+.moodboard__item {
+  position:absolute;
+  left:var(--mx);
+  top:var(--my);
+  width:var(--mw);
+  z-index:var(--mz);
+  opacity:0;
+  transform:rotate(var(--mrot)) scale(.85);
+  transition:opacity .9s ease, transform .9s cubic-bezier(.2, .7, .2, 1);
+}
+.moodboard__item.is-visible {
+  opacity:1;
+  transform:rotate(var(--mrot)) scale(1);
+}
+
+.moodboard__img {
+  width:100%;
+  height:auto;
+  border-radius:4px;
+  box-shadow:0 12px 32px rgba(0, 0, 0, .35);
+  animation:board-float var(--fdur) ease-in-out var(--fdelay) infinite alternate;
+}
+
+@keyframes board-float {
+  from { transform:translate(var(--fx0), var(--fy0)); }
+  to   { transform:translate(var(--fx1), var(--fy1)); }
+}
+
+/* ---------- 11d. PRE-FOOTER CTA (inspiration): banda naranja + botón negro ----------
+   Toda la banda es naranja (ya no está partida en dos bloques de color); el
+   texto ocupa las dos terceras partes izquierdas repartido en dos líneas, y
+   "Let's say hi" es un botón negro grande, no un bloque a toda altura.
+   El margen negativo de arriba es lo que hace que se solape con el hueco
+   inferior de .inspiration__card (ver su padding-bottom): así no queda
+   ninguna separación entre ambas tarjetas ni hace falta redondear su
+   esquina superior. */
+/* grid en vez de flex: así el texto ocupa siempre las 2/3 partes reales del
+   ancho (2fr de 3fr) sin que el botón, al ser más ancho de lo esperado a
+   tamaños de fuente grandes, le "robe" espacio y lo empuje a más líneas. */
+.inspiration-cta__row {
+  position:relative;
+  display:grid;
+  /* minmax(0, Nfr) en vez de solo "Nfr": por defecto una columna de grid no
+     se encoge por debajo del min-content de lo que contiene (aquí, el ancho
+     del botón "Let's say hi" con su padding), así que sin este minmax ambas
+     columnas dejaban de respetar la proporción real 2:1 en tamaños de letra
+     grandes — el botón "robaba" espacio y el texto se quedaba corto. */
+  grid-template-columns:minmax(0, 2fr) minmax(0, 1fr);
+  align-items:center;
+  gap:clamp(24px, 4vw, 40px);
+  background:var(--terracota-orange);
+  /* mismas esquinas inferiores redondeadas que usa el footer (ver
+     .site-footer__bar) — como el footer se solapa encima con el mismo
+     color, sin este radio aquí no se llegaba a ver ningún redondeo real
+     contra el fondo de la página. */
+  border-radius:0 0 8px 8px;
+  /* la altura sale del contenido + su propio padding, no de un valor fijo.
+     El padding de abajo es mayor a propósito: el footer se solapa encima
+     ocupando exactamente su propia altura (--footer-h) desde el borde
+     inferior, así que si el padding de abajo fuera igual al de arriba el
+     footer llegaría a tapar el propio texto/botón — este extra empuja el
+     contenido hacia arriba, por encima de la franja donde pinta el footer,
+     sin que quede ningún hueco de color entre la banda naranja y el footer
+     (siguen tocándose exactamente igual, solo que ahora con margen de
+     sobra antes de llegar a esa franja). */
+  padding:clamp(28px, 3.4vw, 48px) clamp(20px, 3vw, 48px) calc(var(--footer-h) + clamp(24px, 3vw, 40px));
+  margin-top:calc(-1 * clamp(72px, 9vw, 160px));
+}
+
+/* tamaño ligeramente por debajo del type-prefooter-cta base: a 96px pleno,
+   la frase larga de la izquierda no llega a caber en dos líneas dentro de
+   las 2/3 partes de la banda sin invadir el espacio del botón. */
+.inspiration-cta .type-prefooter-cta { font-size:clamp(40px, 4.4vw, 84px); }
+
+.inspiration-cta__text {
+  color:var(--text-inverse);
+  min-width:0;
+}
+
+.inspiration-cta__link {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  justify-self:end;
+  align-self:center;
+  min-width:0;
+  background:var(--negro-principal);
+  border-radius:var(--radius-card);
+  padding:clamp(18px, 2.4vw, 28px) clamp(28px, 3.6vw, 44px);
+  transition:background-color .18s ease;
+}
+.inspiration-cta__link .type-prefooter-cta {
+  color:var(--text-inverse);
+  white-space:nowrap;
+  text-decoration:underline;
+  text-decoration-color:var(--text-inverse);
+  text-decoration-thickness:3px;
+  text-underline-offset:0.12em;
+}
+.inspiration-cta__link:hover { background:var(--negro-700); }
+
+.page-inspiration .site-footer__bar { background:var(--terracota-orange); }
+.page-inspiration .site-footer__social a:hover { color:var(--text-inverse); }
+
+/* mismo mecanismo de solape que en contact: sticky + margen negativo igual
+   a su propia altura, para que su borde inferior coincida exactamente con
+   el borde inferior del CTA (sin banda de por medio y sin quedar "debajo"). */
+.page-inspiration .site-footer {
+  position:sticky;
+  margin-top:calc(-1 * var(--footer-h));
+}
+
+/* ---------- 11e. THOUGHTS / BLOG PAGE ----------
+   Misma tarjeta grande sobre fondo negro/500 que inspiration, pero aquí la
+   tarjeta es CLARA (bg/primary) y el texto va en tono oscuro (al revés que
+   inspiration, que iba oscura con texto invertido). Estructura de dos
+   columnas: la izquierda (título + línea + párrafo) queda fija en pantalla
+   mientras la derecha (tarjetas del blog) hace scroll y sale por arriba —
+   truco de "grid stretch": la fila del grid mide tanto como el feed (mucho
+   más alto), así el panel sticky de la izquierda permanece pegado
+   exactamente mientras dura ese scroll y se suelta justo al llegar al
+   final, coincidiendo con la aparición del CTA — igual que hace ya
+   .page-contact/.page-inspiration con su footer (sticky + margen negativo),
+   solo que aplicado aquí a todo un panel en vez de a una barra. */
+:root {
+  --thoughts-col: clamp(260px, 34vw, 520px);
+  /* mismos valores que el padding de .thoughts__card — variables aparte
+     para poder usarlos también en los "sangrados" (márgenes negativos) de
+     las líneas divisoras, que deben llegar hasta el borde real de la
+     tarjeta, no quedarse dentro del padding. */
+  --thoughts-pad-x: clamp(20px, 5vw, 64px);
+  --thoughts-pad-top: clamp(40px, 7vw, 96px);
+  --thoughts-pad-bottom: clamp(120px, 14vw, 220px);
+  /* mismo valor que el margin-top negativo de .thoughts-cta__row (cuánto
+     se solapa la banda ámbar hacia arriba) — se reutiliza para frenar la
+     línea vertical justo en el borde superior de esa banda. */
+  --thoughts-cta-overlap: clamp(72px, 9vw, 160px);
+  --thoughts-gap: clamp(24px, 3.4vw, 48px);
+}
+
+.page-thoughts { background:var(--negro-500); }
+
+.thoughts {
+  padding-block:calc(var(--header-h) + clamp(24px, 4vw, 56px)) 0;
+}
+
+.thoughts__card {
+  background:var(--bg-primary);
+  border-radius:var(--radius-card);
+  /* mismo truco de solape que inspiration: relleno inferior de sobra para
+     que el CTA ámbar (ver .thoughts-cta__row) se solape hacia arriba con
+     un margen negativo sin dejar ningún corte visible entre tarjetas. */
+  padding:var(--thoughts-pad-top) var(--thoughts-pad-x) var(--thoughts-pad-bottom);
+}
+
+.thoughts__row {
+  position:relative;
+  display:grid;
+  grid-template-columns:var(--thoughts-col) 1px minmax(0, 1fr);
+  column-gap:var(--thoughts-gap);
+}
+
+/* panel fijo: título + línea horizontal (a todo el ancho, por eso ocupa las
+   3 columnas) + párrafo. align-self:start es la clave: su propia caja solo
+   mide lo que ocupa su contenido, pero la CELDA del grid en la que vive
+   mide tanto como el feed (columna derecha, mucho más alta) — así el
+   sticky se suelta justo al final del feed, ni antes ni después. */
+.thoughts__sticky {
+  grid-column:1 / -1;
+  grid-row:1;
+  position:sticky;
+  top:calc(var(--header-h) + clamp(16px, 2vw, 32px));
+  align-self:start;
+  /* por debajo del feed (ver .thoughts__feed-wrap): así, al hacer scroll,
+     las tarjetas pasan POR DELANTE de la línea horizontal (y del propio
+     panel), no por detrás. */
+  z-index:1;
+  pointer-events:none; /* dejar pasar los clics hacia las tarjetas de debajo */
+}
+/* título y párrafo se desplazan hacia el borde real de la tarjeta (mismo
+   valor fijo de 24px ya usado en otros ajustes finos del sitio), en vez de
+   quedarse al mismo margen que usa el resto del padding (--thoughts-pad-x,
+   pensado para la línea horizontal y el resto del layout) — así queda más
+   aire entre el texto y la línea vertical, sin mover ni la línea ni el
+   resto de la columna. */
+.thoughts__title { color:var(--text-primary); max-width:var(--thoughts-col); margin-left:calc(-1 * (var(--thoughts-pad-x) - 24px)); }
+/* separación extra tras el "&": con el interlineado tan ajustado (0.75),
+   sin este hueco el punto de la "i" de "stories" queda pegado a la oreja
+   de la "g" de "Thoughts", en la línea de arriba. */
+.thoughts__title-amp { margin-right:0.45em; }
+.thoughts__rule {
+  border:none;
+  border-top:2px solid var(--negro-principal);
+  margin-block:clamp(20px, 2.6vw, 32px);
+  /* sangrado: llega hasta el borde real de la tarjeta, no se queda dentro
+     del padding lateral (mismo truco que .inspiration__rule). */
+  margin-inline:calc(-1 * var(--thoughts-pad-x));
+}
+.thoughts__lead { color:var(--text-primary); max-width:var(--thoughts-col); margin-left:calc(-1 * (var(--thoughts-pad-x) - 24px)); }
+.thoughts__lead .type-body-big-highlight { color:var(--text-primary); }
+
+.thoughts__pendulo {
+  position:absolute;
+  top:2px;
+  right:0;
+  width:clamp(90px, 8vw, 140px);
+  height:auto;
+}
+
+/* pista central de 1px: línea vertical que separa ambas columnas. Al ser un
+   ítem de grid normal (sin position:sticky), su altura ya es la de toda la
+   fila (feed, mucho más alta) — al ser una línea continua sin marcas, da
+   igual que "se mueva" con el scroll: se ve exactamente igual que si
+   estuviera fija, sin ninguno de los problemas de recorte que tendría un
+   sticky real tan alto como el contenido. */
+.thoughts__divider-v {
+  grid-column:2;
+  grid-row:1;
+  background:var(--negro-principal);
+  /* sangrado vertical: se estira más allá de su propia celda (arriba y
+     abajo, con margen negativo) para llegar hasta el borde real de la
+     tarjeta, en vez de quedarse solo a la altura del feed. No afecta a la
+     altura de la fila del grid (que ya la marca .thoughts__feed-wrap,
+     mucho más alto en su tamaño natural). Abajo se frena justo en el borde
+     superior de la banda ámbar (padding inferior menos lo que esa banda se
+     solapa hacia arriba) para que la línea no la atraviese. */
+  margin-block:calc(-1 * var(--thoughts-pad-top)) calc(-1 * (var(--thoughts-pad-bottom) - var(--thoughts-cta-overlap)));
+  z-index:3; /* por delante de las tarjetas: a diferencia de la línea
+    horizontal, esta sí debe seguir viéndose por encima al hacer scroll */
+}
+
+.thoughts__feed-wrap {
+  grid-column:3;
+  grid-row:1;
+  position:relative;
+  z-index:2; /* por delante de .thoughts__sticky (línea horizontal + panel) */
+}
+
+/* transición de apertura/cierre del artículo (ver JS): el feed y el panel
+   del artículo comparten hueco y se cruzan con un fundido secuencial
+   (uno se desvanece, luego aparece el otro), nunca un corte instantáneo. */
+.thoughts__feed,
+.thoughts__article {
+  transition:opacity .24s ease, transform .24s ease;
+}
+.thoughts__feed.is-fading,
+.thoughts__article.is-fading {
+  pointer-events:none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .thoughts__feed,
+  .thoughts__article {
+    transition:none;
+  }
+}
+
+/* feed en dos columnas al estilo "mampostería": las tarjetas y las
+   ilustraciones decorativas se reparten solas, sin JS, según van llenando
+   cada columna (break-inside:avoid evita que una tarjeta se parta). */
+.thoughts__feed {
+  column-count:2;
+  column-gap:clamp(20px, 2.4vw, 32px);
+}
+
+.thoughtcard,
+.thoughts__illustration {
+  break-inside:avoid;
+  margin-bottom:clamp(20px, 2.4vw, 32px);
+}
+
+.thoughtcard {
+  border-radius:8px;
+  padding:clamp(22px, 2.4vw, 30px) clamp(18px, 1.9vw, 24px);
+}
+.thoughtcard--terracota { background:var(--terracota-500); color:var(--negro-principal); }
+.thoughtcard--azul      { background:var(--azul-principal); color:var(--text-inverse); }
+.thoughtcard--ambar     { background:var(--ambar-700); color:var(--negro-principal); }
+
+.thoughtcard__title {
+  font-family:var(--font-serif);
+  font-weight:700;
+  font-size:clamp(19px, 1.5vw, 25px);
+  line-height:1.1;
+}
+.thoughtcard__rule {
+  border:none;
+  border-top:2px solid currentColor;
+  opacity:.55;
+  margin-block:10px clamp(12px, 1.4vw, 18px);
+}
+.thoughtcard__media { border-radius:6px; overflow:hidden; background:rgba(15, 10, 10, .12); }
+.thoughtcard__media img { width:100%; height:auto; display:block; aspect-ratio:4 / 3; object-fit:cover; }
+
+.thoughtcard--split { display:flex; gap:clamp(14px, 1.6vw, 20px); align-items:flex-start; }
+.thoughtcard--split .thoughtcard__split-text { flex:1 1 42%; min-width:0; }
+.thoughtcard--split .thoughtcard__media { flex:1 1 50%; min-width:0; }
+
+/* tarjeta "The humanism in science": la única con demo de despliegue —
+   por eso es un <button> real (accesible por teclado) en vez de <article>. */
+.thoughtcard--clickable {
+  border:none;
+  width:100%;
+  text-align:left;
+  font:inherit;
+  color:inherit;
+  display:block;
+  cursor:pointer;
+  transition:transform .2s ease, box-shadow .2s ease;
+}
+.thoughtcard--clickable:hover,
+.thoughtcard--clickable:focus-visible {
+  transform:translateY(-3px);
+  box-shadow:0 14px 28px rgba(15, 10, 10, .22);
+}
+
+.thoughts__illustration img { width:100%; height:auto; display:block; }
+.thoughts__illustration--orbits { max-width:200px; margin-inline:auto; }
+.thoughts__illustration--tree   { max-width:190px; margin-inline:auto; }
+
+/* panel de artículo desplegado: ocupa el mismo hueco que el feed (misma
+   celda de grid, ver .thoughts__feed-wrap), y se queda fijo igual que el
+   panel izquierdo mientras se lee — así "todo permanece fijo" también aquí. */
+.thoughts__article {
+  position:sticky;
+  top:calc(var(--header-h) + clamp(16px, 2vw, 32px));
+  align-self:start;
+  /* sin color de fondo propio (bg/primary, igual que la tarjeta que lo
+     envuelve): solo texto en text/primary, para que no cargue demasiado. */
+  background:var(--bg-primary);
+  color:var(--text-primary);
+  border-radius:var(--radius-card);
+  /* sin padding lateral propio: el hueco de 24px hasta la línea vertical y
+     hasta el borde de la tarjeta (ver margin-left/margin-right) ya hace de
+     margen — un padding lateral aparte solo estrechaba el texto de más. */
+  padding-block:clamp(28px, 3.4vw, 48px);
+  padding-inline:0;
+  max-height:calc(100vh - var(--header-h) - clamp(32px, 4vw, 64px));
+  overflow-y:auto;
+  /* el artículo desplegado debe aprovechar casi todo el ancho de la
+     columna derecha: exactamente 24px desde la línea vertical (se resta el
+     hueco de más que trae de fábrica el column-gap del grid) y exactamente
+     24px desde el borde real de la tarjeta (se sangra hacia fuera lo que
+     falte del padding lateral de .thoughts__card, que por defecto deja
+     .thoughts__feed-wrap mucho más corto que el borde real). */
+  margin-left:calc(-1 * (var(--thoughts-gap) - 24px));
+  margin-right:calc(-1 * (var(--thoughts-pad-x) - 24px));
+}
+.thoughts__article-close {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:36px;
+  height:36px;
+  border:none;
+  border-radius:50%;
+  background:var(--negro-principal);
+  color:var(--text-inverse);
+  font-size:20px;
+  line-height:1;
+  cursor:pointer;
+  margin-bottom:clamp(16px, 2vw, 24px);
+  transition:background .18s ease;
+}
+.thoughts__article-close:hover { background:var(--negro-700); }
+.thoughts__article-title {
+  /* mantiene Baskervville bold (como .type-quote/.type-cta) aunque la
+     etiqueta de base sea .type-h2 (sans-serif) — aquí se sobrescribe. */
+  font-family:var(--font-serif);
+  font-weight:700;
+  color:var(--text-primary);
+  margin-bottom:clamp(16px, 2vw, 24px);
+}
+.thoughts__article-body { color:var(--text-primary); display:flex; flex-direction:column; gap:1em; }
+
+/* ---------- 11f. PRE-FOOTER CTA (thoughts): igual mecánica que inspiration,
+   recoloreada a ámbar/700 ---------- */
+.thoughts-cta__row {
+  position:relative;
+  display:grid;
+  grid-template-columns:minmax(0, 2fr) minmax(0, 1fr);
+  align-items:center;
+  gap:clamp(24px, 4vw, 40px);
+  background:var(--ambar-700);
+  border-radius:0 0 8px 8px;
+  padding:clamp(28px, 3.4vw, 48px) clamp(20px, 3vw, 48px) calc(var(--footer-h) + clamp(24px, 3vw, 40px));
+  margin-top:calc(-1 * var(--thoughts-cta-overlap));
+}
+.thoughts-cta .type-prefooter-cta { font-size:clamp(40px, 4.4vw, 84px); }
+.thoughts-cta__text { color:var(--negro-principal); min-width:0; }
+.thoughts-cta__link {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  justify-self:end;
+  align-self:center;
+  min-width:0;
+  background:var(--negro-principal);
+  border-radius:var(--radius-card);
+  padding:clamp(18px, 2.4vw, 28px) clamp(28px, 3.6vw, 44px);
+  transition:background-color .18s ease;
+}
+.thoughts-cta__link .type-prefooter-cta {
+  color:var(--text-inverse);
+  white-space:nowrap;
+  text-decoration:underline;
+  text-decoration-color:var(--text-inverse);
+  text-decoration-thickness:3px;
+  text-underline-offset:0.12em;
+}
+.thoughts-cta__link:hover { background:var(--negro-700); }
+
+/* footer negro/principal con texto invertido — a diferencia del resto de
+   páginas, aquí NO coincide con el color del CTA justo encima (ámbar): es
+   un contraste deliberado, tal como se ve en Figma. */
+.page-thoughts .site-footer__bar { background:var(--negro-principal); }
+.page-thoughts .site-footer__social a,
+.page-thoughts .site-footer__legal { color:var(--text-inverse); }
+.page-thoughts .site-footer__social a:hover { color:var(--terracota-500); }
+
+.page-thoughts .site-footer {
+  position:sticky;
+  margin-top:calc(-1 * var(--footer-h));
+}
+
+/* ---------- 11g. WORKS PAGE ----------
+   Misma mecánica de "grid stretch" que Thoughts (columna fija a la
+   izquierda, feed que sube y sale por arriba a la derecha), pero aquí el
+   panel fijo lleva además, arriba a la derecha, los botones de filtro
+   (pegados justo encima de la línea horizontal), y debajo del párrafo una
+   banda de técnicas que se desplaza sola en bucle. Las tarjetas de trabajo
+   van alternando composición (texto/captura ↔ captura/texto). */
+:root {
+  /* mismo valor que --thoughts-col (y mismo --works-pad-x que
+     --thoughts-pad-x, más abajo): así la línea vertical cae exactamente en
+     la misma posición de viewport que en la página Thoughts. */
+  --works-col: clamp(260px, 34vw, 520px);
+  --works-pad-x: clamp(20px, 5vw, 64px);
+  --works-pad-top: clamp(40px, 6vw, 80px);
+  --works-pad-bottom: clamp(120px, 14vw, 220px);
+  --works-cta-overlap: clamp(72px, 9vw, 160px);
+  --works-gap: clamp(24px, 3.4vw, 48px);
+}
+
+.page-works { background:var(--negro-principal); }
+
+.works {
+  padding-block:calc(var(--header-h) + clamp(24px, 4vw, 56px)) 0;
+}
+
+.works__card {
+  background:var(--bg-primary);
+  border-radius:var(--radius-card);
+  padding:var(--works-pad-top) var(--works-pad-x) var(--works-pad-bottom);
+}
+
+.works__row {
+  position:relative;
+  display:grid;
+  grid-template-columns:var(--works-col) 1px minmax(0, 1fr);
+  column-gap:var(--works-gap);
+}
+
+/* panel fijo: título+filtros (fila de cabecera) + línea horizontal a todo
+   el ancho + párrafo + banda de técnicas — mismo truco de grid-stretch que
+   .thoughts__sticky (ver comentario allí): la celda mide lo que el feed,
+   mucho más alto, así que el panel se suelta justo al final del feed. */
+.works__sticky {
+  grid-column:1 / -1;
+  grid-row:1;
+  min-width:0;
+  position:sticky;
+  top:calc(var(--header-h) + clamp(16px, 2vw, 32px));
+  align-self:start;
+  z-index:1; /* por debajo del feed: las tarjetas pasan por delante al hacer scroll */
+  pointer-events:none;
+}
+
+/* misma plantilla de columnas que .works__row (título en la columna 1,
+   columna 2 vacía — ahí cae la línea vertical —, filtros centrados en la
+   columna 3): así los filtros quedan centrados sobre la columna del feed,
+   y align-items:end alinea su borde inferior con el del título, tenga la
+   altura que tenga según el viewport (tipografía fluida). */
+.works__header {
+  display:grid;
+  grid-template-columns:var(--works-col) 1px minmax(0, 1fr);
+  column-gap:var(--works-gap);
+  align-items:end;
+}
+
+/* mismo desplazamiento hacia el borde real que en Thoughts (ver comentario
+   en .thoughts__title): el título y el párrafo se acercan al borde de la
+   tarjeta, dejando más aire hacia la línea vertical. */
+.works__title { grid-column:1; color:var(--text-primary); max-width:var(--works-col); margin-left:calc(-1 * (var(--works-pad-x) - 24px)); }
+
+/* botones de filtro: centrados sobre la columna del feed, en un número fijo
+   de filas (4 columnas = 2 filas para 8 botones) en vez de dejar que el
+   ajuste de línea dependa del ancho disponible — con grid-auto-flow:row,
+   una plantilla de N columnas reparte los botones en filas completas de N,
+   así que basta con cambiar ese número de columnas por breakpoint (ver
+   media query) para pasar de 2 a 3 filas en móvil. Son la única parte de
+   todo el panel fijo que recupera los clics (pointer-events:auto), aunque
+   de momento son solo visuales — el filtrado en sí queda para más adelante. */
+.works__filters {
+  grid-column:3;
+  justify-self:center;
+  text-align:center;
+}
+.works__filters-label {
+  display:block;
+  color:var(--text-primary);
+  margin-bottom:clamp(8px, 1.1vw, 12px);
+}
+.works__filter-list {
+  display:grid;
+  grid-template-columns:repeat(4, max-content);
+  grid-auto-flow:row;
+  justify-content:center;
+  gap:6px;
+}
+.works__filter-btn {
+  background:var(--negro-principal);
+  color:var(--text-inverse);
+  font-family:var(--font-serif);
+  font-weight:700;
+  font-size:14px;
+  line-height:0.9;
+  border:none;
+  border-radius:4px;
+  padding:6px 12px;
+  white-space:nowrap;
+  cursor:pointer;
+  pointer-events:auto;
+  transition:background .18s ease;
+}
+.works__filter-btn:hover,
+.works__filter-btn:focus-visible { background:var(--terracota-500); }
+
+.works__rule {
+  border:none;
+  border-top:2px solid var(--negro-principal);
+  margin-block:clamp(20px, 2.6vw, 32px);
+  /* mismo sangrado que .thoughts__rule: llega hasta el borde real de la
+     tarjeta, atravesando también la columna de los filtros. */
+  margin-inline:calc(-1 * var(--works-pad-x));
+}
+
+.works__lead { color:var(--text-primary); max-width:var(--works-col); margin-left:calc(-1 * (var(--works-pad-x) - 24px)); }
+
+/* banda de técnicas: se desplaza sola, de derecha a izquierda, en bucle
+   continuo. El texto está duplicado dentro de la pista (.works__techniques-track)
+   y la animación se limita a desplazar exactamente el ancho de una copia
+   (-50%), así el bucle no se nota nunca.
+   Solo lleva borde arriba y abajo (nada a los lados): sangra por la
+   izquierda hasta el borde real de la tarjeta blanca (mismo truco que
+   .works__rule) y por la derecha llega justo hasta la línea vertical —
+   ancho calculado para terminar exactamente donde empieza esa columna
+   (var(--works-col) + var(--works-gap) después del borde sangrado). */
+.works__techniques {
+  overflow:hidden;
+  width:calc(var(--works-pad-x) + var(--works-col) + var(--works-gap));
+  margin-left:calc(-1 * var(--works-pad-x));
+  border-top:2px solid var(--negro-principal);
+  border-bottom:2px solid var(--negro-principal);
+  padding-block:10px;
+  padding-inline-start:24px; /* mismo borde de arranque que el título y el párrafo (ver .works__title/.works__lead), no el padding general de la tarjeta */
+  margin-top:clamp(24px, 3.4vw, 40px);
+}
+.works__techniques-track {
+  display:flex;
+  width:max-content;
+  animation:works-marquee 26s linear infinite;
+}
+.works__techniques-track span {
+  font-family:var(--font-mono);
+  font-size:20px;
+  letter-spacing:0.05em;
+  white-space:nowrap;
+  padding-right:0.4em;
+}
+@keyframes works-marquee {
+  from { transform:translateX(0); }
+  to   { transform:translateX(-50%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .works__techniques-track { animation:none; }
+}
+
+/* línea vertical: mismo sangrado y mismo frenado geométrico justo en el
+   borde superior del CTA azul que .thoughts__divider-v (ver comentario
+   allí) — evita cualquier ambigüedad de z-index entre el orden de pintado
+   y el punto donde debe detenerse. */
+.works__divider-v {
+  grid-column:2;
+  grid-row:1;
+  background:var(--negro-principal);
+  margin-block:calc(-1 * var(--works-pad-top)) calc(-1 * (var(--works-pad-bottom) - var(--works-cta-overlap)));
+  z-index:3;
+}
+
+.works__feed-wrap {
+  grid-column:3;
+  grid-row:1;
+  min-width:0; /* evita que el ancho intrínseco de las imágenes de las tarjetas fuerce la columna del grid a crecer */
+  position:relative;
+  z-index:2; /* por delante de .works__sticky: las tarjetas pasan por delante de la línea */
+  /* las tarjetas deben encajar a presión: a la izquierda, pegadas a la
+     línea vertical (se cierra el column-gap del grid que las separaba de
+     ella); a la derecha, hasta el borde real de la tarjeta blanca (se
+     sangra el padding lateral de .works__card, igual que ya hacen la línea
+     horizontal y la banda de técnicas). */
+  margin-left:calc(-1 * var(--works-gap));
+  margin-right:calc(-1 * var(--works-pad-x));
+}
+
+.works__feed {
+  display:flex;
+  flex-direction:column;
+  gap:clamp(24px, 3vw, 40px);
+}
+
+/* tarjeta de trabajo: caja de trazo negro/principal partida en dos mitades
+   horizontales (captura + texto). El orden visual alterna tarjeta a
+   tarjeta con flex-direction:row-reverse en las pares — el HTML siempre
+   lleva el mismo orden (texto primero, captura después). */
+.workcard {
+  display:flex;
+  align-items:stretch;
+  border:2px solid var(--negro-principal);
+  border-radius:8px;
+  overflow:hidden;
+  background:var(--bg-primary);
+}
+.workcard:nth-child(even) { flex-direction:row-reverse; }
+
+/* la captura ya no necesita mostrarse entera (ni el recuadro gris de letterbox
+   que eso exigía): ahora es un recorte representativo, tipo zoom-in, que
+   rellena toda su mitad de la tarjeta de borde a borde — object-fit:cover en
+   vez de contain, sin padding ni fondo propio. */
+.workcard__media {
+  flex:1 1 46%;
+  min-width:0; /* la imagen no debe forzar el ancho de la mitad de la tarjeta */
+  align-self:stretch;
+}
+.workcard__media img {
+  width:100%;
+  height:100%;
+  min-height:clamp(260px, 26vw, 400px);
+  object-fit:cover;
+  display:block;
+}
+/* logo (Lab & sharks branding): es un logotipo, no una captura de trabajo —
+   debe verse completo y sobre fondo claro, no recortado a zoom. */
+.workcard__media--logo {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:clamp(24px, 3vw, 40px);
+  background:var(--bg-primary);
+}
+.workcard__media--logo img {
+  width:100%;
+  height:auto;
+  min-height:0;
+  object-fit:contain;
+}
+
+/* caribú: la lámina completa trae al animal a la izquierda (cabeza) y bocetos
+   sueltos a la derecha — con el recorte centrado por defecto se perdía la
+   cara. Se desplaza el punto de referencia del recorte hacia la izquierda de
+   la imagen para que la cara quede dentro del encuadre. */
+.workcard__media--caribou img { object-position:0% 38%; }
+
+.workcard__content {
+  flex:1 1 54%;
+  min-width:0;
+  display:flex;
+  flex-direction:column;
+  gap:clamp(12px, 1.6vw, 18px);
+  /* menos hueco arriba que a los lados/abajo: la categoría "/Categoría" debe
+     quedar pegada al borde superior de la tarjeta, no centrada en un
+     padding uniforme. */
+  padding:clamp(14px, 1.6vw, 20px) clamp(24px, 2.6vw, 40px) clamp(24px, 2.6vw, 36px);
+}
+/* espacio extra respecto al título (se suma al gap general del contenedor):
+   la categoría debe quedar claramente separada del resto del texto, no
+   pegada al título como una etiqueta más de la pila. */
+.workcard__eyebrow { color:var(--text-primary); margin-bottom:clamp(18px, 2.4vw, 32px); }
+.workcard__title { color:var(--text-primary); }
+.workcard__desc { color:var(--text-primary); }
+.workcard__explore {
+  margin-top:auto;
+  align-self:flex-start;
+  display:inline-flex;
+  border:none;
+  background:none;
+  padding:0;
+  line-height:0;
+  cursor:pointer;
+  transition:opacity .18s ease;
+}
+.workcard__explore:hover,
+.workcard__explore:focus-visible { opacity:.7; }
+.workcard__explore img { width:100px; height:40px; }
+
+/* ---------- 11h. PRE-FOOTER CTA (works): igual mecánica que thoughts,
+   recoloreada a azul/principal con texto invertido ---------- */
+.works-cta__row {
+  position:relative;
+  display:grid;
+  grid-template-columns:minmax(0, 2fr) minmax(0, 1fr);
+  align-items:center;
+  gap:clamp(24px, 4vw, 40px);
+  background:var(--azul-principal);
+  border-radius:0 0 8px 8px;
+  padding:clamp(28px, 3.4vw, 48px) clamp(20px, 3vw, 48px) calc(var(--footer-h) + clamp(24px, 3vw, 40px));
+  margin-top:calc(-1 * var(--works-cta-overlap));
+}
+.works-cta .type-prefooter-cta { font-size:clamp(40px, 4.4vw, 84px); }
+.works-cta__text { color:var(--text-inverse); min-width:0; }
+.works-cta__link {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  justify-self:end;
+  align-self:center;
+  min-width:0;
+  background:var(--negro-principal);
+  border-radius:var(--radius-card);
+  padding:clamp(18px, 2.4vw, 28px) clamp(28px, 3.6vw, 44px);
+  transition:background-color .18s ease;
+}
+.works-cta__link .type-prefooter-cta {
+  color:var(--text-inverse);
+  white-space:nowrap;
+  text-decoration:underline;
+  text-decoration-color:var(--text-inverse);
+  text-decoration-thickness:3px;
+  text-underline-offset:0.12em;
+}
+.works-cta__link:hover { background:var(--negro-700); }
+
+/* footer terracota/500 (a diferencia del resto, que reutiliza azul/principal
+   por defecto) — mismo patrón que .page-contact, con hover a negro/principal
+   para mantener el contraste sobre un color tan saturado. */
+.page-works .site-footer__bar { background:var(--terracota-500); }
+.page-works .site-footer__social a:hover { color:var(--negro-principal); }
+
+.page-works .site-footer {
+  position:sticky;
+  margin-top:calc(-1 * var(--footer-h));
+}
+
+/* ---------- 12. RESPONSIVE ---------- */
+@media (max-width: 900px) {
+  .nav {
+    grid-template-columns:none;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:flex-end;
+  }
+  .nav__pill--work, .nav__pill--about, .nav__pill--inspiration,
+  .nav__pill--thoughts, .nav__pill--talk { grid-column:auto; grid-row:auto; justify-self:auto; }
+
+  .hero__top { grid-template-columns:1fr; }
+  .hero__divider-v { display:none; }
+  /* filas explícitas: sin esto, .hero__video (que en escritorio lleva
+     grid-row:1 fijo) se coloca ANTES que .hero__lettering en el algoritmo
+     de auto-placement de Grid, aunque en el HTML vaya después — por eso
+     la animación aparecía arriba del todo. */
+  .hero__lettering { grid-column:1; grid-row:1; width:100%; border-bottom:none; }
+  .hero__video { position:static; inset:auto; grid-column:1; grid-row:2; width:100%; height:auto; display:flex; justify-content:center; padding-block:16px; }
+  .hero__video video { width:100%; height:auto; object-fit:initial; }
+  .hero__bottom { align-items:flex-start; text-align:left; padding-inline:clamp(16px, 3vw, 32px); }
+  .hero__title, .hero__lead { max-width:none; }
+
+  .covers__deco { width:70px; }
+  .covers__deck { height:clamp(220px, 46vw, 320px); }
+
+  .workflow__band-inner { flex-wrap:wrap; justify-content:center; text-align:center; min-height:0; padding-block:clamp(20px, 4vw, 32px); }
+  .workflow__label--left, .workflow__label--right { text-align:center; }
+  .workflow__handshake { order:3; width:min(480px, 85vw); height:auto; max-width:85vw; }
+
+  .final-cta__title { max-width:none; }
+
+  /* en pantallas medianas/estrechas el texto ya no comparte fila con el
+     botón: ocupa todo el ancho y el botón cae debajo, alineado a la
+     izquierda igual que el texto. (El hueco extra para el footer ya lo da
+     el padding-bottom base de .inspiration-cta__row, igual en cualquier
+     ancho.) */
+  .inspiration-cta__row { grid-template-columns:1fr; }
+  .inspiration-cta__link { justify-self:start; }
+
+  /* los saltos de línea manuales del párrafo (--lead) están pensados para
+     el ancho de escritorio: en móvil, contra una columna mucho más
+     estrecha, cada línea se corta otra vez sola y deja huérfanas ("get",
+     "some", "its"…) — se ve deshilachado. Se desactivan aquí (un <br>
+     con display:none no fuerza salto) y el texto vuelve a fluir como un
+     párrafo normal, envolviéndose según el ancho disponible. */
+  .inspiration__lead-break { display:none; }
+  .inspiration__lead { max-width:38ch; }
+
+  /* las posiciones --mx de las imágenes están pensadas para un tablero
+     ancho: en pantallas estrechas, el ancho mínimo de cada imagen (los
+     "clamp(...)" de --mw no bajan de ~110-150px) pesa mucho más que el
+     tablero, así que el conjunto queda visualmente desbordado solo hacia
+     la derecha (las imágenes cercanas al borde izquierdo apenas llegan a
+     rozarlo, mientras que las de la derecha sobresalen de largo). Se
+     desplaza aquí el conjunto entero hacia la izquierda para repartir el
+     desbordamiento a ambos lados — el propio valor se ajusta con el ancho
+     de viewport (más desplazamiento cuanto más estrecho). */
+  .inspiration__board { transform:translateX(calc(-60px + 5.3vw)); }
+
+  /* en móvil/tablet se abandona el truco sticky (columna fija + línea
+     vertical a toda altura): todo pasa a flujo normal, apilado en una sola
+     columna — título/línea/párrafo arriba, tarjetas del blog debajo. */
+  .thoughts__row { grid-template-columns:1fr; }
+  .thoughts__divider-v, .thoughts__pendulo { display:none; }
+  .thoughts__sticky {
+    position:static;
+    pointer-events:auto;
+    margin-bottom:clamp(32px, 5vw, 48px);
+  }
+  .thoughts__title, .thoughts__lead { max-width:none; }
+  .thoughts__feed-wrap { grid-column:1; grid-row:auto; }
+  .thoughts__feed { column-count:1; }
+  .thoughtcard--split { flex-direction:column; }
+  .thoughts__article { position:static; max-height:none; margin-left:0; margin-right:0; }
+
+  .thoughts-cta__row { grid-template-columns:1fr; }
+  .thoughts-cta__link { justify-self:start; }
+
+  /* Works: mismo abandono del truco sticky que Thoughts — todo a una sola
+     columna, cabecera (título+filtros) apilada encima de la línea, banda de
+     técnicas y feed de tarjetas debajo. */
+  /* minmax(0, 1fr) y no un simple "1fr": sin el mínimo a 0, el ancho
+     intrínseco de las imágenes de las tarjetas (o el texto sin salto de
+     los botones de filtro) fuerza a la única columna a crecer por encima
+     del viewport — mismo motivo por el que la columna del feed ya lo lleva
+     en el grid de escritorio (ver .works__row más arriba). */
+  .works__row { grid-template-columns:minmax(0, 1fr); }
+  .works__divider-v { display:none; }
+  .works__sticky { position:static; pointer-events:auto; margin-bottom:clamp(32px, 5vw, 48px); }
+  .works__header { grid-template-columns:1fr; row-gap:clamp(16px, 3vw, 24px); align-items:start; }
+  .works__title { grid-column:1; max-width:none; }
+  .works__filters { grid-column:1; justify-self:start; text-align:left; }
+  /* 3 columnas en vez de 4: los mismos 8 botones se reparten en 3 filas
+     (3+3+2) en vez de 2. A diferencia de escritorio, las columnas van a
+     "1fr" (ancho igual, repartiendo el ancho disponible) y el texto puede
+     partirse en dos líneas dentro del pill — con columnas a max-content,
+     dos etiquetas largas ("Data visualization", "Graphical abstracts") en
+     la misma fila no cabían en el ancho de un móvil y desbordaban la tarjeta. */
+  .works__filter-list { grid-template-columns:repeat(3, 1fr); justify-content:stretch; }
+  .works__filter-btn { white-space:normal; text-align:center; }
+  .works__lead { max-width:none; }
+  /* en móvil ya no hay columna del feed a la que llegar: la banda sangra a
+     los dos lados, a todo el ancho de la tarjeta, igual que la línea
+     horizontal (.works__rule). */
+  .works__techniques { width:auto; max-width:none; margin-inline:calc(-1 * var(--works-pad-x)); }
+  /* en móvil ya no hay línea vertical a la que pegarse: las tarjetas vuelven
+     a respetar el padding normal de la tarjeta, en vez de sangrar a los
+     bordes reales (eso era solo para encajar con la línea/borde en escritorio). */
+  .works__feed-wrap { grid-column:1; grid-row:auto; margin-left:0; margin-right:0; }
+  .workcard, .workcard:nth-child(even) { flex-direction:column; }
+  /* en columna, la mitad de la captura ya no puede heredar la altura de la
+     mitad de texto (align-items:stretch no aplica en column): se le da una
+     proporción fija propia para que el recorte zoom siga viéndose bien. */
+  .workcard__media { aspect-ratio:4 / 3; }
+  .workcard__media img { min-height:0; }
+  .workcard__media--logo img { height:auto; }
+
+  .works-cta__row { grid-template-columns:1fr; }
+  .works-cta__link { justify-self:start; }
+}
+
+@media (max-width: 560px) {
+  :root { --header-h:76px; }
+  /* mismo tamaño que la tarjeta del botón de menú (40x40) para que ambos
+     queden alineados en altura */
+  .logo img { width:40px; height:40px; }
+  .nav__pill { font-size:12.6px; padding:4.5px 10.8px; } /* -10% respecto al tamaño anterior */
+  .hero__card { border-radius:12px; }
+
+  /* nav sustituido por un botón: las pills se ocultan y en su lugar aparece
+     una bandeja terracota que entra deslizando desde el lado derecho de la
+     pantalla, quedando alineada a la izquierda con la tarjeta del hero
+     (mismo wrap que el resto de bandas de la web). Las pills dentro flotan
+     con su ancho natural (según el texto), sin estirarse. */
+  .nav-toggle { display:inline-flex; }
+  .nav {
+    position:absolute;
+    top:calc(100% + 8px);
+    left:var(--grid-pad);
+    right:var(--grid-pad);
+    background:var(--terracota-500);
+    border-radius:8px; /* misma curvatura que el footer */
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    gap:14px;
+    padding:20px;
+    transform:translateX(100%);
+    visibility:hidden;
+    transition:transform .4s cubic-bezier(.22, .85, .3, 1.1), visibility 0s linear .4s;
+  }
+  .nav.is-open {
+    transform:translateX(0);
+    visibility:visible;
+    transition:transform .4s cubic-bezier(.22, .85, .3, 1.1);
+  }
+  .nav.is-open .nav__pill {
+    font-size:20px;
+    padding:14px 18px;
+  }
+
+  .covers__deck-wrap { padding-inline:12px; }
+  .covers__deck { height:260px; gap:3px; }
+  .covers__card.is-active,
+  .covers__card:hover,
+  .covers__card:focus-within { flex-grow:4; }
+
+  .formats__grid { grid-template-columns:repeat(2, 1fr); column-gap:20px; row-gap:36px; }
+  /* con 2 columnas el ajuste de línea de cada título depende del ancho
+     exacto del viewport (un título puede pasar de 1 a 2 líneas en un
+     punto distinto que su pareja de fila), así que reordenar por sí solo
+     no basta para mantener la regla horizontal alineada en todo el rango
+     móvil. Reservamos siempre la altura de 2 líneas — el título ocupe 1 o
+     2 — para que la línea quede a la misma altura pase lo que pase. */
+  .formats__item-title { min-height:2.3em; }
+
+  .workflow__logos-track { gap:36px; }
+
+  :root { --footer-h:64px; }
+  .site-footer__bar { flex-direction:column; align-items:flex-start; justify-content:center; gap:4px; padding-block:8px; }
+}
+
+/* ---------- 11i. ABOUT PAGE ----------
+   A diferencia de works/thoughts (panel fijo + feed que hace scroll) o de
+   contact/inspiration (tarjeta de color distinto flotando sobre un fondo
+   oscuro), en Figma la página ABOUT vive directamente sobre bg/primary, sin
+   ninguna "tarjeta" de color diferenciado — por eso aquí no hay .page-about
+   con un fondo propio ni ningún envoltorio con su propio color: todo fluye
+   en la página tal cual, como un artículo largo. Sí se reutiliza el mismo
+   mecanismo de solape CTA + footer sticky que usa el resto del sitio. */
+:root {
+  --about-pad-x: clamp(20px, 5vw, 64px);
+  --about-cta-overlap: clamp(72px, 9vw, 160px);
+}
+
+.about {
+  padding-block:calc(var(--header-h) + clamp(24px, 4vw, 56px)) 0;
+}
+
+/* ----- cabecera: título + retratos + historia ----- */
+.about__hero {
+  display:grid;
+  grid-template-columns:minmax(0, 1fr) minmax(0, 1.15fr);
+  column-gap:clamp(32px, 5vw, 64px);
+  row-gap:clamp(32px, 5vw, 56px);
+  align-items:start;
+}
+.about__title {
+  grid-column:1 / -1;
+  color:var(--text-primary);
+}
+
+/* foto del laboratorio: en su propia columna, desplazada hacia abajo para
+   no arrancar a la misma altura que la columna de la historia (igual que en
+   Figma, donde queda "escalonada" respecto al retrato/párrafo). */
+.about__media {
+  grid-column:1;
+  grid-row:2;
+  /* desplazada para que arranque a la altura del párrafo "Along the way...
+     I carried always a pencil..." (el segundo del bloque de historia) en
+     vez de justo debajo del título — valor afinado a ojo contra ese
+     párrafo, no una fórmula exacta (el texto de cada columna fluye de
+     forma independiente, así que un ajuste fijo es más fiable que un
+     cálculo en vw). */
+  margin-top:clamp(480px, 77vw, 1180px);
+}
+.about__media img {
+  width:100%;
+  height:auto;
+  border-radius:var(--radius-card);
+}
+
+.about__story {
+  grid-column:2;
+  grid-row:2;
+  display:flex;
+  flex-direction:column;
+  gap:clamp(20px, 2.6vw, 32px);
+}
+
+.about__credentials {
+  align-self:flex-end;
+  text-align:right;
+  color:var(--text-primary);
+  display:flex;
+  flex-direction:column;
+  gap:clamp(10px, 1.2vw, 16px);
+}
+
+.about__portrait {
+  align-self:flex-end;
+  width:clamp(200px, 24vw, 360px);
+  border-radius:var(--radius-card);
+  overflow:hidden;
+  border:1px solid var(--negro-principal);
+}
+.about__portrait img { width:100%; height:100%; aspect-ratio:1 / 1.05; object-fit:cover; display:block; }
+
+.about__intro { color:var(--text-primary); }
+.about__intro--bold { font-family:var(--font-sans); font-weight:700; }
+
+/* el primer párrafo "sube" y se solapa un poco con el borde inferior del
+   retrato (que queda alineado a la derecha, justo encima): un margen
+   negativo lo levanta fuera de su celda de flujo normal, rompiendo la
+   gradilla en vez de apilarse limpiamente debajo de la foto. Como va
+   después en el DOM, queda por delante de la imagen sin necesidad de
+   z-index. */
+.about__intro--overlap {
+  position:relative;
+  /* +1 letra de altura extra respecto a la versión anterior, para que el
+     solape con el retrato sea un poco mayor sin dejar de limitarse a la
+     primera línea. */
+  margin-top:calc(clamp(-48px, -3.6vw, -28px) - 38px);
+}
+
+/* resaltado tipo "rotulador a mano": texto blanco sobre negro para los
+   hitos del recorrido personal, y texto oscuro sobre terracota para las
+   frases-idea que cierran cada bloque — mismos dos colores que usa Figma
+   tras las cajas negras/naranjas posicionadas a mano detrás del texto.
+   box-decoration-break:clone repite el resaltado en cada línea cuando
+   envuelve a más de una — cada fragmento recibe esquinas asimétricas y una
+   ligera rotación propia (no exactamente iguales entre sí, ver variantes
+   más abajo), para que el conjunto no se vea como una caja perfecta de
+   software sino como un trazo de rotulador hecho a mano. */
+mark.hl {
+  background:var(--negro-principal);
+  color:var(--text-inverse);
+  padding:0.04em 0.32em 0.08em;
+  border-radius:7px 3px 8px 2px / 3px 8px 2px 9px;
+  box-decoration-break:clone;
+  -webkit-box-decoration-break:clone;
+  display:inline;
+  transform:rotate(-0.55deg);
+}
+mark.hl.hl--accent {
+  background:var(--terracota-500);
+  color:var(--text-primary);
+  border-radius:3px 8px 2px 9px / 8px 3px 9px 2px;
+  transform:rotate(0.5deg);
+}
+/* alterna el sentido/ángulo de giro según la posición de cada resaltado en
+   la página: evita que todas las marcas "caigan" hacia el mismo lado. */
+mark.hl:nth-of-type(3n+2) { transform:rotate(0.7deg); border-radius:3px 9px 2px 8px / 8px 2px 9px 3px; }
+mark.hl:nth-of-type(3n+3) { transform:rotate(-0.4deg); border-radius:8px 2px 9px 3px / 2px 9px 3px 8px; }
+
+.about__fundamentals {
+  color:var(--text-primary);
+  max-width:20ch;
+  /* la línea es el propio border-top del título: su ancho es el ancho real
+     de la caja del texto (limitada por max-width), no todo el ancho de la
+     página — "muy pegada" arriba, con solo el hueco justo antes de las
+     letras. */
+  border-top:2px solid var(--negro-principal);
+  padding-top:clamp(8px, 1.1vw, 14px);
+  margin-top:clamp(56px, 7vw, 96px);
+  margin-bottom:clamp(24px, 3.4vw, 40px);
+}
+
+/* ----- banda de las tres claves: rectángulo negro con textura de ruido de
+   tinta impresa, y dentro tres cuadrados de color con su propio hueco
+   (padding) respecto al borde negro y entre sí. ----- */
+.about__keys {
+  position:relative;
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  align-items:center;
+  justify-items:center;
+  gap:clamp(14px, 2vw, 28px);
+  background:var(--negro-principal);
+  border-radius:var(--radius-card);
+  padding:clamp(28px, 4.5vw, 64px) clamp(14px, 2vw, 28px);
+  overflow:hidden;
+  margin-bottom:clamp(56px, 8vw, 120px);
+}
+/* mismo ruido fractal que .hero__noise, pero en "screen" en vez de
+   "multiply": sobre negro puro, multiplicar por negro no aclararía nada
+   (el grano quedaría invisible) — screen sí deja ver el grano como
+   motas claras sobre la tinta. */
+.about__keys::after {
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:2;
+  pointer-events:none;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='150' height='150'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='1.15' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  background-size:150px 150px;
+  opacity:0.18;
+  mix-blend-mode:screen;
+}
+.about-key {
+  position:relative;
+  z-index:1;
+  width:clamp(170px, 20vw, 300px);
+  aspect-ratio:1 / 1;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:clamp(12px, 1.6vw, 22px);
+  padding:clamp(14px, 2vw, 28px);
+  border-radius:calc(var(--radius-card) - 6px);
+}
+.about-key--curiosity { background:var(--ambar-principal); }
+.about-key--method     { background:var(--azul-principal); }
+.about-key--progress   { background:var(--terracota-500); }
+.about-key__icon { width:clamp(95px, 12vw, 185px); height:auto; }
+.about-key__label { color:var(--negro-principal); }
+
+/* ----- 1|Curiosity, 2|Method, 3|Progress: bloques que alternan
+   ilustración+cita a un lado y número+texto al otro, mismo patrón de
+   alternancia estricta ya usado en las tarjetas de la página Works. ----- */
+.about-section {
+  display:grid;
+  grid-template-columns:minmax(0, 1fr) minmax(0, 1fr);
+  gap:clamp(32px, 5vw, 64px);
+  align-items:center;
+  padding-block:clamp(40px, 6vw, 80px);
+}
+.about-section__media {
+  grid-column:1;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:clamp(20px, 3vw, 32px);
+  text-align:left;
+}
+.about-section__body {
+  grid-column:2;
+  display:flex;
+  flex-direction:column;
+  gap:clamp(16px, 2vw, 24px);
+}
+.about-section--reverse .about-section__body  { grid-column:1; }
+.about-section--reverse .about-section__media { grid-column:2; }
+
+.about-section__illustration { height:auto; display:block; }
+.about-section__illustration--spheres   { width:min(100%, 420px); }
+.about-section__illustration--squares   { width:min(70%, 300px); }
+/* mucho más grande que el resto de ilustraciones a propósito: no cabe
+   entera en una pantalla normal (se corta arriba/abajo al hacer scroll),
+   para transmitir la sensación de algo grande — como en la referencia. */
+.about-section__illustration--triangles { width:min(150%, 640px); max-width:none; }
+
+.about-quote {
+  font-family:var(--font-serif);
+  font-weight:700;
+  font-size:clamp(19px, 2vw, 32px);
+  line-height:0.9;
+  color:var(--text-primary);
+  text-align:left;
+  max-width:34ch;
+}
+
+/* la cita de Curie se saca del flujo y se posiciona sobre el propio
+   triángulo, para que se solape parcialmente con él (en vez de ir apilada
+   encima o debajo) — altura afinada a ojo para que quede a la altura del
+   párrafo "...infodemics we live with, with massive abundance..." de la
+   columna de texto vecina. */
+.about-section__media--progress { position:relative; }
+.about-quote--progress {
+  position:absolute;
+  left:0;
+  /* en % de la altura de la ilustración (no px/vw) para que el punto de
+     solape con el triángulo se mantenga proporcional al cambiar de tamaño
+     la imagen (p.ej. en móvil, donde triangles.svg es mucho más bajo) —
+     68.3% cae dentro del triángulo grande inferior (que ocupa entre ~28%
+     y ~82% del lienzo del SVG), a la altura del párrafo "...infodemics we
+     live with, with massive abundance..." en escritorio. */
+  top:68.3%;
+  z-index:1;
+  max-width:34ch;
+}
+
+.about-section__num {
+  font-family:var(--font-sans);
+  font-weight:900;
+  font-size:clamp(30px, 3.6vw, 56px);
+  line-height:0.9;
+  letter-spacing:-0.03em;
+  color:var(--text-primary);
+  /* línea muy pegada arriba del título — al ser el border-top del propio
+     elemento, su ancho es el ancho real de la columna de texto (igual que
+     el de los párrafos que siguen debajo), no el de toda la página. */
+  border-top:2px solid var(--negro-principal);
+  padding-top:clamp(6px, 0.9vw, 10px);
+}
+.about-section__body .type-body-big-display { color:var(--text-primary); }
+.about-section__body .type-body-big-display + .type-body-big-display { margin-top:-0.6em; }
+
+/* ---------- 11j. PRE-FOOTER CTA (about): banda terracota/500, mismo botón
+   negro que el resto del sitio ---------- */
+.about-cta__row {
+  position:relative;
+  display:grid;
+  grid-template-columns:minmax(0, 2fr) minmax(0, 1fr);
+  align-items:center;
+  gap:clamp(24px, 4vw, 40px);
+  background:var(--terracota-500);
+  border-radius:var(--radius-card) var(--radius-card) 8px 8px;
+  padding:clamp(28px, 3.4vw, 48px) clamp(20px, 3vw, 48px) calc(var(--footer-h) + clamp(24px, 3vw, 40px));
+  margin-top:clamp(56px, 8vw, 120px);
+}
+.about-cta .type-prefooter-cta { font-size:clamp(40px, 4.4vw, 84px); }
+.about-cta__text { color:var(--text-inverse); min-width:0; }
+.about-cta__link {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  justify-self:end;
+  align-self:center;
+  min-width:0;
+  background:var(--negro-principal);
+  border-radius:var(--radius-card);
+  padding:clamp(18px, 2.4vw, 28px) clamp(28px, 3.6vw, 44px);
+  transition:background-color .18s ease;
+}
+.about-cta__link .type-prefooter-cta {
+  color:var(--text-inverse);
+  white-space:nowrap;
+  text-decoration:underline;
+  text-decoration-color:var(--text-inverse);
+  text-decoration-thickness:3px;
+  text-underline-offset:0.12em;
+}
+.about-cta__link:hover { background:var(--negro-700); }
+
+/* footer negro/principal con texto invertido — igual que en Thoughts. */
+.page-about .site-footer__bar { background:var(--negro-principal); }
+.page-about .site-footer__social a,
+.page-about .site-footer__legal { color:var(--text-inverse); }
+.page-about .site-footer__social a:hover { color:var(--terracota-500); }
+
+.page-about .site-footer {
+  position:sticky;
+  margin-top:calc(-1 * var(--footer-h));
+}
+
+@media (max-width: 900px) {
+  .about__hero { grid-template-columns:1fr; }
+
+  /* en móvil el orden de lectura no es el orden de escritorio (foto del
+     laboratorio primero, historia después): título → titulaciones →
+     retrato → párrafos de la historia → foto del laboratorio. Para
+     lograrlo sin duplicar el HTML, .about__story se "disuelve" con
+     display:contents — sus hijos pasan a ser ítems directos del grid de
+     .about__hero y se reordenan con `order` junto con el propio retrato
+     de laboratorio. */
+  .about__story { display:contents; }
+  .about__credentials {
+    order:2;
+    align-self:flex-start;
+    text-align:left;
+    /* aire extra respecto al título, por encima del row-gap normal del
+       grid, para que el bloque de titulaciones respire más antes de
+       empezar. */
+    margin-top:clamp(56px, 20vw, 120px);
+  }
+  .about__portrait { order:3; align-self:flex-start; text-align:left; }
+  .about__intro { order:4; }
+  .about__media { grid-column:1; grid-row:auto; margin-top:0; order:5; }
+
+  .about-section,
+  .about-section--reverse {
+    grid-template-columns:1fr;
+  }
+  .about-section__media,
+  .about-section--reverse .about-section__media,
+  .about-section__body,
+  .about-section--reverse .about-section__body {
+    grid-column:1;
+  }
+  /* en columna única, la ilustración + cita de cada bloque (Curiosity,
+     Method, Progress) va siempre DESPUÉS de su texto, sea o no una
+     sección "reverse" en escritorio. */
+  .about-section__media,
+  .about-section--reverse .about-section__media { order:2; }
+  .about-section__body,
+  .about-section--reverse .about-section__body { order:1; }
+  /* en columna única, el triángulo grande ya no tiene una columna de medio
+     ancho que lo contenga: se limita al ancho real de la tarjeta para que
+     no fuerce scroll horizontal (el "sale de la página" se queda solo en
+     escritorio, donde sí hay una columna vecina de la que desbordar). */
+  .about-section__illustration--triangles { width:min(100%, 420px); }
+
+  .about-cta__row { grid-template-columns:1fr; }
+  .about-cta__link { justify-self:start; }
+}
+
+@media (max-width: 560px) {
+  .about__keys { grid-template-columns:1fr; }
+  .about-key { width:min(70%, 220px); }
+}

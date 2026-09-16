@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Science with Design — A site for modern science communication</title>
+<meta name="description" content="Science with Design: comunicación científica visual, rigurosa y curiosa." />
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ============ HEADER: logo + nav — flotante, fijo al hacer scroll ============ -->
+  <header class="site-header">
+    <div class="wrap site-header__inner">
+      <a href="index.html" class="logo" aria-label="Science with Design — inicio">
+        <img src="img/basic.elements/Logo.bot%20Home.svg" alt="Science with Design" width="54" height="54" />
+      </a>
+
+      <button type="button" class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Abrir menú de navegación">
+        <img src="img/basic.elements/nav.menu.button.svg" alt="" width="30" height="30" />
+      </button>
+
+      <nav class="nav" id="primary-nav" aria-label="Navegación principal">
+        <a href="works.html" class="nav__pill nav__pill--work">Work</a>
+        <a href="about.html" class="nav__pill nav__pill--about">About</a>
+        <a href="thoughts.html" class="nav__pill nav__pill--thoughts">Thoughts</a>
+        <a href="inspiration.html" class="nav__pill nav__pill--inspiration">Inspiration</a>
+        <a href="contact.html" class="nav__pill nav__pill--talk">Let&rsquo;s talk</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ============ HERO ============ -->
+  <main>
+    <!-- hero-wrap: arranca en el borde superior real de la página (el header flota
+         encima, no reserva espacio en el flujo) — aquí vive la línea vertical
+         que recorre toda la altura (la regla horizontal bajo el nav se quitó). -->
+    <div class="hero-wrap">
+
+      <section class="hero wrap" aria-label="Presentación">
+        <div class="hero__card">
+          <span class="hero__noise" aria-hidden="true"></span>
+          <span class="hero__divider-v" aria-hidden="true"></span>
+
+          <div class="hero__top">
+            <div class="hero__lettering">
+              <img src="img/basic.elements/hero-frame.lettering.svg" alt="Science with Design" />
+            </div>
+
+            <div class="hero__video">
+              <video autoplay muted loop playsinline aria-hidden="true">
+                <source src="animaciones/Comp%201.mp4" type="video/mp4" />
+              </video>
+            </div>
+          </div>
+
+          <div class="hero__bottom">
+            <h1 class="type-h1 hero__title">A site for modern science communication</h1>
+            <p class="type-body-big hero__lead">We spread your research with curated designs &amp; scientific illustrations that spark curiosity while safeguarding the truth.</p>
+            <a href="contact.html" class="button-cta hero__cta">Let&rsquo;s begin</a>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ============ COVERS: aperitivo de portadas/pósters, baraja interactiva ============ -->
+    <section class="covers wrap" aria-labelledby="covers-title">
+      <hr class="section-rule" aria-hidden="true" />
+
+      <div class="covers__head">
+        <div class="covers__intro">
+          <h2 id="covers-title" class="type-h2 covers__title">For starters, you can have a look at some covers</h2>
+          <p class="type-body-big covers__lead">It&rsquo;s about lighting up the curiosity by luring the eyes into discovery</p>
+        </div>
+        <img src="img/illustrations/abstract.optics.and.pitagoras.svg" alt="" class="covers__deco" aria-hidden="true" />
+      </div>
+
+      <!-- galería horizontal "acordeón" (como en griph-art.com): todas las
+           portadas reparten el ancho disponible y lo llenan por completo,
+           recortadas. Al pasar el ratón (o dar foco/tocar) por una, esa
+           columna crece mucho y muestra la portada ENTERA sin recortar,
+           mientras las demás se estrechan para dejarle sitio. -->
+
+      <div class="covers__deck-wrap">
+        <ul class="covers__deck" role="list">
+          <li class="covers__card">
+            <button type="button" class="covers__card-btn" aria-label="Ver portada: tesis de Edudu">
+              <img src="img/images.my.projects/tesis.portada.png" alt="Portada de tesis de Edudu" loading="lazy" />
+            </button>
+          </li>
+          <li class="covers__card">
+            <button type="button" class="covers__card-btn" aria-label="Ver póster: biorremediación">
+              <img src="img/images.my.projects/poster.biorremed.modulo_Mesa%20de%20trabajo%201.png" alt="Póster de biorremediación" loading="lazy" />
+            </button>
+          </li>
+          <li class="covers__card">
+            <button type="button" class="covers__card-btn" aria-label="Ver póster: neurogénesis cortical, estilo Bauhaus">
+              <img src="img/images.my.projects/bauhaus.cortical.neurogenesis.png" alt="Póster estilo Bauhaus sobre neurogénesis cortical" loading="lazy" />
+            </button>
+          </li>
+          <li class="covers__card">
+            <button type="button" class="covers__card-btn" aria-label="Ver póster: aves y plástico">
+              <img src="img/images/posteer-bird-plastic.jpg" alt="Póster sobre aves y plástico" loading="lazy" />
+            </button>
+          </li>
+          <li class="covers__card">
+            <button type="button" class="covers__card-btn" aria-label="Ver ilustración: ecología, estilo Kojima">
+              <img src="img/images/Kojima.ecology.jpg" alt="Ilustración de ecología, estilo Kojima" loading="lazy" />
+            </button>
+          </li>
+          <li class="covers__card">
+            <button type="button" class="covers__card-btn" aria-label="Ver portada: Partida, fantaciencia">
+              <img src="img/images/cotta.partida.fantaciencia.jpg" alt="Portada &ldquo;Partida&rdquo;, fantaciencia" loading="lazy" />
+            </button>
+          </li>
+          <li class="covers__card">
+            <button type="button" class="covers__card-btn" aria-label="Ver ilustración: Quiet outer space">
+              <img src="img/images/janfishcer.quiet.outer.space.jpg" alt="Ilustración &ldquo;Quiet outer space&rdquo;" loading="lazy" />
+            </button>
+          </li>
+          <li class="covers__card">
+            <button type="button" class="covers__card-btn" aria-label="Ver ilustración: Stardust">
+              <img src="img/images/paul.tebott.stardust.png" alt="Ilustración &ldquo;Stardust&rdquo;" loading="lazy" />
+            </button>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ FORMATS: menú de formatos/servicios ============ -->
+    <section class="formats wrap" aria-labelledby="formats-title">
+      <div class="formats__head">
+        <h2 id="formats-title" class="type-h2 formats__title">+ science communication &amp; illustration formats</h2>
+        <p class="type-body-big formats__lead">diverse tools to reach your specific audience. We offer a broad variety of human-crafted designs of scientific information. Visuals with clarity and rigor for education, social awareness, outreach and engagement</p>
+      </div>
+
+      <ul class="formats__grid" role="list">
+        <li class="formats__item" tabindex="0">
+          <h3 class="type-h3 formats__item-title">Infographics</h3>
+          <hr class="formats__item-rule" aria-hidden="true" />
+          <img src="img/illustrations/ilustraciones.web.infographics.png" alt="Ilustración estilo Bauhaus para el formato Infographics" loading="lazy" class="formats__item-img" />
+          <div class="formats__preview" aria-hidden="true">
+            <img src="img/images.my.projects/tesis.inforgrafia.png" alt="" loading="lazy" />
+          </div>
+        </li>
+        <li class="formats__item" tabindex="0">
+          <h3 class="type-h3 formats__item-title">Illustrations</h3>
+          <hr class="formats__item-rule" aria-hidden="true" />
+          <img src="img/illustrations/ilustracion-03.png" alt="Ilustración estilo Bauhaus para el formato Illustrations" loading="lazy" class="formats__item-img" />
+          <!-- ejemplo de trabajo: aparece al hacer hover/foco, ver .formats__preview -->
+          <div class="formats__preview" aria-hidden="true">
+            <img src="img/images.my.projects/buitre.posado.png" alt="" loading="lazy" />
+          </div>
+        </li>
+        <li class="formats__item">
+          <h3 class="type-h3 formats__item-title">Data visualization</h3>
+          <hr class="formats__item-rule" aria-hidden="true" />
+          <img src="img/illustrations/ilustraciones.web.dataviz-07.png" alt="Ilustración estilo Bauhaus para el formato Data visualization" loading="lazy" class="formats__item-img" />
+        </li>
+        <li class="formats__item">
+          <h3 class="type-h3 formats__item-title">Presentations</h3>
+          <hr class="formats__item-rule" aria-hidden="true" />
+          <img src="img/illustrations/ilustraciones.web.presentations-10.png" alt="Ilustración estilo Bauhaus para el formato Presentations" loading="lazy" class="formats__item-img" />
+        </li>
+        <li class="formats__item">
+          <h3 class="type-h3 formats__item-title">Scrollytelling articles</h3>
+          <hr class="formats__item-rule" aria-hidden="true" />
+          <img src="img/illustrations/ilustraciones.web.scrollytelling-05.png" alt="Ilustración estilo Bauhaus para el formato Scrollytelling articles" loading="lazy" class="formats__item-img" />
+        </li>
+        <li class="formats__item">
+          <h3 class="type-h3 formats__item-title">Lab branding &amp; web design</h3>
+          <hr class="formats__item-rule" aria-hidden="true" />
+          <img src="img/illustrations/ilustraciones.web.brand-06.png" alt="Ilustración estilo Bauhaus para el formato Lab branding &amp; web design" loading="lazy" class="formats__item-img" />
+        </li>
+        <li class="formats__item" tabindex="0">
+          <h3 class="type-h3 formats__item-title">Thesis covers</h3>
+          <hr class="formats__item-rule" aria-hidden="true" />
+          <img src="img/illustrations/ilustraciones.web.covers-09.png" alt="Ilustración estilo Bauhaus para el formato Thesis covers" loading="lazy" class="formats__item-img" />
+          <div class="formats__preview" aria-hidden="true">
+            <img src="img/images.my.projects/tesis.portada.png" alt="" loading="lazy" />
+          </div>
+        </li>
+        <li class="formats__item">
+          <h3 class="type-h3 formats__item-title">Printed materials</h3>
+          <hr class="formats__item-rule" aria-hidden="true" />
+          <img src="img/illustrations/ilustraciones.web.press-08.png" alt="Ilustración estilo Bauhaus para el formato Printed materials" loading="lazy" class="formats__item-img" />
+        </li>
+        <li class="formats__item">
+          <h3 class="type-h3 formats__item-title">Workshops</h3>
+          <hr class="formats__item-rule" aria-hidden="true" />
+          <img src="img/illustrations/ilustraciones.web.workshop-04.png" alt="Ilustración estilo Bauhaus para el formato Workshops" loading="lazy" class="formats__item-img" />
+        </li>
+      </ul>
+    </section>
+
+    <!-- ============ WORKFLOW: "A collaborative workflow" ============ -->
+    <section class="workflow" aria-labelledby="workflow-title">
+      <div class="wrap workflow__intro">
+        <h2 id="workflow-title" class="type-display workflow__title">A collaborative workflow</h2>
+        <div class="workflow__copy">
+          <p class="type-body-big">Finding a good solution is just a matter of talking, really. In ScienceWithDesign we believe that when several minds put their thoughts into creating something together, results get so much better. We want to listen to your ideas. We want to know the basis of your research, its goals, its limits, the cool experiments, the human stories behind. It will be a creative process, so it will be fun. But it will be a process of design, so we will aim it at fulfilling a goal. We&rsquo;ll also learn a lot.</p>
+          <p class="type-body-big">We want to make sure that our designs<br /><span class="type-body-big-highlight">respect the integrity of the scientific information.</span></p>
+          <p class="type-body-big">So yep, we are here to understand your needs and offer an original, bold and creative way to share your science with the world!</p>
+        </div>
+      </div>
+
+      <div class="workflow__band wrap">
+        <div class="workflow__band-inner">
+          <h2 class="type-h2 workflow__label workflow__label--left">Scientific<br />rigor</h2>
+          <img src="img/illustrations/handshake-13.png" alt="Ilustración de un apretón de manos, colaboración entre ciencia y diseño" class="workflow__handshake" loading="lazy" />
+          <h2 class="type-h2 workflow__label workflow__label--right">Clear<br />visuals</h2>
+        </div>
+      </div>
+
+      <div class="workflow__strip wrap">
+        <div class="workflow__strip-inner">
+          <p class="type-caption workflow__strip-text">these firms and persons have tried already applying design thinking to science comm :P</p>
+        </div>
+      </div>
+
+      <div class="workflow__logos wrap" aria-label="Clientes con los que hemos trabajado">
+        <div class="workflow__logos-clip">
+          <div class="workflow__logos-track">
+            <img src="img/logos.clientes/IN25.svg" alt="Instituto de Neurociencias — Severo Ochoa" loading="lazy" />
+            <img src="img/logos.clientes/UMH.svg" alt="Universitas Miguel Hernández" loading="lazy" />
+            <img src="img/logos.clientes/MEDALGAE.svg" alt="Mediterranean Algae" loading="lazy" />
+            <img src="img/logos.clientes/LA%20CAIXA.svg" alt="&ldquo;la Caixa&rdquo; Foundation" loading="lazy" />
+            <!-- mismo set repetido, oculto a lectores de pantalla: cierra el bucle del desplazamiento continuo -->
+            <img src="img/logos.clientes/IN25.svg" alt="" aria-hidden="true" loading="lazy" />
+            <img src="img/logos.clientes/UMH.svg" alt="" aria-hidden="true" loading="lazy" />
+            <img src="img/logos.clientes/MEDALGAE.svg" alt="" aria-hidden="true" loading="lazy" />
+            <img src="img/logos.clientes/LA%20CAIXA.svg" alt="" aria-hidden="true" loading="lazy" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="final-cta wrap" aria-labelledby="final-cta-title">
+      <div class="final-cta__inner">
+        <h2 id="final-cta-title" class="type-display final-cta__title">Science deserves to be shared with society</h2>
+        <a href="contact.html" class="button-cta final-cta__cta">Let&rsquo;s explore how</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap site-footer__wrap">
+      <div class="site-footer__bar">
+        <nav class="site-footer__social" aria-label="Redes sociales">
+          <a href="https://instagram.com" class="type-caption">Instagram</a>
+          <a href="https://linkedin.com" class="type-caption">Linkedin</a>
+          <a href="https://behance.net" class="type-caption">Behance</a>
+        </nav>
+        <p class="type-caption site-footer__legal">&copy; 2026 All rights reserved | ScienceWithDesign</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Fila acordeón: el crecimiento/encogimiento en ratón y teclado ya lo
+    // resuelve el CSS (:hover / :focus-within), sin JS. Este script solo
+    // añade el equivalente para pantallas táctiles (sin hover real):
+    // tocar una portada la activa; tocar fuera o tocarla de nuevo la cierra.
+    (function () {
+      const deck = document.querySelector('.covers__deck');
+      if (!deck) return;
+      const cards = Array.from(deck.querySelectorAll('.covers__card'));
+      if (cards.length < 2) return;
+
+      cards.forEach((card) => {
+        const btn = card.querySelector('.covers__card-btn');
+        btn.addEventListener('click', () => {
+          const wasActive = card.classList.contains('is-active');
+          cards.forEach((c) => c.classList.remove('is-active'));
+          if (!wasActive) card.classList.add('is-active');
+        });
+      });
+    })();
+
+    // Botón de menú (solo visible en móvil estrecho): abre/cierra el nav
+    // como desplegable. Se cierra al elegir un enlace, al tocar fuera o
+    // con Escape.
+    (function () {
+      const toggle = document.getElementById('nav-toggle');
+      const nav = document.getElementById('primary-nav');
+      if (!toggle || !nav) return;
+
+      function closeNav() {
+        nav.classList.remove('is-open');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+      function openNav() {
+        nav.classList.add('is-open');
+        toggle.setAttribute('aria-expanded', 'true');
+      }
+
+      toggle.addEventListener('click', () => {
+        const isOpen = nav.classList.contains('is-open');
+        if (isOpen) { closeNav(); } else { openNav(); }
+      });
+
+      nav.querySelectorAll('a').forEach((link) => {
+        link.addEventListener('click', closeNav);
+      });
+
+      document.addEventListener('click', (event) => {
+        if (!nav.classList.contains('is-open')) return;
+        if (nav.contains(event.target) || toggle.contains(event.target)) return;
+        closeNav();
+      });
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') closeNav();
+      });
+    })();
+  </script>
+</body>
+</html>

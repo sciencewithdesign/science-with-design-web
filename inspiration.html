@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Inspiration — Science with Design</title>
+<meta name="description" content="Un archivo vivo de referencias: ilustración científica, carteles, diseño gráfico y todo lo que alimenta nuestra curiosidad." />
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="page-inspiration">
+
+  <!-- ============ HEADER: logo + nav — idéntico al del resto del sitio ============ -->
+  <header class="site-header">
+    <div class="wrap site-header__inner">
+      <a href="index.html" class="logo" aria-label="Science with Design — inicio">
+        <img src="img/basic.elements/Logo.bot%20Home.svg" alt="Science with Design" width="54" height="54" />
+      </a>
+
+      <button type="button" class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Abrir menú de navegación">
+        <img src="img/basic.elements/nav.menu.button.svg" alt="" width="30" height="30" />
+      </button>
+
+      <nav class="nav" id="primary-nav" aria-label="Navegación principal">
+        <a href="works.html" class="nav__pill nav__pill--work">Work</a>
+        <a href="about.html" class="nav__pill nav__pill--about">About</a>
+        <a href="thoughts.html" class="nav__pill nav__pill--thoughts">Thoughts</a>
+        <a href="inspiration.html" class="nav__pill nav__pill--inspiration">Inspiration</a>
+        <a href="contact.html" class="nav__pill nav__pill--talk">Let&rsquo;s talk</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- ============ INSPIRATION: tarjeta negra con título + moodboard flotante ============ -->
+    <section class="inspiration wrap" aria-labelledby="inspiration-title">
+      <div class="inspiration__card">
+
+        <div class="inspiration__intro">
+          <h1 id="inspiration-title" class="type-display-bigger inspiration__title">A collection of<br />sources of inspiration</h1>
+        </div>
+
+        <hr class="inspiration__rule" aria-hidden="true" />
+
+        <p class="type-body-big inspiration__lead">To achieve order, first you need to visit chaos. <br class="inspiration__lead-break" />Exploration is most fun, and it never ends! <br class="inspiration__lead-break" />Here are some of the visuals, ideas, designs I <br class="inspiration__lead-break" />have liked, and taken into account. Also some <br class="inspiration__lead-break" />of the notes I write to myself, in case they get <br class="inspiration__lead-break" />lost elsewhere. It is utterly important to be <br class="inspiration__lead-break" />open to new arts, new insights, new talents<br class="inspiration__lead-break" />, articles, formats&hellip; It&rsquo;s about learning, <br class="inspiration__lead-break" />processing, about feeding your creativity, so it <br class="inspiration__lead-break" />can grow in depth and variety and return its <br class="inspiration__lead-break" />own great ideas.</p>
+
+        <!-- moodboard: cada imagen empieza invisible y aparece al entrar en el
+             viewport (ver script al final); una vez visible, queda flotando
+             indefinidamente según sus propias variables --fx0/--fy0/--fx1/--fy1 -->
+        <div class="inspiration__board" aria-label="Moodboard de referencias visuales">
+          <div class="moodboard__item" style="--mx:3%; --my:-4%; --mw:clamp(150px,17vw,260px); --mrot:-3deg; --mz:3;">
+            <img src="img/images/cajal.drawing.jpg" alt="Dibujo científico de neuronas de Santiago Ramón y Cajal" class="moodboard__img" style="--fx0:-2px; --fy0:-6px; --fx1:2px; --fy1:5px; --fdur:7.2s; --fdelay:0s;" loading="lazy" />
+          </div>
+          <div class="moodboard__item" style="--mx:27%; --my:10%; --mw:clamp(140px,15vw,240px); --mrot:2deg; --mz:2;">
+            <img src="img/images/russian-constructivism.jpg" alt="Cartel de estética constructivista rusa" class="moodboard__img" style="--fx0:-5px; --fy0:-1px; --fx1:3px; --fy1:2px; --fdur:6.6s; --fdelay:.3s;" loading="lazy" />
+          </div>
+          <div class="moodboard__item" style="--mx:47%; --my:0%; --mw:clamp(150px,16vw,250px); --mrot:-1deg; --mz:4;">
+            <img src="img/images/casuario.ilustracion.jpg" alt="Ilustración científica de un casuario" class="moodboard__img" style="--fx0:-2px; --fy0:-5px; --fx1:3px; --fy1:4px; --fdur:8s; --fdelay:.6s;" loading="lazy" />
+          </div>
+          <div class="moodboard__item" style="--mx:68%; --my:15%; --mw:clamp(130px,14vw,210px); --mrot:3deg; --mz:2;">
+            <img src="img/images/espectro.jpg" alt="Gráfico de espectro de color" class="moodboard__img" style="--fx0:-4px; --fy0:-1px; --fx1:4px; --fy1:2px; --fdur:6.1s; --fdelay:.2s;" loading="lazy" />
+          </div>
+          <div class="moodboard__item" style="--mx:85%; --my:5%; --mw:clamp(120px,13vw,190px); --mrot:-2deg; --mz:3;">
+            <img src="img/images/flea.jpg" alt="Cartel científico vintage de una pulga" class="moodboard__img" style="--fx0:-1px; --fy0:-5px; --fx1:2px; --fy1:3px; --fdur:7.6s; --fdelay:.5s;" loading="lazy" />
+          </div>
+
+          <div class="moodboard__item" style="--mx:7%; --my:22%; --mw:clamp(140px,16vw,240px); --mrot:2deg; --mz:2;">
+            <img src="img/images/musicavivia.jpg" alt="Cartel tipográfico de un festival de música" class="moodboard__img" style="--fx0:-5px; --fy0:-1px; --fx1:3px; --fy1:1px; --fdur:6.9s; --fdelay:.1s;" loading="lazy" />
+          </div>
+          <div class="moodboard__item" style="--mx:30%; --my:37%; --mw:clamp(115px,12vw,180px); --mrot:-3deg; --mz:4;">
+            <img src="img/images/dnacover.jpg" alt="Portada ilustrada sobre la doble hélice de ADN" class="moodboard__img" style="--fx0:-1px; --fy0:-6px; --fx1:2px; --fy1:2px; --fdur:7.4s; --fdelay:.4s;" loading="lazy" />
+          </div>
+          <div class="moodboard__item" style="--mx:49%; --my:27%; --mw:clamp(140px,15vw,220px); --mrot:1deg; --mz:3;">
+            <img src="img/images/quimico.jpg" alt="Ilustración vintage de un químico en su laboratorio" class="moodboard__img" style="--fx0:-4px; --fy0:-1px; --fx1:5px; --fy1:2px; --fdur:6.3s; --fdelay:.2s;" loading="lazy" />
+          </div>
+          <div class="moodboard__item" style="--mx:69%; --my:42%; --mw:clamp(150px,17vw,250px); --mrot:-2deg; --mz:2;">
+            <img src="img/images/poster.swiss.grif.jpg" alt="Cartel de diseño gráfico suizo" class="moodboard__img" style="--fx0:-2px; --fy0:-4px; --fx1:2px; --fy1:4px; --fdur:7.9s; --fdelay:.6s;" loading="lazy" />
+          </div>
+
+          <div class="moodboard__item" style="--mx:2%; --my:48%; --mw:clamp(140px,15vw,220px); --mrot:2deg; --mz:3;">
+            <img src="img/images/bauhaus.poster.jpg" alt="Cartel de estética Bauhaus" class="moodboard__img" style="--fx0:-5px; --fy0:-1px; --fx1:2px; --fy1:1px; --fdur:6.7s; --fdelay:.3s;" loading="lazy" />
+          </div>
+          <div class="moodboard__item" style="--mx:24%; --my:63%; --mw:clamp(115px,12vw,180px); --mrot:-1deg; --mz:4;">
+            <img src="img/images/font.akordeon.jpg" alt="Estudio tipográfico" class="moodboard__img" style="--fx0:-1px; --fy0:-3px; --fx1:2px; --fy1:5px; --fdur:7.1s; --fdelay:.5s;" loading="lazy" />
+          </div>
+          <div class="moodboard__item" style="--mx:42%; --my:53%; --mw:clamp(140px,15vw,220px); --mrot:3deg; --mz:2;">
+            <img src="img/images/courage.jpg" alt="Cartel ilustrado con temática de valentía" class="moodboard__img" style="--fx0:-4px; --fy0:-1px; --fx1:4px; --fy1:2px; --fdur:6.5s; --fdelay:.1s;" loading="lazy" />
+          </div>
+          <div class="moodboard__item" style="--mx:62%; --my:68%; --mw:clamp(150px,16vw,240px); --mrot:-2deg; --mz:3;">
+            <img src="img/images/poster-animals.jpg" alt="Cartel ilustrado de animales" class="moodboard__img" style="--fx0:-2px; --fy0:-5px; --fx1:3px; --fy1:3px; --fdur:7.7s; --fdelay:.4s;" loading="lazy" />
+          </div>
+          <div class="moodboard__item" style="--mx:83%; --my:58%; --mw:clamp(120px,13vw,190px); --mrot:2deg; --mz:2;">
+            <img src="img/images/breakdown.jpg" alt="Composición gráfica experimental" class="moodboard__img" style="--fx0:-4px; --fy0:-1px; --fx1:3px; --fy1:2px; --fdur:6.2s; --fdelay:.2s;" loading="lazy" />
+          </div>
+
+          <div class="moodboard__item" style="--mx:15%; --my:74%; --mw:clamp(140px,15vw,220px); --mrot:-2deg; --mz:3;">
+            <img src="img/images/tubosd.ensayo.jpg" alt="Fotografía científica de tubos de ensayo" class="moodboard__img" style="--fx0:-1px; --fy0:-4px; --fx1:2px; --fy1:4px; --fdur:7.5s; --fdelay:.5s;" loading="lazy" />
+          </div>
+          <div class="moodboard__item" style="--mx:41%; --my:79%; --mw:clamp(150px,16vw,240px); --mrot:1deg; --mz:4;">
+            <img src="img/images/science.illustrated.cover.jpg" alt="Portada ilustrada de divulgación científica" class="moodboard__img" style="--fx0:-5px; --fy0:-1px; --fx1:3px; --fy1:1px; --fdur:6.8s; --fdelay:.3s;" loading="lazy" />
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============ PRE-FOOTER CTA: tarjeta naranja + bloque negro "Let's say hi" ============ -->
+    <section class="inspiration-cta wrap">
+      <div class="inspiration-cta__row">
+        <p class="type-prefooter-cta inspiration-cta__text">You have explored this far. Why not keep it going?</p>
+        <a href="contact.html" class="inspiration-cta__link">
+          <span class="type-prefooter-cta">Let&rsquo;s say hi</span>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap site-footer__wrap">
+      <div class="site-footer__bar">
+        <nav class="site-footer__social" aria-label="Redes sociales">
+          <a href="https://instagram.com" class="type-caption">Instagram</a>
+          <a href="https://linkedin.com" class="type-caption">Linkedin</a>
+          <a href="https://behance.net" class="type-caption">Behance</a>
+        </nav>
+        <p class="type-caption site-footer__legal">&copy; 2026 All rights reserved | ScienceWithDesign</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Botón de menú móvil — idéntico al del resto del sitio.
+    (function () {
+      const toggle = document.getElementById('nav-toggle');
+      const nav = document.getElementById('primary-nav');
+      if (!toggle || !nav) return;
+
+      function closeNav() {
+        nav.classList.remove('is-open');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+      function openNav() {
+        nav.classList.add('is-open');
+        toggle.setAttribute('aria-expanded', 'true');
+      }
+
+      toggle.addEventListener('click', () => {
+        const isOpen = nav.classList.contains('is-open');
+        if (isOpen) { closeNav(); } else { openNav(); }
+      });
+
+      nav.querySelectorAll('a').forEach((link) => {
+        link.addEventListener('click', closeNav);
+      });
+
+      document.addEventListener('click', (event) => {
+        if (!nav.classList.contains('is-open')) return;
+        if (nav.contains(event.target) || toggle.contains(event.target)) return;
+        closeNav();
+      });
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') closeNav();
+      });
+    })();
+
+    // Moodboard: cada imagen aparece (fade + scale) la primera vez que entra
+    // en el viewport al hacer scroll; el flotado continuo es puro CSS
+    // (@keyframes board-float) y corre desde el principio, esto solo
+    // controla la aparición.
+    (function () {
+      const items = document.querySelectorAll('.moodboard__item');
+      if (!items.length) return;
+
+      if (!('IntersectionObserver' in window)) {
+        items.forEach((item) => item.classList.add('is-visible'));
+        return;
+      }
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.2, rootMargin: '0px 0px -8% 0px' });
+
+      items.forEach((item) => observer.observe(item));
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<svg width="920" height="471" viewBox="0 0 920 471" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<!-- outer moon — behind pass (hidden by planet, visible only where the ellipse clears its silhouette) -->
+<g opacity="0">
+<circle cx="0" cy="0" r="76" fill="#5491AD"/>
+<animateMotion dur="26s" repeatCount="indefinite" rotate="0">
+<mpath href="#orbitOuter" xlink:href="#orbitOuter"/>
+</animateMotion>
+<animate attributeName="opacity" values="0;1" keyTimes="0;0.5" calcMode="discrete" dur="26s" repeatCount="indefinite"/>
+</g>
+<!-- inner moon — behind pass -->
+<g opacity="0">
+<circle cx="0" cy="0" r="32" fill="#233F58"/>
+<animateMotion dur="15s" repeatCount="indefinite" rotate="0">
+<mpath href="#orbitInner" xlink:href="#orbitInner"/>
+</animateMotion>
+<animate attributeName="opacity" values="0;1" keyTimes="0;0.5" calcMode="discrete" dur="15s" repeatCount="indefinite"/>
+</g>
+
+<!-- planet -->
+<circle cx="460" cy="235.5" r="220.5" fill="#3D709C"/>
+
+<!-- hidden reference paths for the orbits (not painted) -->
+<defs>
+<path id="orbitOuter" d="M 829 235.5 A 369 130 0 0 1 91 235.5 A 369 130 0 0 1 829 235.5" fill="none"/>
+<path id="orbitInner" d="M 760 235.5 A 300 180 0 0 1 160 235.5 A 300 180 0 0 1 760 235.5" fill="none"/>
+</defs>
+
+<!-- inner moon — front pass (drawn over the planet) -->
+<g opacity="1">
+<circle cx="0" cy="0" r="32" fill="#233F58"/>
+<animateMotion dur="15s" repeatCount="indefinite" rotate="0">
+<mpath href="#orbitInner" xlink:href="#orbitInner"/>
+</animateMotion>
+<animate attributeName="opacity" values="1;0" keyTimes="0;0.5" calcMode="discrete" dur="15s" repeatCount="indefinite"/>
+</g>
+<!-- outer moon — front pass -->
+<g opacity="1">
+<circle cx="0" cy="0" r="76" fill="#5491AD"/>
+<animateMotion dur="26s" repeatCount="indefinite" rotate="0">
+<mpath href="#orbitOuter" xlink:href="#orbitOuter"/>
+</animateMotion>
+<animate attributeName="opacity" values="1;0" keyTimes="0;0.5" calcMode="discrete" dur="26s" repeatCount="indefinite"/>
+</g>
+</svg>
