@@ -1775,6 +1775,12 @@ body {
 
   :root { --footer-h:64px; }
   .site-footer__bar { flex-direction:column; align-items:flex-start; justify-content:center; gap:4px; padding-block:8px; }
+
+  /* el footer (sticky, solapado hacia arriba por --footer-h) tapaba el
+     enlace de email al final de la tarjeta de contact: la tarjeta ahora
+     reserva sitio de sobra al final, más que el propio alto del footer,
+     para que el email quede siempre visible por encima de la banda. */
+  .contact__card { padding-bottom:calc(var(--footer-h) + clamp(28px, 8vw, 48px)); }
 }
 
 /* ---------- 11i. ABOUT PAGE ----------
