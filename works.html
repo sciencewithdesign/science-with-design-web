@@ -34,7 +34,7 @@
     <!-- ============ WORKS: panel fijo (título+filtros+línea+párrafo+técnicas) + feed de tarjetas que sube y sale por arriba ============ -->
     <section class="works wrap" aria-labelledby="works-title">
       <div class="works__card">
-        <div class="works__row">
+        <div class="works__row" id="works-grid">
 
           <div class="works__sticky">
             <div class="works__header">
@@ -77,7 +77,7 @@
                   <p class="type-caption workcard__eyebrow">/Infographics</p>
                   <h2 class="type-h2 workcard__title">Evolution of the brain cortex</h2>
                   <p class="type-body-big workcard__desc">A doctoral thesis has tones of information. But we can show it, relatively summarized, but still with necessary detail, using well compartmentalized journalistic infographics.</p>
-                  <button type="button" class="workcard__explore" aria-label="Explorar: Evolution of the brain cortex">
+                  <button type="button" class="workcard__explore" data-project-target="project-thesis-infographic" aria-label="Explorar: Evolution of the brain cortex">
                     <img src="img/basic.elements/button_explore.svg" alt="" width="100" height="40" />
                   </button>
                 </div>
@@ -91,7 +91,7 @@
                   <p class="type-caption workcard__eyebrow">/Thesis cover</p>
                   <h2 class="type-h2 workcard__title">Art-d&eacute;co inspired cortical evo-devo</h2>
                   <p class="type-body-big workcard__desc">This was my personal design for my doctoral thesis. I tried to convey the epicness of the propaganda pannels of the early XX centrury.</p>
-                  <button type="button" class="workcard__explore" aria-label="Explorar: Art-d&eacute;co inspired cortical evo-devo">
+                  <button type="button" class="workcard__explore" data-project-target="project-thesis-cover" aria-label="Explorar: Art-d&eacute;co inspired cortical evo-devo">
                     <img src="img/basic.elements/button_explore.svg" alt="" width="100" height="40" />
                   </button>
                 </div>
@@ -105,7 +105,7 @@
                   <p class="type-caption workcard__eyebrow">/Illustration</p>
                   <h2 class="type-h2 workcard__title">A portrait of the caribou</h2>
                   <p class="type-body-big workcard__desc">A naturalist illustration of a caribou. Created with traditional methods, combining graphite, water colour and later digital refinement. It belonged to a series of illustrations centered around key representative species of the struggle that climate change poses on biodiversity. Developed during a course of scientific illustration, given by Ilustraciencia.</p>
-                  <button type="button" class="workcard__explore" aria-label="Explorar: A portrait of the caribou">
+                  <button type="button" class="workcard__explore" data-project-target="project-caribou" aria-label="Explorar: A portrait of the caribou">
                     <img src="img/basic.elements/button_explore.svg" alt="" width="100" height="40" />
                   </button>
                 </div>
@@ -119,7 +119,7 @@
                   <p class="type-caption workcard__eyebrow">/Infographics</p>
                   <h2 class="type-h2 workcard__title">Reviving the mammoth steppe</h2>
                   <p class="type-body-big workcard__desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce pretium, lectus in vestibulum placerat, diam orci hendrerit lorem, at lacinia nisl arcu in leo.</p>
-                  <button type="button" class="workcard__explore" aria-label="Explorar: Reviving the mammoth steppe">
+                  <button type="button" class="workcard__explore" data-project-target="project-mammoth-steppe" aria-label="Explorar: Reviving the mammoth steppe">
                     <img src="img/basic.elements/button_explore.svg" alt="" width="100" height="40" />
                   </button>
                 </div>
@@ -146,11 +146,361 @@
           </div>
 
         </div>
+
+        <!-- ============ EXPLORACIÓN DE PROYECTO: "Evolution of the brain cortex" ============
+             Oculta por defecto (atributo hidden). Al pulsar el botón_explore de la primera
+             tarjeta, works-grid se oculta y esta vista aparece en su lugar, dentro de la misma
+             works__card — cabecera, nav y footer no se tocan. El botón "volver" hace el
+             camino inverso. Información y disposición de la galería replicadas del prototipo
+             de Figma (nodo 758:997), adaptadas a una gradilla suiza de 12 columnas y a
+             proporciones fluidas (aspect-ratio) para que todo escale de forma responsive. -->
+        <div class="project" id="project-thesis-infographic" hidden>
+
+          <button type="button" class="project__back" id="project-back" aria-label="Volver a Selected works">
+            <img src="img/basic.elements/Button%20back.svg" alt="" width="100" height="40" />
+          </button>
+
+          <div class="project__info">
+            <div class="project__info-col project__info-col--title">
+              <p class="type-body-small project__label">Project</p>
+              <h2 class="type-h3 project__title">Evolution of neural progenitors in amniotes</h2>
+            </div>
+
+            <div class="project__info-col project__info-col--desc">
+              <p class="type-body-small project__label">Description</p>
+              <p class="type-body-big project__desc">The aim of this project was to gather the information found in my doctoral thesis on a format that allowed exploration of the details that such kind of work contains. By organizing the different aspects in compartmentalized blocks, the reader can get the context of the research, the findings and the experimental process that led to them.</p>
+
+              <div class="project__meta">
+                <div class="project__meta-item">
+                  <p class="type-body-small project__label">Year</p>
+                  <p class="type-body-small project__value">2025</p>
+                </div>
+                <div class="project__meta-item">
+                  <p class="type-body-small project__label">Type</p>
+                  <p class="type-body-small project__value">Journalistic infographics</p>
+                </div>
+                <div class="project__meta-item">
+                  <p class="type-body-small project__label">Techniques</p>
+                  <p class="type-body-small project__value">Graphite, Adobe Illustrator, Adobe Indesign</p>
+                </div>
+                <div class="project__meta-item">
+                  <p class="type-body-small project__label">Collaboration</p>
+                  <p class="type-body-small project__value">Personal project</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="project__gallery">
+
+            <div class="project__img project__img--hero">
+              <img src="img/images.my.projects/tesis.inforgrafia.png" alt="Infografía completa: Evolution of neural progenitors in amniotes" loading="lazy" />
+            </div>
+
+            <div class="project__row project__row--triple">
+              <div class="project__img project__img--chicken">
+                <img src="img/works/mythesisinfographicsandcover/whole.chicken.png" alt="Ilustración de un pollo entero, referencia embrionaria" loading="lazy" />
+              </div>
+              <div class="project__img project__img--panels">
+                <img src="img/works/mythesisinfographicsandcover/sketch.infographic.panels.rotated.png" alt="Boceto de los paneles de la infografía" loading="lazy" />
+              </div>
+              <div class="project__img project__img--print">
+                <img src="img/works/mythesisinfographicsandcover/fotoinfografiaimpres3.jpeg" alt="Fotografía de la infografía ya impresa" loading="lazy" />
+              </div>
+            </div>
+
+            <div class="project__row project__row--corti">
+              <div class="project__col project__col--corti">
+                <div class="project__img project__img--corticogenesis">
+                  <img src="img/works/mythesisinfographicsandcover/corticogenesis.outline.png" alt="Esquema de la corticogénesis" loading="lazy" />
+                </div>
+                <div class="project__row project__row--pair">
+                  <div class="project__img project__img--neurl1b">
+                    <img src="img/works/mythesisinfographicsandcover/sketch.neurl1b.mechanism.png" alt="Boceto del mecanismo de Neurl1b" loading="lazy" />
+                  </div>
+                  <div class="project__img project__img--mouseslice">
+                    <img src="img/works/mythesisinfographicsandcover/DETAIL.MOUSE.BRAIN.SLICE.png" alt="Detalle de un corte de cerebro de ratón" loading="lazy" />
+                  </div>
+                </div>
+              </div>
+              <div class="project__img project__img--corticaldev">
+                <img src="img/works/mythesisinfographicsandcover/detail.corticaldevelopment.png" alt="Detalle del desarrollo cortical" loading="lazy" />
+              </div>
+            </div>
+
+            <div class="project__row project__row--double">
+              <div class="project__img project__img--methods">
+                <img src="img/works/mythesisinfographicsandcover/detail.methods.png" alt="Detalle de los métodos empleados" loading="lazy" />
+              </div>
+              <div class="project__img project__img--outlines">
+                <img src="img/works/mythesisinfographicsandcover/BRAIN.OUTLINES.png" alt="Contornos comparados de cerebros" loading="lazy" />
+              </div>
+            </div>
+
+          </div>
+
+          <button type="button" class="project__back project__back--bottom" aria-label="Volver a Selected works">
+            <img src="img/basic.elements/Button%20back.svg" alt="" width="100" height="40" />
+          </button>
+
+        </div>
+
+        <!-- ============ EXPLORACIÓN DE PROYECTO: "Art-déco inspired cortical evo-devo" (portada de tesis) ============
+             Misma estrategia que el panel de la infografía: oculta por defecto, se muestra en vez del
+             grid al pulsar su button_explore. Réplica del prototipo de Figma (nodo 781:1170): bloque de
+             info en la misma gradilla suiza de 12 columnas, un póster grande alineado con la columna de
+             la Descripción (columnas 5–12, dejando la columna del título despejada encima), y debajo una
+             galería tipo "mesa de trabajo" en 3 columnas con los bocetos, a distinta altura cada una,
+             tal y como en el diseño original. -->
+        <div class="project" id="project-thesis-cover" hidden>
+
+          <button type="button" class="project__back" aria-label="Volver a Selected works">
+            <img src="img/basic.elements/Button%20back.svg" alt="" width="100" height="40" />
+          </button>
+
+          <div class="project__info">
+            <div class="project__info-col project__info-col--title">
+              <p class="type-body-small project__label">Project</p>
+              <h2 class="type-h3 project__title">Diversification of neural progenitor cells in the evolution of amniote cerebral cortex</h2>
+            </div>
+
+            <div class="project__info-col project__info-col--desc">
+              <p class="type-body-small project__label">Description</p>
+              <p class="type-body-big project__desc">For the cover of my PhD thesis, a wanted to take advantage of the variety of animal models we used to achieve an impactful cover. With that aim, I also looked for inspiration in the constructivist and art-déco posters of the early 20th century</p>
+
+              <div class="project__meta">
+                <div class="project__meta-item">
+                  <p class="type-body-small project__label">Year</p>
+                  <p class="type-body-small project__value">2025</p>
+                </div>
+                <div class="project__meta-item">
+                  <p class="type-body-small project__label">Type</p>
+                  <p class="type-body-small project__value">Thesis cover</p>
+                </div>
+                <div class="project__meta-item">
+                  <p class="type-body-small project__label">Techniques</p>
+                  <p class="type-body-small project__value">Graphite, Adobe Illustrator</p>
+                </div>
+                <div class="project__meta-item">
+                  <p class="type-body-small project__label">Collaboration</p>
+                  <p class="type-body-small project__value">Personal project</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="project__gallery">
+
+            <!-- póster: alineado con la columna de Descripción (5–12), no a todo el ancho —
+                 la columna del título queda despejada encima, igual que en el prototipo. -->
+            <div class="project__hero-wrap">
+              <div class="project__img project__img--cover-hero">
+                <img src="img/works/mythesisinfographicsandcover/portada.tesis.cover.jpg" alt="Póster de la portada de la tesis, con estética constructivista y art-déco" loading="lazy" />
+              </div>
+            </div>
+
+            <!-- galería de bocetos: 3 columnas independientes, cada una con sus propias imágenes
+                 apiladas a distinta altura (como una mesa de trabajo), igual que en Figma. -->
+            <div class="project__masonry">
+              <div class="project__masonry-col">
+                <div class="project__img project__img--chicken1">
+                  <img src="img/works/mythesisinfographicsandcover/sketch.chicken1.png" alt="Boceto de dos gallos enfrentados" loading="lazy" />
+                </div>
+                <div class="project__img project__img--ferret">
+                  <img src="img/works/mythesisinfographicsandcover/sketch.ferret.png" alt="Boceto de un hurón" loading="lazy" />
+                </div>
+              </div>
+              <div class="project__masonry-col">
+                <div class="project__img project__img--sketchcover">
+                  <img src="img/works/mythesisinfographicsandcover/sketch.cover.png" alt="Boceto de composición para la portada" loading="lazy" />
+                </div>
+                <div class="project__img project__img--sketchmouse">
+                  <img src="img/works/mythesisinfographicsandcover/sketch.mouse.png" alt="Boceto de un ratón" loading="lazy" />
+                </div>
+                <div class="project__img project__img--fotolibro2">
+                  <img src="img/works/mythesisinfographicsandcover/FOTOLIBROTESIS.2.jpeg" alt="Fotografía de la tesis impresa" loading="lazy" />
+                </div>
+              </div>
+              <div class="project__masonry-col">
+                <div class="project__img project__img--snakehead project__img--mirror">
+                  <img src="img/works/mythesisinfographicsandcover/detail.snake.head.png" alt="Detalle de la cabeza de una serpiente" loading="lazy" />
+                </div>
+                <div class="project__img project__img--chicken2 project__img--mirror">
+                  <img src="img/works/mythesisinfographicsandcover/sketch.chicken2.png" alt="Boceto de un gallo" loading="lazy" />
+                </div>
+                <div class="project__img project__img--sketchsnake project__img--mirror">
+                  <img src="img/works/mythesisinfographicsandcover/sketch.snake.png" alt="Boceto de una serpiente" loading="lazy" />
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <button type="button" class="project__back project__back--bottom" aria-label="Volver a Selected works">
+            <img src="img/basic.elements/Button%20back.svg" alt="" width="100" height="40" />
+          </button>
+
+        </div>
+
+        <!-- ============ EXPLORACIÓN DE PROYECTO: "Reviving the mammoth steppe" ============
+             Misma estrategia que los dos proyectos anteriores. Réplica del prototipo de Figma
+             (nodo 783:60): bloque de info en la misma gradilla de 12 columnas, y debajo una
+             galería en varias filas — infografía completa a todo el ancho, el almizclero solo
+             (con hueco en blanco a su derecha, igual que en el diseño), una fila con el caballo
+             de Przewalski y la saiga, otra con bisontes y caballos en miniatura, los mamuts
+             centrados, el diagrama del suelo y, por último, la tira del "cómo revivirlo". El
+             almizclero y el caballo de Przewalski van reflejados en espejo, igual que en Figma. -->
+        <div class="project" id="project-mammoth-steppe" hidden>
+
+          <button type="button" class="project__back" aria-label="Volver a Selected works">
+            <img src="img/basic.elements/Button%20back.svg" alt="" width="100" height="40" />
+          </button>
+
+          <div class="project__info">
+            <div class="project__info-col project__info-col--title">
+              <p class="type-body-small project__label">Project</p>
+              <h2 class="type-h3 project__title">Reviving the mammoth steppe</h2>
+            </div>
+
+            <div class="project__info-col project__info-col--desc">
+              <p class="type-body-small project__label">Description</p>
+              <p class="type-body-big project__desc">This infographics was part of a series done in collaboration with Ilustraciencia and the climate scientist Fernando Valladares about the climate change tipping points. One of these, the defrosting of permafrost, would liberate massive amounts of greenhouse gases, greatly worsening global warming. Restoring the populations of large herbivores that populated the boreal steppes at the ice age once could prevent this. To try to confer the paleo feeling, I went for loose brushstrokes, earthy textures and a warm palette.</p>
+
+              <div class="project__meta">
+                <div class="project__meta-item">
+                  <p class="type-body-small project__label">Year</p>
+                  <p class="type-body-small project__value">2025</p>
+                </div>
+                <div class="project__meta-item">
+                  <p class="type-body-small project__label">Type</p>
+                  <p class="type-body-small project__value">Scientific infographics</p>
+                </div>
+                <div class="project__meta-item">
+                  <p class="type-body-small project__label">Techniques</p>
+                  <p class="type-body-small project__value">Graphite, Adobe PhotoShop</p>
+                </div>
+                <div class="project__meta-item">
+                  <p class="type-body-small project__label">Collaboration</p>
+                  <p class="type-body-small project__value">Ilustraciencia, Museo Nacional de Ciencias Naturales</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="project__gallery">
+
+            <div class="project__img project__img--mammoth-hero">
+              <img src="img/works/mammothsteppe/mammothsteppeinfographics.png" alt="Infografía completa: Reviving the mammoth steppe" loading="lazy" />
+            </div>
+
+            <div class="project__row project__row--muskox">
+              <div class="project__img project__img--muskox project__img--mirror">
+                <img src="img/works/mammothsteppe/muskox.white.bg.jpg" alt="Ilustración de un buey almizclero" loading="lazy" />
+              </div>
+              <div class="project__img project__img--bisonhead">
+                <img src="img/works/mammothsteppe/bison.head.jpg" alt="Retrato en primer plano de la cabeza de un bisonte europeo" loading="lazy" />
+              </div>
+            </div>
+
+            <div class="project__row project__row--przsaiga">
+              <div class="project__img project__img--przewalski project__img--mirror">
+                <img src="img/works/mammothsteppe/przewalski.fondoblanco.jpg" alt="Ilustración de un caballo de Przewalski" loading="lazy" />
+              </div>
+              <div class="project__img project__img--saiga">
+                <img src="img/works/mammothsteppe/saiga.jpg" alt="Ilustración de una saiga" loading="lazy" />
+              </div>
+            </div>
+
+            <div class="project__row project__row--bisonhorse">
+              <div class="project__img project__img--bisons">
+                <img src="img/works/mammothsteppe/bisons.png" alt="Miniaturas de bisontes" loading="lazy" />
+              </div>
+              <div class="project__img project__img--horses">
+                <img src="img/works/mammothsteppe/horses.png" alt="Miniaturas de caballos" loading="lazy" />
+              </div>
+            </div>
+
+            <div class="project__img project__img--mamuts">
+              <img src="img/works/mammothsteppe/mamuts.png" alt="Ilustración de dos mamuts" loading="lazy" />
+            </div>
+
+            <div class="project__img project__img--soil">
+              <img src="img/works/mammothsteppe/detalle.soil.png" alt="Diagrama del efecto de los herbívoros en el suelo del permafrost" loading="lazy" />
+            </div>
+
+            <div class="project__img project__img--clonarraton">
+              <img src="img/works/mammothsteppe/deetalle.clonar.raton.mamut.png" alt="Tira explicativa de cómo revivir al mamut" loading="lazy" />
+            </div>
+
+          </div>
+
+          <button type="button" class="project__back project__back--bottom" aria-label="Volver a Selected works">
+            <img src="img/basic.elements/Button%20back.svg" alt="" width="100" height="40" />
+          </button>
+
+        </div>
+
+        <div class="project" id="project-caribou" hidden>
+
+          <button type="button" class="project__back" aria-label="Volver a Selected works">
+            <img src="img/basic.elements/Button%20back.svg" alt="" width="100" height="40" />
+          </button>
+
+          <div class="project__info">
+            <div class="project__info-col project__info-col--title">
+              <p class="type-body-small project__label">Project</p>
+              <h2 class="type-h3 project__title">A portrait of the Caribou</h2>
+            </div>
+
+            <div class="project__info-col project__info-col--desc">
+              <p class="type-body-small project__label">Description</p>
+              <p class="type-body-big project__desc">A naturalist portrait of the caribou, part of a series of illustrations on key species facing the pressures of climate change, developed during a scientific illustration course given by Ilustraciencia. The main portrait was built with graphite and watercolour, later refined digitally, and paired with a set of pencil studies —the animal grazing and a detail of its snow-adapted hooves— assembled together into a species fact sheet.</p>
+
+              <div class="project__meta">
+                <div class="project__meta-item">
+                  <p class="type-body-small project__label">Year</p>
+                  <p class="type-body-small project__value">2025</p>
+                </div>
+                <div class="project__meta-item">
+                  <p class="type-body-small project__label">Type</p>
+                  <p class="type-body-small project__value">Scientific illustration</p>
+                </div>
+                <div class="project__meta-item">
+                  <p class="type-body-small project__label">Techniques</p>
+                  <p class="type-body-small project__value">Graphite, Watercolour, Photoshop</p>
+                </div>
+                <div class="project__meta-item">
+                  <p class="type-body-small project__label">Collaboration</p>
+                  <p class="type-body-small project__value">Ilustraciencia, Museo Nacional de Ciencias Naturales</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="project__gallery">
+
+            <div class="project__hero-wrap">
+              <div class="project__img project__img--caribou-ficha">
+                <img src="img/works/caribou/caribou.ficha.jpg" alt="Ficha científica completa del caribú" loading="lazy" />
+              </div>
+            </div>
+
+          </div>
+
+          <button type="button" class="project__back project__back--bottom" aria-label="Volver a Selected works">
+            <img src="img/basic.elements/Button%20back.svg" alt="" width="100" height="40" />
+          </button>
+
+        </div>
+
       </div>
     </section>
 
-    <!-- ============ PRE-FOOTER CTA: igual que thoughts/inspiration, en azul/principal ============ -->
-    <section class="works-cta wrap">
+    <!-- ============ PRE-FOOTER CTA: igual que thoughts/inspiration, en azul/principal ============
+         Oculto mientras se está explorando un proyecto (ver JS): en su lugar, el propio panel del
+         proyecto ya termina con su botón "volver" y el padding-bottom de works__card deja el aire
+         necesario hasta el footer. ============ -->
+    <section class="works-cta wrap" id="works-cta">
       <div class="works-cta__row">
         <p class="type-prefooter-cta works-cta__text">You have explored this far. Why not keep it going?</p>
         <a href="contact.html" class="works-cta__link">
@@ -237,6 +587,89 @@
       }
       document.fonts.ready.then(syncFeedOffset);
       syncFeedOffset();
+    })();
+
+    // Exploración de proyecto dentro de la propia página Works: al pulsar
+    // button_explore en una tarjeta con data-project-target, se oculta el
+    // grid (works-grid) y se muestra el panel de proyecto correspondiente,
+    // dentro de la misma works__card — cabecera, nav y footer no se tocan.
+    // El botón "volver" (dentro del panel) hace el camino inverso. Solo hay
+    // un proyecto implementado de momento (la infografía de tesis); el resto
+    // de botones explore, sin data-project-target, no hacen nada todavía.
+    (function () {
+      const grid = document.getElementById('works-grid');
+      const worksSection = document.querySelector('.works');
+      const worksCta = document.getElementById('works-cta');
+      if (!grid) return;
+
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const FADE_MS = 260;
+
+      // Cruce suave grid ↔ panel de proyecto: en vez del corte seco de
+      // hidden=true/false, se hace fundido + pequeño desplazamiento vertical
+      // (fade out del que se va, luego fade in del que entra). Con
+      // "prefers-reduced-motion" se salta directo a los estados, sin animar.
+      function fadeOut(el, onDone) {
+        if (reduceMotion) { el.hidden = true; onDone(); return; }
+        el.style.transition = 'opacity ' + FADE_MS + 'ms ease, transform ' + FADE_MS + 'ms ease';
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(-10px)';
+        window.setTimeout(() => {
+          el.hidden = true;
+          el.style.transition = '';
+          el.style.opacity = '';
+          el.style.transform = '';
+          onDone();
+        }, FADE_MS);
+      }
+
+      function fadeIn(el) {
+        if (reduceMotion) { el.hidden = false; return; }
+        el.hidden = false;
+        el.style.transition = 'none';
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(10px)';
+        void el.offsetHeight; // fuerza reflow: sin esto el navegador fusiona los cambios y no hay transición que animar
+        el.style.transition = 'opacity ' + FADE_MS + 'ms ease, transform ' + FADE_MS + 'ms ease';
+        el.style.opacity = '1';
+        el.style.transform = 'translateY(0)';
+        window.setTimeout(() => {
+          el.style.transition = '';
+          el.style.opacity = '';
+          el.style.transform = '';
+        }, FADE_MS);
+      }
+
+      function openProject(panel) {
+        if (worksSection) worksSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        fadeOut(grid, () => {
+          if (worksCta) worksCta.hidden = true; // mientras se explora un proyecto, el CTA da paso al aire + botón volver del propio panel
+          document.querySelectorAll('.project').forEach((p) => { if (p !== panel) p.hidden = true; });
+          fadeIn(panel);
+        });
+      }
+
+      function closeProject(panel) {
+        if (worksSection) worksSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        fadeOut(panel, () => {
+          if (worksCta) worksCta.hidden = false;
+          fadeIn(grid);
+        });
+      }
+
+      document.querySelectorAll('.workcard__explore[data-project-target]').forEach((btn) => {
+        const panel = document.getElementById(btn.dataset.projectTarget);
+        if (!panel) return;
+        btn.addEventListener('click', () => openProject(panel));
+      });
+
+      // cada panel puede llevar más de un botón "volver" (arriba y, opcionalmente,
+      // al final de la galería) — se conectan todos igual.
+      document.querySelectorAll('.project').forEach((panel) => {
+        panel.querySelectorAll('.project__back').forEach((backBtn) => {
+          backBtn.addEventListener('click', () => closeProject(panel));
+        });
+      });
     })();
   </script>
 </body>

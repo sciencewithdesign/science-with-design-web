@@ -1303,6 +1303,12 @@ body {
   grid-template-columns:var(--works-col) 1px minmax(0, 1fr);
   column-gap:var(--works-gap);
 }
+/* .works__row fija su propio display:grid, que en cascada gana sobre la
+   regla [hidden]{display:none} del user-agent (mismo origen "autor" pesa
+   más que el UA, con independencia de especificidad) — sin esto, ocultarla
+   por JS (ver toggle de exploración de proyecto en works.html) no surtía
+   ningún efecto visual. */
+.works__row[hidden] { display:none; }
 
 /* panel fijo: título+filtros (fila de cabecera) + línea horizontal a todo
    el ancho + párrafo + banda de técnicas — mismo truco de grid-stretch que
@@ -1594,6 +1600,218 @@ body {
   margin-top:calc(-1 * var(--footer-h));
 }
 
+/* ---------- 11i. EXPLORACIÓN DE PROYECTO (dentro de Works) ----------
+   Vista de detalle de un proyecto, mostrada dentro de la propia works__card
+   en lugar del grid (ver JS en works.html). Réplica del prototipo de Figma
+   (nodo 758:997): botón "volver" centrado arriba, bloque de info en
+   gradilla suiza de 12 columnas, y una galería de imágenes en varias filas.
+   Las proporciones de cada fila/imagen replican las medidas originales del
+   diseño (en px, a escala 1820 de ancho) convertidas a anchos "fr" y a
+   aspect-ratio por imagen: así todo el conjunto escala de forma fluida
+   manteniendo las mismas proporciones relativas del prototipo. */
+:root {
+  --project-gap: clamp(8px, 1.4vw, 24px);
+}
+
+.project { display:flex; flex-direction:column; }
+.project[hidden] { display:none; }
+
+.project__back {
+  display:inline-flex;
+  align-self:center;
+  margin-bottom:clamp(24px, 3.4vw, 40px);
+  border:none;
+  background:none;
+  padding:0;
+  line-height:0;
+  cursor:pointer;
+  transition:opacity .18s ease;
+}
+.project__back:hover,
+.project__back:focus-visible { opacity:.7; }
+.project__back img { width:100px; height:40px; }
+
+/* botón "volver" al final de la galería: en vez de repetir el CTA azul de
+   "You have explored this far" (oculto mientras se explora un proyecto, ver
+   JS), el propio panel termina con este botón centrado — el padding-bottom
+   ya generoso de .works__card (--works-pad-bottom) se encarga de dejar el
+   aire hasta el footer, sin necesidad de nada más debajo. */
+.project__back--bottom {
+  margin-top:clamp(40px, 5.6vw, 72px);
+  margin-bottom:0;
+}
+
+/* bloque de info: título en las 4 primeras columnas, descripción + metadatos
+   en las 8 restantes — misma proporción 4/8 que el prototipo (153–611px de
+   título frente a 611–1665px de descripción, sobre 1514px de ancho útil). */
+.project__info {
+  display:grid;
+  grid-template-columns:repeat(12, 1fr);
+  column-gap:var(--project-gap);
+  margin-bottom:clamp(32px, 4.4vw, 64px);
+}
+.project__info-col--title { grid-column:1 / span 4; }
+.project__info-col--desc { grid-column:5 / span 8; }
+
+.project__label { color:var(--text-secondary); margin-bottom:6px; }
+.project__title { color:var(--text-primary); }
+.project__desc { color:var(--text-primary); margin-bottom:clamp(20px, 2.6vw, 32px); }
+
+.project__meta {
+  display:grid;
+  grid-template-columns:repeat(4, 1fr);
+  column-gap:var(--project-gap);
+  row-gap:clamp(16px, 2vw, 24px);
+}
+.project__meta-item .project__value { color:var(--text-primary); }
+
+/* galería: pila de filas, cada una con su propia proporción de columnas. */
+.project__gallery {
+  display:flex;
+  flex-direction:column;
+  gap:var(--project-gap);
+}
+
+.project__img {
+  overflow:hidden;
+  border-radius:6px;
+  background:var(--negro-100);
+}
+.project__img img { width:100%; height:100%; object-fit:cover; display:block; }
+
+.project__img--hero { aspect-ratio:1512 / 1069; }
+
+/* fila 1: pollo entero · paneles del boceto (girados) · foto de la infografía impresa —
+   anchos "fr" iguales a los px originales (403 : 315 : 746). */
+.project__row--triple {
+  display:grid;
+  grid-template-columns:403fr 315fr 746fr;
+  gap:var(--project-gap);
+}
+.project__img--chicken { aspect-ratio:403 / 501; }
+.project__img--panels { aspect-ratio:315 / 501; }
+.project__img--print { aspect-ratio:746 / 501; }
+.project__img--print img { object-position:left center; }
+
+/* fila 2: bloque asimétrico — a la izquierda, el esquema de corticogénesis
+   arriba y dos imágenes pequeñas debajo; a la derecha, el detalle de
+   desarrollo cortical a toda altura. Igual truco de proporciones "fr". */
+.project__row--corti {
+  display:grid;
+  grid-template-columns:566fr 925fr;
+  gap:var(--project-gap);
+  align-items:stretch;
+}
+.project__col--corti {
+  display:flex;
+  flex-direction:column;
+  gap:var(--project-gap);
+}
+.project__img--corticogenesis { aspect-ratio:579 / 298; }
+.project__row--pair {
+  display:grid;
+  grid-template-columns:255fr 288fr;
+  gap:var(--project-gap);
+}
+.project__img--neurl1b { aspect-ratio:255 / 259; }
+.project__img--mouseslice { aspect-ratio:288 / 195; }
+.project__img--corticaldev { aspect-ratio:925 / 548; height:100%; }
+
+/* fila 3: métodos · contornos de cerebros comparados (esta última recortada
+   a propósito para encajar, con el recorte cargado hacia la izquierda). */
+.project__row--double {
+  display:grid;
+  grid-template-columns:911fr 585fr;
+  gap:var(--project-gap);
+}
+.project__img--methods { aspect-ratio:911 / 497; }
+.project__img--outlines { aspect-ratio:585 / 497; }
+.project__img--outlines img { object-position:left center; }
+
+/* ---------- 11j. EXPLORACIÓN DE PROYECTO: portada de tesis (segundo proyecto) ----------
+   Mismo sistema que el proyecto anterior (misma gradilla de 12 columnas para el bloque de
+   info, ver 11i), pero con una galería distinta: un póster grande alineado con la columna de
+   Descripción (5–12, no a todo el ancho) y, debajo, una galería tipo "mesa de trabajo" en 3
+   columnas independientes — cada una con sus propias imágenes apiladas a su propia altura,
+   igual que en el prototipo de Figma. */
+.project__hero-wrap {
+  display:grid;
+  grid-template-columns:repeat(12, 1fr);
+  column-gap:var(--project-gap);
+}
+.project__img--cover-hero { grid-column:5 / span 8; aspect-ratio:1050 / 1477; }
+
+.project__masonry {
+  display:flex;
+  align-items:flex-start;
+  gap:var(--project-gap);
+  margin-top:var(--project-gap);
+}
+.project__masonry-col {
+  display:flex;
+  flex-direction:column;
+  gap:var(--project-gap);
+  flex:1 1 0;
+  min-width:0;
+}
+.project__img--sketchcover { aspect-ratio:591 / 736; }
+.project__img--chicken1 { aspect-ratio:441 / 585; }
+.project__img--ferret { aspect-ratio:598 / 877; }
+.project__img--sketchmouse { aspect-ratio:441 / 629; }
+.project__img--fotolibro2 { aspect-ratio:441 / 521; }
+.project__img--snakehead { aspect-ratio:441 / 478; }
+.project__img--chicken2 { aspect-ratio:441 / 640; }
+.project__img--sketchsnake { aspect-ratio:438 / 675; }
+
+/* tres bocetos que en el prototipo aparecen reflejados en espejo (rotate180 + flipY equivale,
+   neto, a un flip horizontal) respecto al archivo original. */
+.project__img--mirror img { transform:scaleX(-1); }
+
+/* ---------- 11k. EXPLORACIÓN DE PROYECTO: Reviving the mammoth steppe (tercer proyecto) ----------
+   Misma gradilla de 12 columnas para el bloque de info (ver 11i). La galería alterna imágenes a
+   todo el ancho con filas de dos columnas (anchos "fr" replicando las proporciones originales del
+   prototipo) y con imágenes sueltas centradas — igual mecánica que en los proyectos anteriores. */
+.project__img--mammoth-hero { aspect-ratio:1512 / 1070; }
+
+/* el almizclero a la izquierda, enfrentado al primer plano de la cabeza del bisonte europeo a
+   la derecha — misma proporción de columnas que la fila de abajo (779 : 735). */
+.project__row--muskox {
+  display:grid;
+  grid-template-columns:779fr 735fr;
+  gap:var(--project-gap);
+  align-items:center;
+}
+.project__img--muskox { aspect-ratio:779 / 579; }
+.project__img--bisonhead { aspect-ratio:1600 / 1208; }
+
+.project__row--przsaiga {
+  display:grid;
+  grid-template-columns:779fr 721fr;
+  gap:var(--project-gap);
+}
+.project__img--przewalski { aspect-ratio:779 / 543; }
+.project__img--saiga { aspect-ratio:721 / 484; }
+
+.project__row--bisonhorse {
+  display:grid;
+  grid-template-columns:815fr 712fr;
+  gap:var(--project-gap);
+}
+.project__img--bisons { aspect-ratio:815 / 251; }
+.project__img--horses { aspect-ratio:712 / 248; }
+
+/* mamuts y el diagrama del suelo van centrados, sueltos, cada uno a su propio ancho — igual que
+   en el prototipo (ninguno de los dos llega al ancho completo de la galería). */
+.project__img--mamuts { aspect-ratio:762 / 449; width:50.4%; margin-inline:auto; }
+.project__img--soil { aspect-ratio:1123 / 769; width:74.2%; margin-inline:auto; }
+.project__img--clonarraton { aspect-ratio:1504 / 372; }
+
+/* ---------- 11l. EXPLORACIÓN DE PROYECTO: Caribou (cuarto proyecto) ----------
+   Según el diseño de Figma (frame "caribou"), la pieza final ES la ficha científica completa
+   (formato A4 vertical) y es la única imagen de la galería — mismo truco de "hero" en las
+   columnas centrales de la gradilla de 12 que en la portada de tesis (11j). */
+.project__img--caribou-ficha { grid-column:5 / span 8; aspect-ratio:1055 / 1492; }
+
 /* ---------- 12. RESPONSIVE ---------- */
 @media (max-width: 900px) {
   .nav {
@@ -1714,6 +1932,54 @@ body {
 
   .works-cta__row { grid-template-columns:1fr; }
   .works-cta__link { justify-self:start; }
+
+  /* Exploración de proyecto: la gradilla de 12 columnas y las filas de la
+     galería se apilan en una sola columna — cada imagen conserva su propio
+     aspect-ratio, así que sigue viéndose bien aunque ya no comparta fila. */
+  .project__info { grid-template-columns:1fr; row-gap:clamp(24px, 4vw, 32px); }
+  .project__info-col--title,
+  .project__info-col--desc { grid-column:1; }
+  .project__meta { grid-template-columns:repeat(2, 1fr); }
+
+  .project__row--triple,
+  .project__row--corti,
+  .project__row--pair,
+  .project__row--double { grid-template-columns:1fr; }
+  .project__col--corti { gap:var(--project-gap); }
+  .project__img--corticaldev { height:auto; }
+
+  /* Reviving the mammoth steppe: filas de dos columnas a una sola, y las
+     imágenes sueltas centradas (mamuts, diagrama del suelo) pasan a ocupar
+     todo el ancho — en móvil ya no hay sitio para dejarlas más estrechas
+     con aire a los lados. */
+  .project__row--muskox,
+  .project__row--przsaiga,
+  .project__row--bisonhorse { grid-template-columns:1fr; }
+  .project__img--mamuts,
+  .project__img--soil { width:100%; }
+
+  /* portada de tesis: el póster deja de estar alineado con la columna de
+     Descripción y pasa a ocupar todo el ancho; la galería en 3 columnas se
+     apila en una sola. Las columnas (.project__masonry-col) se vuelven
+     "transparentes" (display:contents): sus imágenes pasan a ser hijas
+     directas de .project__masonry, lo que permite reordenarlas una a una
+     con "order" en vez de mantener el agrupado por columna del diseño de
+     escritorio — en móvil el orden de lectura pedido es otro. */
+  .project__img--cover-hero { grid-column:1 / -1; }
+  .project__masonry { flex-direction:column; }
+  .project__masonry-col { display:contents; }
+  .project__img--sketchcover { order:1; }
+  .project__img--snakehead { order:2; }
+  .project__img--chicken1 { order:3; }
+  .project__img--ferret { order:4; }
+  .project__img--sketchmouse { order:5; }
+  .project__img--chicken2 { order:6; }
+  .project__img--sketchsnake { order:7; }
+  .project__img--fotolibro2 { order:8; }
+
+  /* Caribou: la ficha deja de estar centrada en las columnas medias y pasa a
+     todo el ancho. */
+  .project__img--caribou-ficha { grid-column:1 / -1; }
 }
 
 @media (max-width: 560px) {
