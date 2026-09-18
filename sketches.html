@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Sketches — Science with Design</title>
+<meta name="description" content="Un archivo de bocetos y dibujos a grafito: el punto de partida de todo el proceso, mano y ojo entrenándose en el papel." />
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="page-sketches">
+
+  <!-- ============ HEADER: logo + nav — idéntico al del resto del sitio ============ -->
+  <header class="site-header">
+    <div class="wrap site-header__inner">
+      <a href="index.html" class="logo" aria-label="Science with Design — inicio">
+        <img src="img/basic.elements/Logo.bot%20Home.svg" alt="Science with Design" width="54" height="54" />
+      </a>
+
+      <button type="button" class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Abrir menú de navegación">
+        <img src="img/basic.elements/nav.menu.button.svg" alt="" width="30" height="30" />
+      </button>
+
+      <nav class="nav" id="primary-nav" aria-label="Navegación principal">
+        <a href="works.html" class="nav__pill nav__pill--work">Work</a>
+        <a href="about.html" class="nav__pill nav__pill--about">About</a>
+        <a href="thoughts.html" class="nav__pill nav__pill--thoughts">Thoughts</a>
+        <a href="inspiration.html" class="nav__pill nav__pill--inspiration">Inspiration</a>
+        <div class="nav__row-3">
+          <a href="sketches.html" class="nav__pill nav__pill--sketches">Sketches</a>
+          <a href="contact.html" class="nav__pill nav__pill--talk">Let&rsquo;s talk</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- ============ SKETCHES: tarjeta negra con título + moodboard flotante de bocetos ============
+         Misma estructura que Inspiration (tarjeta + regla + párrafo + moodboard flotante), pero la
+         página vive sobre bg/primary en vez de negro/500 — ver .page-sketches más abajo. -->
+    <section class="sketches wrap" aria-labelledby="sketches-title">
+      <div class="sketches__card">
+
+        <div class="sketches__intro">
+          <h1 id="sketches-title" class="type-display-bigger sketches__title">It starts<br />with a pencil</h1>
+        </div>
+
+        <hr class="sketches__rule" aria-hidden="true" />
+
+        <p class="type-body-big sketches__lead">Drawing is like an extension of thinking. It is the start of the process. But not only that, it is a direct way of keeping the eye, the hand and the mind trained. Most times casual quick sketches and doodles, other times well thought and planned elaborated drawings, I do not know why, but I just love the feel of graphite leaving a trace and of shapes emerging from the paper.</p>
+
+        <!-- moodboard: cada imagen empieza invisible y aparece al entrar en el
+             viewport (ver script al final); una vez visible, queda flotando
+             indefinidamente según sus propias variables --fx0/--fy0/--fx1/--fy1 -->
+        <div class="sketches__board" aria-label="Moodboard de bocetos y dibujos">
+          <div class="moodboard__item" style="--mx:2%; --my:-3%; --mw:clamp(120px,13vw,190px); --mrot:-3deg; --mz:3;">
+            <img src="img/sketches/bear1.jpg" alt="Boceto a grafito de un oso polar de pie" class="moodboard__img" style="--fx0:-2px; --fy0:-6px; --fx1:2px; --fy1:2px; --fdur:7.5s; --fdelay:0.4s;" loading="lazy" />
+          </div>
+
+          <div class="moodboard__item" style="--mx:22%; --my:2%; --mw:clamp(140px,15vw,230px); --mrot:2deg; --mz:2;">
+            <img src="img/sketches/bison.jpg" alt="Boceto a grafito de un bisonte" class="moodboard__img" style="--fx0:-1px; --fy0:-6px; --fx1:3px; --fy1:1px; --fdur:6.5s; --fdelay:0.3s;" loading="lazy" />
+          </div>
+
+          <!-- destacada: más grande que el resto y justo debajo de bison.jpg, a petición explícita. -->
+          <div class="moodboard__item" style="--mx:16%; --my:16%; --mw:clamp(260px,27vw,400px); --mrot:-2deg; --mz:5;">
+            <img src="img/sketches/trucha.jpg" alt="Dibujo a grafito de una trucha" class="moodboard__img" style="--fx0:-3px; --fy0:-5px; --fx1:5px; --fy1:3px; --fdur:6.3s; --fdelay:0.0s;" loading="lazy" />
+          </div>
+
+          <div class="moodboard__item" style="--mx:43%; --my:-5%; --mw:clamp(140px,15vw,220px); --mrot:-2deg; --mz:4;">
+            <img src="img/sketches/boar.and.falcon.jpg" alt="Boceto a grafito de un jabalí y un halcón" class="moodboard__img" style="--fx0:-5px; --fy0:-5px; --fx1:4px; --fy1:3px; --fdur:6.5s; --fdelay:0.4s;" loading="lazy" />
+          </div>
+
+          <div class="moodboard__item" style="--mx:64%; --my:6%; --mw:clamp(150px,16vw,240px); --mrot:3deg; --mz:2;">
+            <img src="img/sketches/capibara.jpg" alt="Boceto a grafito de un capibara" class="moodboard__img" style="--fx0:-2px; --fy0:-6px; --fx1:4px; --fy1:4px; --fdur:6.7s; --fdelay:0.1s;" loading="lazy" />
+          </div>
+
+          <div class="moodboard__item" style="--mx:84%; --my:-2%; --mw:clamp(115px,12vw,180px); --mrot:-1deg; --mz:3;">
+            <img src="img/sketches/escultura.cara.jpg" alt="Estudio a grafito de una escultura de un rostro" class="moodboard__img" style="--fx0:-1px; --fy0:-4px; --fx1:1px; --fy1:1px; --fdur:7.7s; --fdelay:0.4s;" loading="lazy" />
+          </div>
+
+          <div class="moodboard__item" style="--mx:5%; --my:21%; --mw:clamp(120px,13vw,190px); --mrot:2deg; --mz:3;">
+            <img src="img/sketches/cara.bargue.jpg" alt="Estudio académico a grafito de un rostro (lámina Bargue)" class="moodboard__img" style="--fx0:-2px; --fy0:-2px; --fx1:3px; --fy1:5px; --fdur:6.8s; --fdelay:0.3s;" loading="lazy" />
+          </div>
+
+          <div class="moodboard__item" style="--mx:27%; --my:25%; --mw:clamp(130px,14vw,200px); --mrot:-3deg; --mz:2;">
+            <img src="img/sketches/chimp.jpg" alt="Boceto a grafito de un chimpancé sentado" class="moodboard__img" style="--fx0:-2px; --fy0:-3px; --fx1:4px; --fy1:3px; --fdur:7.4s; --fdelay:0.0s;" loading="lazy" />
+          </div>
+
+          <div class="moodboard__item" style="--mx:47%; --my:19%; --mw:clamp(120px,13vw,190px); --mrot:1deg; --mz:4;">
+            <img src="img/sketches/dog.jpg" alt="Boceto a grafito de un galgo" class="moodboard__img" style="--fx0:-4px; --fy0:-5px; --fx1:1px; --fy1:2px; --fdur:6.3s; --fdelay:0.2s;" loading="lazy" />
+          </div>
+
+          <div class="moodboard__item" style="--mx:67%; --my:23%; --mw:clamp(150px,17vw,250px); --mrot:-2deg; --mz:2;">
+            <img src="img/sketches/ferret.jpg" alt="Boceto a lápiz de un hurón, con anotaciones de proceso" class="moodboard__img" style="--fx0:-2px; --fy0:-4px; --fx1:2px; --fy1:2px; --fdur:6.6s; --fdelay:0.6s;" loading="lazy" />
+          </div>
+
+          <div class="moodboard__item" style="--mx:81%; --my:15%; --mw:clamp(170px,18vw,270px); --mrot:3deg; --mz:3;">
+            <img src="img/sketches/koala.jpg" alt="Dibujo a grafito de un koala en un tronco" class="moodboard__img" style="--fx0:-2px; --fy0:-3px; --fx1:2px; --fy1:4px; --fdur:6.4s; --fdelay:0.2s;" loading="lazy" />
+          </div>
+
+          <div class="moodboard__item" style="--mx:3%; --my:41%; --mw:clamp(140px,15vw,220px); --mrot:-1deg; --mz:4;">
+            <img src="img/sketches/macaque.jpg" alt="Dibujo a grafito del retrato de un macaco" class="moodboard__img" style="--fx0:-1px; --fy0:-3px; --fx1:3px; --fy1:4px; --fdur:7.7s; --fdelay:0.5s;" loading="lazy" />
+          </div>
+
+          <div class="moodboard__item" style="--mx:25%; --my:45%; --mw:clamp(120px,13vw,190px); --mrot:2deg; --mz:2;">
+            <img src="img/sketches/octopus.jpg" alt="Boceto a grafito de un pulpo" class="moodboard__img" style="--fx0:-4px; --fy0:-6px; --fx1:2px; --fy1:2px; --fdur:6.5s; --fdelay:0.6s;" loading="lazy" />
+          </div>
+
+          <div class="moodboard__item" style="--mx:45%; --my:39%; --mw:clamp(140px,15vw,220px); --mrot:-3deg; --mz:3;">
+            <img src="img/sketches/raven.jpg" alt="Boceto a grafito de dos cuervos" class="moodboard__img" style="--fx0:-1px; --fy0:-4px; --fx1:4px; --fy1:3px; --fdur:7.8s; --fdelay:0.3s;" loading="lazy" />
+          </div>
+
+          <div class="moodboard__item" style="--mx:60%; --my:43%; --mw:clamp(190px,20vw,300px); --mrot:2deg; --mz:2;">
+            <img src="img/sketches/torso.bargue.jpg" alt="Estudio académico a grafito de un torso (lámina Bargue)" class="moodboard__img" style="--fx0:-4px; --fy0:-5px; --fx1:3px; --fy1:2px; --fdur:7.2s; --fdelay:0.5s;" loading="lazy" />
+          </div>
+
+          <div class="moodboard__item" style="--mx:36%; --my:60%; --mw:clamp(170px,18vw,270px); --mrot:1deg; --mz:3;">
+            <img src="img/sketches/escultura.caballo.jpg" alt="Estudio a grafito de una escultura de caballo" class="moodboard__img" style="--fx0:-5px; --fy0:-3px; --fx1:4px; --fy1:3px; --fdur:6.2s; --fdelay:0.2s;" loading="lazy" />
+          </div>
+
+          <div class="moodboard__item" style="--mx:6%; --my:64%; --mw:clamp(150px,16vw,240px); --mrot:-2deg; --mz:2;">
+            <img src="img/sketches/bears2.jpg" alt="Boceto a grafito de dos osos junto al agua" class="moodboard__img" style="--fx0:-1px; --fy0:-3px; --fx1:5px; --fy1:4px; --fdur:6.1s; --fdelay:0.4s;" loading="lazy" />
+          </div>
+
+          <div class="moodboard__item" style="--mx:60%; --my:60%; --mw:clamp(140px,15vw,220px); --mrot:3deg; --mz:4;">
+            <img src="img/sketches/ferret.2.jpg" alt="Boceto a grafito de un hurón corriendo" class="moodboard__img" style="--fx0:-2px; --fy0:-3px; --fx1:2px; --fy1:4px; --fdur:6.3s; --fdelay:0.3s;" loading="lazy" />
+          </div>
+
+          <div class="moodboard__item" style="--mx:80%; --my:64%; --mw:clamp(130px,14vw,210px); --mrot:-1deg; --mz:3;">
+            <img src="img/sketches/walrus.jpg" alt="Boceto a grafito de una morsa" class="moodboard__img" style="--fx0:-3px; --fy0:-1px; --fx1:5px; --fy1:2px; --fdur:7.1s; --fdelay:0.1s;" loading="lazy" />
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============ PRE-FOOTER CTA: tarjeta negro/700 + bloque negro "Let's say hi" ============ -->
+    <section class="sketches-cta wrap">
+      <div class="sketches-cta__row">
+        <p class="type-prefooter-cta sketches-cta__text">You have explored this far. Why not keep it going?</p>
+        <a href="contact.html" class="sketches-cta__link">
+          <span class="type-prefooter-cta">Let&rsquo;s say hi</span>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap site-footer__wrap">
+      <div class="site-footer__bar">
+        <nav class="site-footer__social" aria-label="Redes sociales">
+          <a href="https://instagram.com" class="type-caption">Instagram</a>
+          <a href="https://linkedin.com" class="type-caption">Linkedin</a>
+          <a href="https://behance.net" class="type-caption">Behance</a>
+        </nav>
+        <p class="type-caption site-footer__legal">&copy; 2026 All rights reserved | ScienceWithDesign</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Botón de menú móvil — idéntico al del resto del sitio.
+    (function () {
+      const toggle = document.getElementById('nav-toggle');
+      const nav = document.getElementById('primary-nav');
+      if (!toggle || !nav) return;
+
+      function closeNav() {
+        nav.classList.remove('is-open');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+      function openNav() {
+        nav.classList.add('is-open');
+        toggle.setAttribute('aria-expanded', 'true');
+      }
+
+      toggle.addEventListener('click', () => {
+        const isOpen = nav.classList.contains('is-open');
+        if (isOpen) { closeNav(); } else { openNav(); }
+      });
+
+      nav.querySelectorAll('a').forEach((link) => {
+        link.addEventListener('click', closeNav);
+      });
+
+      document.addEventListener('click', (event) => {
+        if (!nav.classList.contains('is-open')) return;
+        if (nav.contains(event.target) || toggle.contains(event.target)) return;
+        closeNav();
+      });
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') closeNav();
+      });
+    })();
+
+    // Moodboard: cada imagen aparece (fade + scale) la primera vez que entra
+    // en el viewport al hacer scroll; el flotado continuo es puro CSS
+    // (@keyframes board-float) y corre desde el principio, esto solo
+    // controla la aparición.
+    (function () {
+      const items = document.querySelectorAll('.moodboard__item');
+      if (!items.length) return;
+
+      if (!('IntersectionObserver' in window)) {
+        items.forEach((item) => item.classList.add('is-visible'));
+        return;
+      }
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.2, rootMargin: '0px 0px -8% 0px' });
+
+      items.forEach((item) => observer.observe(item));
+    })();
+  </script>
+</body>
+</html>

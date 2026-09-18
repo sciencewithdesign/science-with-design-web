@@ -25,7 +25,10 @@
         <a href="about.html" class="nav__pill nav__pill--about">About</a>
         <a href="thoughts.html" class="nav__pill nav__pill--thoughts">Thoughts</a>
         <a href="inspiration.html" class="nav__pill nav__pill--inspiration">Inspiration</a>
-        <a href="contact.html" class="nav__pill nav__pill--talk">Let&rsquo;s talk</a>
+        <div class="nav__row-3">
+          <a href="sketches.html" class="nav__pill nav__pill--sketches">Sketches</a>
+          <a href="contact.html" class="nav__pill nav__pill--talk">Let&rsquo;s talk</a>
+        </div>
       </nav>
     </div>
   </header>
@@ -37,29 +40,83 @@
       <div class="about__hero">
         <h1 id="about-title" class="type-display-bigger about__title">About&nbsp;&nbsp;me<br />&amp;&nbsp;science<br />(&amp;&nbsp;design)</h1>
 
-        <div class="about__media" data-name="lab durmiendo">
-          <img src="img/images/lab.durmiendo.png" alt="Laboratorio de investigación, vacío, de madrugada" loading="lazy" />
-        </div>
-
-        <div class="about__story">
-          <ul class="type-caption about__credentials">
+        <div class="about__left">
+          <ul class="type-caption-sans about__credentials">
             <li>PhD in Neuroscience</li>
             <li>Masters in Evolutionary Biology</li>
             <li>Degree in Biotechnology</li>
             <li>Masters in Graphic Design</li>
+            <li>Diploma in Scientific Illustration</li>
           </ul>
 
+          <div class="about__work">
+            <div class="about__work-header">
+              <p class="type-caption-sans about__block-label">My work as a scientist</p>
+              <!-- el botón solo se ve/funciona en móvil (ver CSS + JS); en
+                   escritorio el contenido queda siempre visible. -->
+              <button type="button" class="about__work-toggle" id="about-work-toggle" aria-expanded="false" aria-controls="about-work-collapsible" aria-label="Mostrar mi trabajo como científico y mis publicaciones">
+                <img class="about__work-toggle-icon about__work-toggle-icon--more" src="img/basic.elements/Button show more.svg" alt="" aria-hidden="true" />
+                <span class="about__work-toggle-icon about__work-toggle-icon--close" aria-hidden="true">&times;</span>
+              </button>
+            </div>
+
+            <div class="about__work-collapsible" id="about-work-collapsible">
+              <div class="about__work-collapsible-inner">
+                <ul class="about__work-list">
+                  <li class="about__work-item">
+                    <span class="type-caption about__work-year">2021&#8211;2026</span>
+                    <span class="type-caption-sans about__work-place">Alicante, Spain</span>
+                    <span class="type-caption-sans about__work-desc">Researching in evolution of the brain cortex in reptiles, birds and mammals</span>
+                  </li>
+                  <li class="about__work-item">
+                    <span class="type-caption about__work-year">2020&#8211;2021</span>
+                    <span class="type-caption-sans about__work-place">Dresden, Germany</span>
+                    <span class="type-caption-sans about__work-desc">Researching in evolution of the human neocortex</span>
+                  </li>
+                  <li class="about__work-item">
+                    <span class="type-caption about__work-year">2019&#8211;2021</span>
+                    <span class="type-caption-sans about__work-place">Leiden, the Netherlands</span>
+                    <span class="type-caption-sans about__work-desc">Researching in ecological networks between fungi, plants and pollinators</span>
+                  </li>
+                  <li class="about__work-item">
+                    <span class="type-caption about__work-year">2018&#8211;2019</span>
+                    <span class="type-caption-sans about__work-place">Valencia, Spain</span>
+                    <span class="type-caption-sans about__work-desc">Researching in cell therapy for spinal cord injury</span>
+                  </li>
+                </ul>
+
+                <div class="about__publications">
+                  <p class="type-caption-sans about__block-label">Publications</p>
+                  <ul class="type-caption-sans about__pub-list">
+                    <li>Fern&aacute;ndez Ortu&ntilde;o, E., C&aacute;rdenas, A., et al. Developmental divergence of neurogenic strategies during amniote cortex radiation. In preparation (under review).</li>
+                    <li>Singh, A. et al., Fern&aacute;ndez-Ortu&ntilde;o, E., et al. (2024). Gene regulatory landscape of cerebral cortex folding. Science Advances. DOI: 10.1126/sciadv.adn1640</li>
+                    <li>Fern&aacute;ndez Ortu&ntilde;o, E., Fischer, J., et al. (2022). Human-specific ARHGAP11B ensures human-like basal progenitor levels in hominid cerebral organoids. EMBO Reports. DOI: 10.15252/embr.202254728</li>
+                    <li>Espin&oacute;s, A., Fern&aacute;ndez-Ortu&ntilde;o, E., Negri, E., &amp; Borrell, V. (2022). Evolution of genetic mechanisms regulating cortical neurogenesis. Developmental Neurobiology. DOI: 10.1002/dneu.22891</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="about__media" data-name="lab durmiendo">
+            <img src="img/images/lab.durmiendo.png" alt="Laboratorio de investigación, vacío, de madrugada" loading="lazy" />
+          </div>
+        </div>
+
+        <div class="about__right">
           <div class="about__portrait">
             <img src="img/images/retrato.pizarramagnetica.png" alt="Retrato de Edu sosteniendo un pequeño marco magnético" loading="lazy" />
           </div>
 
-          <p class="type-body-big-display about__intro about__intro--overlap">I am Edu, a biotechnologist and neuroscientist. I grew up wanting to understand so many things about nature. So I started a scientific career, which led me to visit several amazing research fields in different laboratories. I worked on <mark class="hl">cell therapy</mark> for spinal cord injury in Valencia, went to <mark class="hl">South Africa</mark> to research on <mark class="hl">ecological networks</mark> between fungi, plants and pollinators, studied a master&rsquo;s on evolutionary biology in <mark class="hl">the Netherlands</mark>, grew brain <mark class="hl">organoids of chimpanzee</mark> and human in <mark class="hl">Germany</mark> and finally made my <mark class="hl">PhD on brain evolution</mark> between birds, reptiles and mammals back in <mark class="hl">Spain</mark>.</p>
+          <div class="about__story">
+            <p class="type-body-big-display about__intro">I am Edu, a biotechnologist and neuroscientist. I grew up wanting to understand so many things about nature. So I started a scientific career, which led me to visit several amazing research fields in different laboratories. I worked on cell therapy for spinal cord injury in Valencia, went to South Africa to research on ecological networks between fungi, plants and pollinators, studied a master&rsquo;s on evolutionary biology in the Netherlands, grew brain organoids of chimpanzee and human in Germany and finally made my PhD on brain evolution between birds, reptiles and mammals back in Spain.</p>
 
-          <p class="type-body-big-display about__intro">Along the way, and since much earlier, I carried always <mark class="hl">a pencil</mark> in my hand. I draw almost constantly. It is a natural drive of mine, and a need almost like breathing.</p>
+            <p class="type-body-big-display about__intro">Along the way, and since much earlier, I carried always a pencil in my hand. I draw almost constantly. It is a natural drive of mine, and a need almost like breathing.</p>
 
-          <p class="type-body-big-display about__intro">I have always had this dichotomy in my head, between <mark class="hl">the curiosity to explore and think through science</mark>, and <mark class="hl">the drive to make artistic creations</mark>.</p>
+            <p class="type-body-big-display about__intro">I have always had this dichotomy in my head, between the curiosity to explore and think through science, and the drive to make artistic creations.</p>
 
-          <p class="type-body-big-display about__intro about__intro--bold">Now, I want to merge both and am set to bring the wonders of science closer to society through design and illustration. But in doing so, <mark class="hl hl--accent">I want to make sure that the essence of science stays. Let me share with you my vision about that.</mark></p>
+            <p class="type-body-big-display about__intro about__intro--bold">Now, I want to merge both and am set to bring the wonders of science closer to society through design and illustration. But in doing so, <mark class="hl hl--accent">I want to make sure that the essence of science stays. Let me share with you my vision about that.</mark></p>
+          </div>
         </div>
       </div>
 
@@ -181,6 +238,28 @@
 
       document.addEventListener('keydown', (event) => {
         if (event.key === 'Escape') closeNav();
+      });
+    })();
+
+    // "My work as a scientist" — desplegable solo funcional en móvil (en
+    // escritorio el botón queda oculto por CSS y el contenido siempre
+    // visible, así que este script no le afecta ahí).
+    (function () {
+      const toggle = document.getElementById('about-work-toggle');
+      const panel = document.getElementById('about-work-collapsible');
+      if (!toggle || !panel) return;
+
+      function setOpen(open) {
+        toggle.setAttribute('aria-expanded', String(open));
+        toggle.classList.toggle('is-open', open);
+        panel.classList.toggle('is-open', open);
+        toggle.setAttribute('aria-label', open
+          ? 'Ocultar mi trabajo como científico y mis publicaciones'
+          : 'Mostrar mi trabajo como científico y mis publicaciones');
+      }
+
+      toggle.addEventListener('click', () => {
+        setOpen(toggle.getAttribute('aria-expanded') !== 'true');
       });
     })();
   </script>

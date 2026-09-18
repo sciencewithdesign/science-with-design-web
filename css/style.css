@@ -92,10 +92,13 @@ body {
 .thoughts-cta.wrap,
 .inspiration.wrap,
 .inspiration-cta.wrap,
+.sketches.wrap,
+.sketches-cta.wrap,
 .page-contact .site-footer__wrap,
 .page-works .site-footer__wrap,
 .page-thoughts .site-footer__wrap,
 .page-inspiration .site-footer__wrap,
+.page-sketches .site-footer__wrap,
 .page-home .site-footer__wrap,
 .hero.wrap,
 .covers.wrap,
@@ -120,6 +123,10 @@ body {
 .type-body-small       { font-family:var(--font-sans); font-weight:400; font-size:16px; line-height:1.7; letter-spacing:0.07em; }
 .type-label            { font-family:var(--font-sans); font-weight:400; font-size:13px; line-height:1.7; letter-spacing:0.03em; text-transform:uppercase; }
 .type-caption          { font-family:var(--font-mono); font-weight:400; font-size:20px; line-height:1.5; letter-spacing:0.05em; }
+/* misma escala que .type-caption (20px/150%/5%) pero en la sans del sitio en
+   vez de en mono — la usa el bloque de educación/trabajo/publicaciones de
+   About, donde solo las fechas van en mono (ver about__work-year). */
+.type-caption-sans     { font-family:var(--font-sans); font-weight:400; font-size:20px; line-height:1.5; letter-spacing:0.05em; }
 .type-quote            { font-family:var(--font-serif); font-weight:700; font-size:32px; line-height:0.9; letter-spacing:0; }
 .type-button           { font-family:var(--font-serif); font-weight:700; font-size:20px; line-height:0.9; letter-spacing:0; }
 .type-cta              { font-family:var(--font-serif); font-weight:700; font-size:clamp(24px, 2.1vw, 40px); line-height:25.6px; letter-spacing:0; } /* line-height al 80% (32px * 0.8) */
@@ -208,7 +215,25 @@ body {
 .nav__pill--about       { grid-column:3; grid-row:1; }
 .nav__pill--inspiration { grid-column:1; grid-row:2; }
 .nav__pill--thoughts    { grid-column:2 / span 2; grid-row:2; }
-.nav__pill--talk        { grid-column:1 / -1; grid-row:3; justify-self:end; }
+
+/* "sketches" no formaba parte del reparto original de Figma: se añade en la
+   fila 3, junto a "Let's talk". No reutiliza el truco de columna+span de las
+   filas 1-2 (grid-column:1 + grid-column:2/span2) porque ahí las columnas se
+   comparten entre filas: la 3ª fila sola necesita mucho menos ancho que
+   "Thoughts" en la 2ª, así que la columna 2-3 salía sobredimensionada y,
+   como "Let's talk" iba justify-self:end dentro de ese hueco de sobra, dejaba
+   un salto grande entre ambas pills en vez del mismo gap de 3px que el resto.
+   En su lugar, "sketches" y "talk" van juntas en un sub-contenedor flex propio
+   (mismo gap:3px que el grid) que ocupa toda la fila 3 y se ancla a la derecha
+   como una unidad — así el hueco entre ambas es idéntico al de cualquier otro
+   par de pills, sin depender del ancho de las columnas de las filas de arriba. */
+.nav__row-3 {
+  grid-column:1 / -1;
+  grid-row:3;
+  display:flex;
+  gap:3px;
+  justify-self:end;
+}
 
 /* ---------- 6. HERO-WRAP: envuelve la regla superior (no fija) + la línea
    vertical (que sí recorre toda la altura, desde el borde superior real de
@@ -1520,6 +1545,11 @@ body {
    la imagen para que la cara quede dentro del encuadre. */
 .workcard__media--caribou img { object-position:0% 38%; }
 
+/* mediterranean algae: con el recorte centrado por defecto se perdía el título de la
+   infografía — se ancla el recorte a la esquina superior izquierda para mostrar siempre
+   esa parte de la lámina. */
+.workcard__media--algae img { object-position:0% 0%; }
+
 .workcard__content {
   flex:1 1 54%;
   min-width:0;
@@ -1812,6 +1842,119 @@ body {
    columnas centrales de la gradilla de 12 que en la portada de tesis (11j). */
 .project__img--caribou-ficha { grid-column:5 / span 8; aspect-ratio:1055 / 1492; }
 
+/* ---------- 11m. EXPLORACIÓN DE PROYECTO: The power of macroalgae (quinto proyecto) ----------
+   Según el diseño de Figma (frame "mediterraneanalgae"), la galería es una única infografía a
+   todo el ancho — igual truco que el hero de la primera infografía de tesis (project__img--hero),
+   pero con su propia proporción exacta. */
+.project__img--algae-hero { aspect-ratio:1514 / 1070; }
+
+/* ---------- 11n. SKETCHES PAGE ----------
+   No hay frame de Figma para esta página (no formaba parte del diseño original):
+   se construye replicando la mecánica de Inspiration (11c) — tarjeta grande con
+   título + regla + párrafo + moodboard flotante — con dos diferencias pedidas
+   explícitamente: el FONDO DE LA PÁGINA es bg/primary (claro) en vez de negro/500,
+   y tanto la barra pre-footer como el footer van en negro/700 en vez de terracota.
+   Al quedar la página clara, la tarjeta se mantiene oscura (negro/principal, texto
+   invertido) para conservar el mismo contraste "tarjeta flotando sobre el fondo"
+   que tienen el resto de páginas de este tipo. */
+.page-sketches { background:var(--bg-primary); }
+
+.sketches {
+  padding-block:calc(var(--header-h) + clamp(24px, 4vw, 56px)) 0;
+}
+
+.sketches__card {
+  background:var(--negro-principal);
+  border-radius:var(--radius-card);
+  /* mismo padding inferior generoso que .inspiration__card: deja hueco bajo
+     el moodboard para que la barra de abajo se solape hacia arriba sin corte. */
+  padding:clamp(40px, 7vw, 96px) clamp(20px, 5vw, 64px) clamp(120px, 14vw, 220px);
+}
+
+.sketches__intro { margin-bottom:clamp(24px, 3vw, 40px); text-align:center; }
+.sketches__title { color:var(--text-inverse); }
+
+.sketches__rule {
+  border:none;
+  border-top:1px solid var(--text-inverse);
+  margin-inline:calc(-1 * clamp(20px, 5vw, 64px));
+  margin-bottom:clamp(32px, 4vw, 56px);
+}
+
+.sketches__lead {
+  color:var(--text-inverse);
+  max-width:42ch;
+  margin-inline:auto;
+  margin-bottom:clamp(48px, 7vw, 96px);
+  text-align:center;
+}
+
+/* el lienzo del moodboard reutiliza tal cual .moodboard__item/.moodboard__img
+   (11c): misma mecánica de aparición + flotado continuo, solo cambian las
+   imágenes y sus coordenadas, fijadas en el propio HTML. */
+.sketches__board {
+  position:relative;
+  width:100%;
+  height:clamp(760px, 82vw, 1180px);
+}
+
+/* ---------- 11o. PRE-FOOTER CTA (sketches): banda negro/700 + botón negro ----------
+   Mismo layout que .inspiration-cta__row (11d), con la barra en negro/700 (pedido
+   explícitamente) en vez de terracota. Como el botón por defecto va en
+   negro/principal —muy próximo en tono a la propia barra—, aquí el hover pasa a
+   terracota/500 en vez del negro/700 que usa el resto de páginas: si mantuviera
+   negro/700 el botón "desaparecería" contra la barra al pasar el ratón. */
+.sketches-cta__row {
+  position:relative;
+  display:grid;
+  grid-template-columns:minmax(0, 2fr) minmax(0, 1fr);
+  align-items:center;
+  gap:clamp(24px, 4vw, 40px);
+  background:var(--negro-700);
+  border-radius:0 0 8px 8px;
+  padding:clamp(28px, 3.4vw, 48px) clamp(20px, 3vw, 48px) calc(var(--footer-h) + clamp(24px, 3vw, 40px));
+  margin-top:calc(-1 * clamp(72px, 9vw, 160px));
+}
+
+.sketches-cta .type-prefooter-cta { font-size:clamp(40px, 4.4vw, 84px); }
+
+.sketches-cta__text {
+  color:var(--text-inverse);
+  min-width:0;
+}
+
+.sketches-cta__link {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  justify-self:end;
+  align-self:center;
+  min-width:0;
+  background:var(--negro-principal);
+  border-radius:var(--radius-card);
+  padding:clamp(18px, 2.4vw, 28px) clamp(28px, 3.6vw, 44px);
+  transition:background-color .18s ease;
+}
+.sketches-cta__link .type-prefooter-cta {
+  color:var(--text-inverse);
+  white-space:nowrap;
+  text-decoration:underline;
+  text-decoration-color:var(--text-inverse);
+  text-decoration-thickness:3px;
+  text-underline-offset:0.12em;
+}
+.sketches-cta__link:hover { background:var(--terracota-500); }
+
+.page-sketches .site-footer__bar { background:var(--negro-700); }
+.page-sketches .site-footer__social a,
+.page-sketches .site-footer__legal { color:var(--text-inverse); }
+.page-sketches .site-footer__social a:hover { color:var(--terracota-500); }
+
+.page-sketches .site-footer {
+  position:sticky;
+  margin-top:calc(-1 * var(--footer-h));
+}
+
 /* ---------- 12. RESPONSIVE ---------- */
 @media (max-width: 900px) {
   .nav {
@@ -1822,6 +1965,11 @@ body {
   }
   .nav__pill--work, .nav__pill--about, .nav__pill--inspiration,
   .nav__pill--thoughts, .nav__pill--talk { grid-column:auto; grid-row:auto; justify-self:auto; }
+  /* en el nav apilado/envolvente de móvil no hace falta el sub-contenedor de
+     la fila 3: se vuelve "transparente" (display:contents) para que sketches
+     y talk pasen a ser hijas directas de .nav, en igualdad con el resto de
+     pills, y envuelvan igual que ellas. */
+  .nav__row-3 { display:contents; }
 
   .hero__top { grid-template-columns:1fr; }
   .hero__divider-v { display:none; }
@@ -1871,6 +2019,58 @@ body {
      desbordamiento a ambos lados — el propio valor se ajusta con el ancho
      de viewport (más desplazamiento cuanto más estrecho). */
   .inspiration__board { transform:translateX(calc(-60px + 5.3vw)); }
+
+  /* Sketches: mismo ajuste de móvil que Inspiration — CTA a una columna y
+     tablero desplazado para repartir el desbordamiento lateral. */
+  .sketches-cta__row { grid-template-columns:1fr; }
+  .sketches-cta__link { justify-self:start; }
+  .sketches__lead { max-width:38ch; }
+  .sketches__board { transform:translateX(calc(-60px + 5.3vw)); }
+
+  /* en móvil las imágenes quedaban demasiado amontonadas entre sí: la
+     cuadrícula de --mx/--my está pensada para el ancho de escritorio, y en
+     una columna mucho más estrecha (encima con --mw topando casi siempre en
+     su mínimo en px, más grande en proporción al hueco disponible) el
+     solapamiento vertical se disparaba. Se sube el alto del tablero un 50%
+     (clamp reescalado ×1.5 respecto al de escritorio) y se redistribuye la
+     posición vertical (--my) de cada pieza — con !important porque --my
+     llega como estilo en línea, de mayor especificidad que esta regla — para
+     repartirlas a lo largo de ese espacio extra en vez de dejar que la
+     mayoría caiga en el mismo tercio superior. Debe seguir habiendo
+     solapamiento (es parte del collage), solo que menos denso. El --mx de
+     cada imagen no se toca: solo cambia su reparto vertical. */
+  .sketches__board { height:clamp(1300px, 140vw, 2020px); }
+  /* el reparto llega hasta ~78% (no 100%): las piezas son absolutamente
+     posicionadas y no empujan la altura del tablero, así que cualquier
+     --my + alto propio de la imagen que se pase del 100% asoma por debajo
+     del tablero, pisando el padding-inferior de la tarjeta (e incluso la
+     barra del CTA con imágenes altas como escultura.caballo). Frenar el
+     reparto en ~78% deja ese margen de sobra para todas.
+     capibara es la excepción: va deliberadamente en último lugar del
+     collage, por delante de escultura.caballo (--mz más alto), así que su
+     --my sube al 84% y el alto del tablero se aumenta (de 1140 a 1300px
+     en el mínimo del clamp) para que, aun así, quede hueco negro real
+     entre su borde inferior y la barra de CTA — que además "sube" sobre
+     el padding de la tarjeta con su propio margin-top negativo. */
+  .sketches__board .moodboard__item:nth-child(1)  { --my:-0.4%  !important; } /* bear1 */
+  .sketches__board .moodboard__item:nth-child(2)  { --my:21%    !important; } /* bison */
+  .sketches__board .moodboard__item:nth-child(3)  { --my:8.8%   !important; } /* trucha */
+  .sketches__board .moodboard__item:nth-child(4)  { --my:-5%    !important; } /* boar.and.falcon */
+  .sketches__board .moodboard__item:nth-child(5)  { --my:84%    !important; --mz:6 !important; } /* capibara: por delante de escultura.caballo */
+  .sketches__board .moodboard__item:nth-child(6)  { --my:4.2%   !important; } /* escultura.cara */
+  .sketches__board .moodboard__item:nth-child(7)  { --my:31.8%  !important; } /* cara.bargue */
+  .sketches__board .moodboard__item:nth-child(8)  { --my:41%    !important; } /* chimp */
+  .sketches__board .moodboard__item:nth-child(9)  { --my:27.2%  !important; } /* dog */
+  .sketches__board .moodboard__item:nth-child(10) { --my:43%    !important; } /* ferret */
+  .sketches__board .moodboard__item:nth-child(11) { --my:22.6%  !important; } /* koala */
+  .sketches__board .moodboard__item:nth-child(12) { --my:50.2%  !important; } /* macaque */
+  .sketches__board .moodboard__item:nth-child(13) { --my:59.4%  !important; } /* octopus */
+  .sketches__board .moodboard__item:nth-child(14) { --my:45.6%  !important; } /* raven */
+  .sketches__board .moodboard__item:nth-child(15) { --my:54.8%  !important; } /* torso.bargue */
+  .sketches__board .moodboard__item:nth-child(16) { --my:79%    !important; } /* escultura.caballo */
+  .sketches__board .moodboard__item:nth-child(17) { --my:73.2%  !important; } /* bears2 */
+  .sketches__board .moodboard__item:nth-child(18) { --my:68.6%  !important; } /* ferret.2 */
+  .sketches__board .moodboard__item:nth-child(19) { --my:78%    !important; } /* walrus */
 
   /* en móvil/tablet se abandona el truco sticky (columna fija + línea
      vertical a toda altura): todo pasa a flujo normal, apilado en una sola
@@ -2066,11 +2266,17 @@ body {
   padding-block:calc(var(--header-h) + clamp(24px, 4vw, 56px)) 0;
 }
 
-/* ----- cabecera: título + retratos + historia ----- */
+/* ----- cabecera: título + retratos + historia -----
+   Reorganizada sobre una cuadrícula de 12 columnas (como marca el Figma
+   actualizado, node 797:717): mitad izquierda (about__left, columnas 1-6)
+   con la educación/trayectoria/publicaciones + la foto del laboratorio;
+   mitad derecha (about__right, columnas 7-12) con el retrato — ahora a 4
+   de las 12 columnas totales, es decir 4/6 = 2/3 del ancho de su mitad —
+   y la historia debajo, sin solape. */
 .about__hero {
   display:grid;
-  grid-template-columns:minmax(0, 1fr) minmax(0, 1.15fr);
-  column-gap:clamp(32px, 5vw, 64px);
+  grid-template-columns:repeat(12, 1fr);
+  column-gap:clamp(24px, 4vw, 64px);
   row-gap:clamp(32px, 5vw, 56px);
   align-items:start;
 }
@@ -2079,68 +2285,151 @@ body {
   color:var(--text-primary);
 }
 
-/* foto del laboratorio: en su propia columna, desplazada hacia abajo para
-   no arrancar a la misma altura que la columna de la historia (igual que en
-   Figma, donde queda "escalonada" respecto al retrato/párrafo). */
-.about__media {
-  grid-column:1;
-  grid-row:2;
-  /* desplazada para que arranque a la altura del párrafo "Along the way...
-     I carried always a pencil..." (el segundo del bloque de historia) en
-     vez de justo debajo del título — valor afinado a ojo contra ese
-     párrafo, no una fórmula exacta (el texto de cada columna fluye de
-     forma independiente, así que un ajuste fijo es más fiable que un
-     cálculo en vw). */
-  margin-top:clamp(480px, 77vw, 1180px);
-}
-.about__media img {
-  width:100%;
-  height:auto;
-  border-radius:var(--radius-card);
-}
-
-.about__story {
-  grid-column:2;
-  grid-row:2;
+.about__left {
+  grid-column:1 / span 6;
   display:flex;
   flex-direction:column;
-  gap:clamp(20px, 2.6vw, 32px);
+  align-items:flex-start;
+  gap:clamp(32px, 3.6vw, 52px);
 }
 
+/* educación: bloque estrecho, 2 de las 12 columnas totales → 2/6 = 1/3 del
+   ancho de about__left. El resto de bloques de la izquierda (trabajo,
+   publicaciones, foto) ocupan 5/12 totales → 5/6 del ancho de la mitad. */
 .about__credentials {
-  align-self:flex-end;
-  text-align:right;
+  width:33.333%;
+  min-width:210px;
   color:var(--text-primary);
   display:flex;
   flex-direction:column;
   gap:clamp(10px, 1.2vw, 16px);
 }
 
+.about__work {
+  width:83.333%;
+  min-width:280px;
+}
+
+.about__block-label {
+  color:var(--text-primary);
+  margin-bottom:clamp(14px, 1.8vw, 24px);
+}
+
+/* cabecera del bloque "my work as a scientist": etiqueta + botón de
+   desplegar. El botón solo existe funcionalmente en móvil — ver más abajo,
+   donde queda oculto por defecto y solo se muestra dentro de la media
+   query — así que aquí basta con el layout en fila. */
+.about__work-header {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:clamp(12px, 2vw, 24px);
+  margin-bottom:clamp(14px, 1.8vw, 24px);
+}
+.about__work-header .about__block-label { margin-bottom:0; }
+
+.about__work-toggle {
+  display:none;
+  flex:0 0 auto;
+  align-items:center;
+  justify-content:center;
+  border:none;
+  background:none;
+  padding:0;
+  cursor:pointer;
+}
+.about__work-toggle-icon--more { height:clamp(32px, 3.6vw, 40px); width:auto; display:block; }
+/* mismo botón "cerrar" (círculo negro/× blanco) que usa el artículo
+   desplegado del blog en Thoughts (.thoughts__article-close), para que el
+   gesto de cerrar se reconozca igual en todo el sitio. */
+.about__work-toggle-icon--close {
+  display:none;
+  align-items:center;
+  justify-content:center;
+  width:36px;
+  height:36px;
+  border-radius:50%;
+  background:var(--negro-principal);
+  color:var(--text-inverse);
+  font-size:20px;
+  line-height:1;
+}
+.about__work-toggle:hover .about__work-toggle-icon--close { background:var(--negro-700); }
+.about__work-toggle.is-open .about__work-toggle-icon--more { display:none; }
+.about__work-toggle.is-open .about__work-toggle-icon--close { display:inline-flex; }
+
+/* el contenido plegable (trabajo + publicaciones) siempre visible tal
+   cual en escritorio — el mecanismo de plegado en sí (grid-template-rows
+   0fr/1fr) solo se activa dentro de la media query de móvil. */
+.about__work-collapsible-inner {
+  display:flex;
+  flex-direction:column;
+  gap:clamp(32px, 3.6vw, 52px);
+  min-height:0;
+}
+
+.about__work-list,
+.about__pub-list {
+  list-style:none;
+  margin:0;
+  padding:0;
+  display:flex;
+  flex-direction:column;
+  gap:clamp(14px, 1.8vw, 22px);
+  color:var(--text-primary);
+}
+
+/* cada entrada de "trabajo como científico" en fila — año / lugar /
+   descripción — con la misma proporción aproximada 1:2:2 que marca el
+   Figma (133px / ~286px / ~291px sobre un total de ~753px). En móvil pasa
+   a columna (ver media query). */
+.about__work-item {
+  display:grid;
+  grid-template-columns:minmax(64px, 1fr) minmax(0, 2fr) minmax(0, 2fr);
+  column-gap:clamp(10px, 1.4vw, 20px);
+  row-gap:2px;
+}
+.about__work-year { color:var(--text-secondary); }
+
+.about__media { width:83.333%; min-width:280px; }
+.about__media img {
+  width:100%;
+  height:auto;
+  border-radius:var(--radius-card);
+}
+
+.about__right {
+  grid-column:7 / span 6;
+  display:flex;
+  flex-direction:column;
+}
+
 .about__portrait {
   align-self:flex-end;
-  width:clamp(200px, 24vw, 360px);
+  width:66.667%;
+  max-width:420px;
   border-radius:var(--radius-card);
   overflow:hidden;
   border:1px solid var(--negro-principal);
 }
-.about__portrait img { width:100%; height:100%; aspect-ratio:1 / 1.05; object-fit:cover; display:block; }
+.about__portrait img { width:100%; height:100%; aspect-ratio:590 / 581; object-fit:cover; display:block; }
+
+/* la historia ya no se solapa con el retrato (como sí ocurría antes): un
+   pequeño espacio en blanco la separa de su borde inferior, igual que en
+   el Figma actualizado (~66px sobre 1820px de tarjeta). */
+.about__story {
+  display:flex;
+  flex-direction:column;
+  gap:clamp(20px, 2.6vw, 32px);
+  margin-top:clamp(20px, 3.6vw, 48px);
+}
 
 .about__intro { color:var(--text-primary); }
-.about__intro--bold { font-family:var(--font-sans); font-weight:700; }
-
-/* el primer párrafo "sube" y se solapa un poco con el borde inferior del
-   retrato (que queda alineado a la derecha, justo encima): un margen
-   negativo lo levanta fuera de su celda de flujo normal, rompiendo la
-   gradilla en vez de apilarse limpiamente debajo de la foto. Como va
-   después en el DOM, queda por delante de la imagen sin necesidad de
-   z-index. */
-.about__intro--overlap {
-  position:relative;
-  /* +1 letra de altura extra respecto a la versión anterior, para que el
-     solape con el retrato sea un poco mayor sin dejar de limitarse a la
-     primera línea. */
-  margin-top:calc(clamp(-48px, -3.6vw, -28px) - 38px);
-}
+/* antes iba en negrita; ahora peso medium — igual que el resto de párrafos
+   de la historia (type-body-big-display ya es medium por defecto), así
+   que el modificador se deja solo para identificar este párrafo de cierre
+   (lleva el mark hl--accent) y no por que cambie el peso realmente. */
+.about__intro--bold { font-family:var(--font-sans); font-weight:500; }
 
 /* resaltado tipo "rotulador a mano": texto blanco sobre negro para los
    hitos del recorrido personal, y texto oscuro sobre terracota para las
@@ -2181,7 +2470,10 @@ mark.hl:nth-of-type(3n+3) { transform:rotate(-0.4deg); border-radius:8px 2px 9px
      letras. */
   border-top:2px solid var(--negro-principal);
   padding-top:clamp(8px, 1.1vw, 14px);
-  margin-top:clamp(56px, 7vw, 96px);
+  /* más aire respecto al bloque anterior (foto del laboratorio / historia)
+     del que tenía antes: a petición explícita, para que "I'd say science
+     is all about..." no arranque pegado al párrafo de cierre. */
+  margin-top:clamp(120px, 18vw, 320px);
   margin-bottom:clamp(24px, 3.4vw, 40px);
 }
 
@@ -2263,7 +2555,7 @@ mark.hl:nth-of-type(3n+3) { transform:rotate(-0.4deg); border-radius:8px 2px 9px
 .about-section--reverse .about-section__media { grid-column:2; }
 
 .about-section__illustration { height:auto; display:block; }
-.about-section__illustration--spheres   { width:min(100%, 420px); }
+.about-section__illustration--spheres   { width:min(100%, 560px); }
 .about-section__illustration--squares   { width:min(70%, 300px); }
 /* mucho más grande que el resto de ilustraciones a propósito: no cabe
    entera en una pantalla normal (se corta arriba/abajo al hacer scroll),
@@ -2278,6 +2570,13 @@ mark.hl:nth-of-type(3n+3) { transform:rotate(-0.4deg); border-radius:8px 2px 9px
   color:var(--text-primary);
   text-align:left;
   max-width:34ch;
+  /* se centra como bloque dentro de la columna de la ilustración (en vez
+     de quedar pegada al borde izquierdo), aunque sus propias líneas sigan
+     alineadas a la izquierda entre sí — así queda "más centrada" respecto
+     al conjunto de esferas/cuadrados, como en la referencia. La cita de
+     Curie (--progress) no se ve afectada: al ir position:absolute, ignora
+     align-self. */
+  align-self:center;
 }
 
 /* la cita de Curie se saca del flujo y se posiciona sobre el propio
@@ -2365,28 +2664,62 @@ mark.hl:nth-of-type(3n+3) { transform:rotate(-0.4deg); border-radius:8px 2px 9px
 }
 
 @media (max-width: 900px) {
+  /* una sola columna, con un orden de lectura propio de móvil, distinto
+     tanto del de escritorio como del orden del HTML: título → (espacio en
+     blanco) → retrato → historia → foto del laboratorio → "my work as a
+     scientist" (a 16px, plegado tras un botón) → el resto (educación) tal
+     cual — las publicaciones van ahora dentro del propio desplegable de
+     "my work as a scientist" (ver HTML), así que ya no necesitan su propio
+     order. Para reordenar libremente sin duplicar el HTML, about__left y
+     about__right se "disuelven" con display:contents — sus hijos pasan a
+     ser ítems directos del grid de about__hero y se colocan con `order`. */
   .about__hero { grid-template-columns:1fr; }
+  .about__left,
+  .about__right { display:contents; }
 
-  /* en móvil el orden de lectura no es el orden de escritorio (foto del
-     laboratorio primero, historia después): título → titulaciones →
-     retrato → párrafos de la historia → foto del laboratorio. Para
-     lograrlo sin duplicar el HTML, .about__story se "disuelve" con
-     display:contents — sus hijos pasan a ser ítems directos del grid de
-     .about__hero y se reordenan con `order` junto con el propio retrato
-     de laboratorio. */
-  .about__story { display:contents; }
-  .about__credentials {
-    order:2;
-    align-self:flex-start;
-    text-align:left;
-    /* aire extra respecto al título, por encima del row-gap normal del
-       grid, para que el bloque de titulaciones respire más antes de
-       empezar. */
-    margin-top:clamp(56px, 20vw, 120px);
+  .about__title { order:1; }
+  /* espacio en blanco explícito entre el título y el retrato, pedido a
+     parte del row-gap normal del grid. */
+  .about__portrait { order:2; margin-top:clamp(32px, 10vw, 64px); }
+  .about__story { order:3; }
+  .about__media { order:4; }
+  .about__work { order:5; }
+  .about__credentials { order:6; }
+
+  /* en la columna estrecha, los bloques de la izquierda ya no necesitan
+     limitarse a 2/6 o 5/6 del ancho de about__left: ocupan todo el ancho
+     disponible para que el texto respire. */
+  .about__credentials,
+  .about__work,
+  .about__media { width:100%; min-width:0; }
+
+  .about__work-item { grid-template-columns:1fr; row-gap:4px; }
+
+  /* "my work as a scientist" como desplegable: el botón (show more ↔
+     cerrar) solo existe en móvil, y el contenido arranca plegado
+     (grid-template-rows:0fr recorta a alto 0 sin perder la transición,
+     ya que un simple height:0/auto no se puede animar). */
+  .about__work-toggle { display:inline-flex; }
+  .about__work-collapsible {
+    display:grid;
+    grid-template-rows:0fr;
+    overflow:hidden;
+    transition:grid-template-rows .32s ease;
   }
-  .about__portrait { order:3; align-self:flex-start; text-align:left; }
-  .about__intro { order:4; }
-  .about__media { grid-column:1; grid-row:auto; margin-top:0; order:5; }
+  .about__work-collapsible.is-open { grid-template-rows:1fr; }
+  .about__work-collapsible-inner { overflow:hidden; }
+
+  /* en móvil, todo el bloque de texto de la izquierda (educación, "my work
+     as a scientist" y publications) baja a 16px — .about__credentials
+     lleva la clase type-caption-sans en el propio <ul>, así que se apunta
+     directamente; work/publications se apuntan por descendiente porque
+     type-caption-sans/type-caption están en sus hijos (label, lista). */
+  .about__credentials,
+  .about__work .type-caption-sans,
+  .about__work .type-caption,
+  .about__publications .type-caption-sans { font-size:16px; }
+
+  .about__portrait { align-self:flex-start; width:min(66.667%, 320px); max-width:none; }
 
   .about-section,
   .about-section--reverse {
